@@ -29,8 +29,8 @@ public class ManagerAirport extends Manager {
         message.setAddressee(mySim().findAgent(Id.agentT1));
         notice(message);
     }
-    
-     private void processArrivalCustomerT2(MessageForm message) {
+
+    private void processArrivalCustomerT2(MessageForm message) {
         message.setCode(Mc.arrivalCustomer);
         message.setAddressee(mySim().findAgent(Id.agentT2));
         notice(message);
@@ -41,15 +41,15 @@ public class ManagerAirport extends Manager {
     }
 
     //meta! sender="AgentRental", id="46", type="Response"
-    public void processMovMinibusToRental(MessageForm message) {
+    public void processFinishProcessMovingMinibusToRental(MessageForm message) {
     }
 
     //meta! sender="AgentT3", id="45", type="Response"
-    public void processMovMinibusToT3(MessageForm message) {
+    public void processFinishProcessMovingMinibusToT3(MessageForm message) {
     }
 
     //meta! sender="AgentT2", id="43", type="Response"
-    public void processMovMinibusToT2(MessageForm message) {
+    public void processFinishProcessMovingMinibusToT2(MessageForm message) {
 
     }
 
@@ -62,11 +62,11 @@ public class ManagerAirport extends Manager {
     }
 
     //meta! sender="AgentT1", id="44", type="Response"
-    public void processMovMinibusToT1(MessageForm message) {
-
+    public void processFinishProcessMovingMinibusToT1(MessageForm message) {
+        message.setCode(Mc.arrivalMinibus);
+        message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusToT1));         
+        startContinualAssistant(message); 
     }
-
-   
 
     //meta! userInfo="Process messages defined in code", id="0"
     public void processDefault(MessageForm message) {
@@ -80,10 +80,7 @@ public class ManagerAirport extends Manager {
 
     @Override
     public void processMessage(MessageForm message) {
-        switch (message.code()) {          
-            case Mc.movMinibusToT2:
-                processMovMinibusToT2(message);
-                break;
+        switch (message.code()) {
 
             case Mc.departureCustomer:
                 switch (message.sender().id()) {
@@ -97,12 +94,24 @@ public class ManagerAirport extends Manager {
                 }
                 break;
 
-            case Mc.movMinibusToT3:
-                processMovMinibusToT3(message);
-                break;
+            case Mc.finish:
+                switch (message.sender().id()) {
+                    case Id.processMovingMinibusToT2:
+                        processFinishProcessMovingMinibusToT2(message);
+                        break;
 
-            case Mc.movMinibusToT1:
-                processMovMinibusToT1(message);
+                    case Id.processMovingMinibusToT3:
+                        processFinishProcessMovingMinibusToT3(message);
+                        break;
+
+                    case Id.processMovingMinibusToRental:
+                        processFinishProcessMovingMinibusToRental(message);
+                        break;
+
+                    case Id.processMovingMinibusToT1:
+                        processFinishProcessMovingMinibusToT1(message);
+                        break;
+                }
                 break;
 
             case Mc.arrivalCustomerT1:
@@ -117,8 +126,20 @@ public class ManagerAirport extends Manager {
                 processArrivalCustomerRental(message);
                 break;
 
+            case Mc.movMinibusToT1:
+                processmovMinibusToT1(message);
+                break;
+
+            case Mc.movMinibusToT2:
+                processmovMinibusToT2(message);
+                break;
+                
+            case Mc.movMinibusToT3:
+                processmovMinibusToT3(message);
+                break;
+                
             case Mc.movMinibusToRental:
-                processMovMinibusToRental(message);
+                processmovMinibusToRental(message);
                 break;
 
             default:
@@ -131,5 +152,21 @@ public class ManagerAirport extends Manager {
     @Override
     public AgentAirport myAgent() {
         return (AgentAirport) super.myAgent();
+    }
+
+    private void processmovMinibusToT1(MessageForm message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void processmovMinibusToT2(MessageForm message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void processmovMinibusToRental(MessageForm message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void processmovMinibusToT3(MessageForm message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

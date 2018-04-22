@@ -15,6 +15,7 @@ public class Mc extends IdList
 	public static final int movMinibusToT1 = 1017;
 	public static final int movMinibusToT3 = 1018;
 	public static final int movMinibusToRental = 1019;
+        public static final int arrivalMinibus = 1020;
 	//meta! tag="end"
 
 	// 1..1000 range reserved for user

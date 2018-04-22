@@ -26,7 +26,7 @@ public class AgentT3 extends Agent
 	{
 		new ManagerT3(Id.managerT3, mySim(), this);
 		new ProcessMovingMinibusToT3(Id.processMovingMinibusToT3, mySim(), this);
-		addOwnMessage(Mc.movMinibusToT3);
+		addOwnMessage(Mc.arrivalMinibus);
 		addOwnMessage(Mc.unloadCustomer);
 	}
 	//meta! tag="end"

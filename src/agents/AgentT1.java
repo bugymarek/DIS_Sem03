@@ -30,7 +30,7 @@ public class AgentT1 extends Agent {
         new ProcessMovingMinibusToT1(Id.processMovingMinibusToT1, mySim(), this);
         addOwnMessage(Mc.arrivalCustomer);
         addOwnMessage(Mc.loadCustomer);
-        addOwnMessage(Mc.movMinibusToT1);
+        addOwnMessage(Mc.arrivalMinibus);
     }
     
     public SimQueue<MessageForm> getCustomersQueue() {

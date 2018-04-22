@@ -25,6 +25,10 @@ public class AgentAirport extends Agent
 	private void init()
 	{
 		new ManagerAirport(Id.managerAirport, mySim(), this);
+                new ProcessMovingMinibusToT3(Id.processMovingMinibusToT3, mySim(), this);
+		new ProcessMovingMinibusToRental(Id.processMovingMinibusToRental, mySim(), this);
+		new ProcessMovingMinibusToT2(Id.processMovingMinibusToT2, mySim(), this);
+		new ProcessMovingMinibusToT1(Id.processMovingMinibusToT1, mySim(), this);
 		addOwnMessage(Mc.arrivalCustomerT1);
                 addOwnMessage(Mc.arrivalCustomerT2);
                 addOwnMessage(Mc.arrivalCustomerRental);

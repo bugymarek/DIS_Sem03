@@ -29,7 +29,7 @@ public class AgentRental extends Agent
 		addOwnMessage(Mc.serveCustomer);
 		addOwnMessage(Mc.loadCustomer);
 		addOwnMessage(Mc.arrivalCustomer);
-		addOwnMessage(Mc.movMinibusToRental);
+		addOwnMessage(Mc.arrivalMinibus);
 		addOwnMessage(Mc.unloadCustomer);
 	}
 	//meta! tag="end"
