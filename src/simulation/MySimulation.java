@@ -42,7 +42,7 @@ public class MySimulation extends Simulation
 	//meta! userInfo="Generated code: do not modify", tag="begin"
 	private void init()
 	{
-		setAgentModel(new AgentModel(Id.agentModel, this, null));
+		setAgentModel(new AgentModel(Id.agentModel, this, null) {});
 		setAgentAirport(new AgentAirport(Id.agentAirport, this, agentModel()));
 		setAgentEnvironment(new AgentEnvironment(Id.agentEnvironment, this, agentModel()));
 		setAgentBoardingCustomers(new AgentBoardingCustomers(Id.agentBoardingCustomers, this, agentAirport()));

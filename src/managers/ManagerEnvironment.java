@@ -32,7 +32,7 @@ public class ManagerEnvironment extends Manager
             message.setAddressee(myAgent().findAssistant(Id.planArrivalCustomerT1));         
             startContinualAssistant(message);    
             
-            MyMessage msg = new MyMessage(mySim(), null);
+            MyMessage msg = new MyMessage(mySim(), null, null);
             msg.setAddressee(myAgent().findAssistant(Id.planArrivalCustomerT2));         
             startContinualAssistant(msg);
 	}

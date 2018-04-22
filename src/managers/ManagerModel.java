@@ -43,6 +43,10 @@ public class ManagerModel extends Manager {
             case Mc.init:
                 message.setAddressee(mySim().findAgent(Id.agentEnvironment));
                 notice(message);
+                
+                MyMessage msg = new MyMessage((MyMessage) message);
+                msg.setAddressee(mySim().findAgent(Id.agentAirport));
+                notice(msg);
                 break;
             case Mc.arrivalCustomerT1:
                 processArrivalCustomerT1(message);
@@ -72,15 +76,19 @@ public class ManagerModel extends Manager {
     }
 
     private void processArrivalCustomerT1(MessageForm message) {
-        System.out.println("Arrival T1 : " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
+        message.setAddressee(mySim().findAgent(Id.agentAirport));
+        notice(message);
+        System.out.println("AgentModel Arrival T1 : " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
     }
 
     private void processArrivalCustomerT2(MessageForm message) {
-        System.out.println("Arrival T2: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
+        message.setAddressee(mySim().findAgent(Id.agentAirport));
+        notice(message);
+        System.out.println("AgentModel Arrival T2: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
     }
 
     private void processArrivalCustomerRental(MessageForm message) {
-        System.out.println("Arrival rental: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
+        System.out.println("AgentModel Arrival rental: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
     }
 
 }

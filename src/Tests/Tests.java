@@ -5,6 +5,7 @@
  */
 package Tests;
 
+import simulation.Config;
 import simulation.MySimulation;
 
 /**
@@ -17,6 +18,7 @@ public class Tests {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        parseSimParams();
         MySimulation sim = new MySimulation();
 		
 		sim.onSimulationWillStart(s ->{
@@ -25,5 +27,21 @@ public class Tests {
 
 		sim.simulate(3, 90000000d);
     }
+    
+    public static boolean parseSimParams()
+	{
+		
+		try
+		{
+			Config.countMinibuses = Integer.parseInt("5");
+		}
+		catch (RuntimeException ex)
+		{
+                    System.out.println("Pocet minibusov musí byť cele číslo");
+			
+			return false;
+		}
+		return true;
+	}
     
 }

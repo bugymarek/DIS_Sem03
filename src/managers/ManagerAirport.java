@@ -6,123 +6,130 @@ import agents.*;
 import continualAssistants.*;
 
 //meta! id="35"
-public class ManagerAirport extends Manager
-{
-	public ManagerAirport(int id, Simulation mySim, Agent myAgent)
-	{
-		super(id, mySim, myAgent);
-		init();
-	}
+public class ManagerAirport extends Manager {
 
-	@Override
-	public void prepareReplication()
-	{
-		super.prepareReplication();
-		// Setup component for the next replication
+    public ManagerAirport(int id, Simulation mySim, Agent myAgent) {
+        super(id, mySim, myAgent);
+        init();
+    }
 
-		if (petriNet() != null)
-		{
-			petriNet().clear();
-		}
-	}
+    @Override
+    public void prepareReplication() {
+        super.prepareReplication();
+        // Setup component for the next replication
 
-	//meta! sender="AgentModel", id="25", type="Notice"
-	public void processArrivalCustomer(MessageForm message)
-	{
-	}
+        if (petriNet() != null) {
+            petriNet().clear();
+        }
+    }
 
-	//meta! sender="AgentRental", id="46", type="Response"
-	public void processMovMinibusToRental(MessageForm message)
-	{
-	}
+    //meta! sender="AgentModel", id="25", type="Notice"
+    public void processArrivalCustomerT1(MessageForm message) {
+        message.setCode(Mc.arrivalCustomer);
+        message.setAddressee(mySim().findAgent(Id.agentT1));
+        notice(message);
+    }
+    
+     private void processArrivalCustomerT2(MessageForm message) {
+        message.setCode(Mc.arrivalCustomer);
+        message.setAddressee(mySim().findAgent(Id.agentT2));
+        notice(message);
+    }
 
-	//meta! sender="AgentT3", id="45", type="Response"
-	public void processMovMinibusToT3(MessageForm message)
-	{
-	}
+    private void processArrivalCustomerRental(MessageForm message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-	//meta! sender="AgentT2", id="43", type="Response"
-	public void processMovMinibusToT2(MessageForm message)
-	{
-	}
+    //meta! sender="AgentRental", id="46", type="Response"
+    public void processMovMinibusToRental(MessageForm message) {
+    }
 
-	//meta! sender="AgentT3", id="32", type="Notice"
-	public void processDepartureCustomerAgentT3(MessageForm message)
-	{
-	}
+    //meta! sender="AgentT3", id="45", type="Response"
+    public void processMovMinibusToT3(MessageForm message) {
+    }
 
-	//meta! sender="AgentRental", id="33", type="Notice"
-	public void processDepartureCustomerAgentRental(MessageForm message)
-	{
-	}
+    //meta! sender="AgentT2", id="43", type="Response"
+    public void processMovMinibusToT2(MessageForm message) {
 
-	//meta! sender="AgentT1", id="44", type="Response"
-	public void processMovMinibusToT1(MessageForm message)
-	{
-	}
+    }
 
-	//meta! userInfo="Process messages defined in code", id="0"
-	public void processDefault(MessageForm message)
-	{
-		switch (message.code())
-		{
-		}
-	}
+    //meta! sender="AgentT3", id="32", type="Notice"
+    public void processDepartureCustomerAgentT3(MessageForm message) {
+    }
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	public void init()
-	{
-	}
+    //meta! sender="AgentRental", id="33", type="Notice"
+    public void processDepartureCustomerAgentRental(MessageForm message) {
+    }
 
-	@Override
-	public void processMessage(MessageForm message)
-	{
-		switch (message.code())
-		{
-		case Mc.movMinibusToT2:
-			processMovMinibusToT2(message);
-		break;
+    //meta! sender="AgentT1", id="44", type="Response"
+    public void processMovMinibusToT1(MessageForm message) {
 
-		case Mc.departureCustomer:
-			switch (message.sender().id())
-			{
-			case Id.agentT3:
-				processDepartureCustomerAgentT3(message);
-			break;
+    }
 
-			case Id.agentRental:
-				processDepartureCustomerAgentRental(message);
-			break;
-			}
-		break;
+   
 
-		case Mc.movMinibusToT3:
-			processMovMinibusToT3(message);
-		break;
+    //meta! userInfo="Process messages defined in code", id="0"
+    public void processDefault(MessageForm message) {
+        switch (message.code()) {
+        }
+    }
 
-		case Mc.movMinibusToT1:
-			processMovMinibusToT1(message);
-		break;
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    public void init() {
+    }
 
-		case Mc.arrivalCustomer:
-			processArrivalCustomer(message);
-		break;
+    @Override
+    public void processMessage(MessageForm message) {
+        switch (message.code()) {          
+            case Mc.movMinibusToT2:
+                processMovMinibusToT2(message);
+                break;
 
-		case Mc.movMinibusToRental:
-			processMovMinibusToRental(message);
-		break;
+            case Mc.departureCustomer:
+                switch (message.sender().id()) {
+                    case Id.agentT3:
+                        processDepartureCustomerAgentT3(message);
+                        break;
 
-		default:
-			processDefault(message);
-		break;
-		}
-	}
-	//meta! tag="end"
+                    case Id.agentRental:
+                        processDepartureCustomerAgentRental(message);
+                        break;
+                }
+                break;
 
-	@Override
-	public AgentAirport myAgent()
-	{
-		return (AgentAirport)super.myAgent();
-	}
+            case Mc.movMinibusToT3:
+                processMovMinibusToT3(message);
+                break;
 
+            case Mc.movMinibusToT1:
+                processMovMinibusToT1(message);
+                break;
+
+            case Mc.arrivalCustomerT1:
+                processArrivalCustomerT1(message);
+                break;
+
+            case Mc.arrivalCustomerT2:
+                processArrivalCustomerT2(message);
+                break;
+
+            case Mc.arrivalCustomerRental:
+                processArrivalCustomerRental(message);
+                break;
+
+            case Mc.movMinibusToRental:
+                processMovMinibusToRental(message);
+                break;
+
+            default:
+                processDefault(message);
+                break;
+        }
+    }
+    //meta! tag="end"
+
+    @Override
+    public AgentAirport myAgent() {
+        return (AgentAirport) super.myAgent();
+    }
 }
