@@ -29,6 +29,7 @@ public class AgentEnvironment extends Agent
 		new PlanArrivalCustomerRental(Id.planArrivalCustomerRental, mySim(), this);
 		new PlanArrivalCustomerT1(Id.planArrivalCustomerT1, mySim(), this);
 		addOwnMessage(Mc.init);
+                addOwnMessage(Mc.newCustomer);
 		addOwnMessage(Mc.departureCustomer);
 	}
 	//meta! tag="end"

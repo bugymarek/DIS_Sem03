@@ -18,4 +18,8 @@ public class Mc extends IdList
 	//meta! tag="end"
 
 	// 1..1000 range reserved for user
+        public static final int newCustomer = 1040;
+        public static final int arrivalCustomerT1 = 1041;
+        public static final int arrivalCustomerT2 = 1042;
+        public static final int arrivalCustomerRental = 1043;
 }

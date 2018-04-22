@@ -29,6 +29,12 @@ public class ManagerEnvironment extends Manager
 	//meta! sender="AgentModel", id="20", type="Notice"
 	public void processInit(MessageForm message)
 	{
+            message.setAddressee(myAgent().findAssistant(Id.planArrivalCustomerT1));         
+            startContinualAssistant(message);    
+            
+            MyMessage msg = new MyMessage(mySim(), null);
+            msg.setAddressee(myAgent().findAssistant(Id.planArrivalCustomerT2));         
+            startContinualAssistant(msg);
 	}
 
 	//meta! sender="PlanArrivalCustomerRental", id="19", type="Finish"
@@ -39,11 +45,17 @@ public class ManagerEnvironment extends Manager
 	//meta! sender="PlanArrivalCustomerT2", id="17", type="Finish"
 	public void processFinishPlanArrivalCustomerT2(MessageForm message)
 	{
+            message.setCode(Mc.arrivalCustomerT2);
+            message.setAddressee(myAgent().findAssistant(Id.agentModel));
+            notice(message);
 	}
 
 	//meta! sender="PlanArrivalCustomerT1", id="13", type="Finish"
 	public void processFinishPlanArrivalCustomerT1(MessageForm message)
 	{
+            message.setCode(Mc.arrivalCustomerT1);
+            message.setAddressee(myAgent().findAssistant(Id.agentModel));
+            notice(message);
 	}
 
 	//meta! sender="AgentModel", id="10", type="Notice"

@@ -1,31 +1,54 @@
 package simulation;
 
 import OSPABA.*;
+import entity.Customer;
 
-public class MyMessage extends MessageForm
-{
-	public MyMessage(Simulation sim)
-	{
-		super(sim);
-	}
+public class MyMessage extends MessageForm {
 
-	public MyMessage(MyMessage original)
-	{
-		super(original);
-		// copy() is called in superclass
-	}
+    private Customer _customer;
+    private double _countDepartureCustomers;
 
-	@Override
-	public MessageForm createCopy()
-	{
-		return new MyMessage(this);
-	}
+    /**
+     * Kopirovaci konstruktor
+     */
+    public MyMessage(MyMessage original) {
+        super(original);
+        _customer = original._customer;
+        _countDepartureCustomers = original._countDepartureCustomers;
+    }
 
-	@Override
-	protected void copy(MessageForm message)
-	{
-		super.copy(message);
-		MyMessage original = (MyMessage)message;
-		// Copy attributes
-	}
+    public MyMessage(Simulation mySim, Customer custoemr) {
+        super(mySim);
+        _customer = custoemr;
+        _countDepartureCustomers = 0;
+    }
+
+    @Override
+    public MessageForm createCopy() {
+        return new MyMessage(this);
+    }
+
+    @Override
+    protected void copy(MessageForm message) {
+        super.copy(message);
+        MyMessage original = (MyMessage) message;
+        // Copy attributes
+    }
+
+    public Customer getCustomer() {
+        return _customer;
+    }
+
+    public double getCountDepartureCustomers() {
+        return _countDepartureCustomers;
+    }
+
+    public void setCustomer(Customer _customer) {
+        this._customer = _customer;
+    }
+
+    public void setCountDepartureCustomers(double _countDepartureCustomers) {
+        this._countDepartureCustomers = _countDepartureCustomers;
+    }
+
 }

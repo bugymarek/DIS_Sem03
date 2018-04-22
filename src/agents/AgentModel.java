@@ -25,8 +25,19 @@ public class AgentModel extends Agent
 	private void init()
 	{
 		new ManagerModel(Id.managerModel, mySim(), this);
-		addOwnMessage(Mc.arrivalCustomer);
+		addOwnMessage(Mc.arrivalCustomerT1);
+                addOwnMessage(Mc.arrivalCustomerT2);
+                addOwnMessage(Mc.arrivalCustomerRental);
 		addOwnMessage(Mc.departureCustomer);
+		addOwnMessage(Mc.init);
 	}
 	//meta! tag="end"
+        
+        public void startSimulation() {
+
+        MyMessage msg = new MyMessage(mySim(), null);
+        msg.setAddressee(this);
+        msg.setCode(Mc.init);
+        manager().notice(msg);
+    }
 }

@@ -5,6 +5,8 @@
  */
 package Tests;
 
+import simulation.MySimulation;
+
 /**
  *
  * @author Bugy
@@ -15,7 +17,13 @@ public class Tests {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        MySimulation sim = new MySimulation();
+		
+		sim.onSimulationWillStart(s ->{
+			System.out.println("Simulating...");
+		});
+
+		sim.simulate(3, 90000000d);
     }
     
 }

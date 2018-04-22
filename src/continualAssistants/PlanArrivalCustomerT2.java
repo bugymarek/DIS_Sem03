@@ -1,13 +1,18 @@
 package continualAssistants;
 
 import OSPABA.*;
+import OSPRNG.ExponentialRNG;
 import simulation.*;
 import agents.*;
+import entity.Customer;
 
 //meta! id="16"
 public class PlanArrivalCustomerT2 extends Scheduler
-{
-	public PlanArrivalCustomerT2(int id, Simulation mySim, CommonAgent myAgent)
+{   
+	
+    private static ExponentialRNG _exp = new ExponentialRNG((60.0 * 60.0) / 19.0); // second
+    
+    public PlanArrivalCustomerT2(int id, Simulation mySim, CommonAgent myAgent)
 	{
 		super(id, mySim, myAgent);
 	}
@@ -22,6 +27,8 @@ public class PlanArrivalCustomerT2 extends Scheduler
 	//meta! sender="AgentEnvironment", id="17", type="Start"
 	public void processStart(MessageForm message)
 	{
+            message.setCode(Mc.newCustomer);
+            hold(_exp.sample(), message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -41,6 +48,10 @@ public class PlanArrivalCustomerT2 extends Scheduler
 		case Mc.start:
 			processStart(message);
 		break;
+                
+                case Mc.newCustomer:
+                processNewCustomer(message);            	
+                break;
 
 		default:
 			processDefault(message);
@@ -48,6 +59,15 @@ public class PlanArrivalCustomerT2 extends Scheduler
 		}
 	}
 	//meta! tag="end"
+        
+        private void processNewCustomer(MessageForm message) {
+        MyMessage msg = new MyMessage((MyMessage) message);
+        hold(_exp.sample(), msg);
+
+        ((MyMessage) message).setCustomer(new Customer(mySim()));
+        assistantFinished(message);
+    }
+
 
 	@Override
 	public AgentEnvironment myAgent()
