@@ -23,6 +23,8 @@ public class ProcessMovingMinibusToT2 extends Process
 	//meta! sender="AgentT2", id="78", type="Start"
 	public void processStart(MessageForm message)
 	{
+            message.setCode(Mc.movingMinibusDone);
+            hold(Config.LengthT1ToT2,message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -42,6 +44,9 @@ public class ProcessMovingMinibusToT2 extends Process
 		case Mc.start:
 			processStart(message);
 		break;
+                
+                case Mc.movingMinibusDone:
+			assistantFinished(message);
 
 		default:
 			processDefault(message);

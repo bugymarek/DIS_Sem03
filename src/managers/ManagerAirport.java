@@ -50,7 +50,9 @@ public class ManagerAirport extends Manager {
 
     //meta! sender="AgentT2", id="43", type="Response"
     public void processFinishProcessMovingMinibusToT2(MessageForm message) {
-
+        message.setCode(Mc.serveArrivalMinibus);
+        message.setAddressee(mySim().findAgent(Id.agentT2));
+        request(message);
     }
 
     //meta! sender="AgentT3", id="32", type="Notice"
@@ -74,11 +76,13 @@ public class ManagerAirport extends Manager {
     }
 
     private void processMovMinibusToT2(MessageForm message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusToT2));
+        startContinualAssistant(message);
     }
 
     private void processMovMinibusToRental(MessageForm message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusToRental));
+        startContinualAssistant(message);
     }
 
     private void processMovMinibusToT3(MessageForm message) {

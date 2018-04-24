@@ -4,6 +4,7 @@ import OSPABA.*;
 import simulation.*;
 import agents.*;
 import continualAssistants.*;
+import entity.Customer;
 
 //meta! id="22"
 public class ManagerT2 extends Manager {
@@ -33,10 +34,25 @@ public class ManagerT2 extends Manager {
 
     //meta! sender="AgentBoardingCustomers", id="57", type="Response"
     public void processLoadCustomerDone(MessageForm message) {
+        processArrivalMinibus(message);
     }
     
     //meta! sender="AgentAirport", id="43", type="Request"
     public void processArrivalMinibus(MessageForm message) {
+        if(myAgent().getCustomersQueue().isEmpty() || !((MyMessage)message).getMinibus().isPlaceInBus()){
+             myMessage(message).getMinibus().setPosition("Cestujem z T2 do T3");
+             message.setCode(Mc.minibusReadyForMove);
+             response(message);
+        }else {           
+            myMessage(message).getMinibus().setPosition("Som na T2");
+            Customer customer = myMessage(myAgent().getCustomersQueue().dequeue()).getCustomer();
+            myMessage(message).setCustomer(customer);
+            message.setCode(Mc.loadCustomer);
+            message.setAddressee(mySim().findAgent(Id.agentBoardingCustomers));
+            request(message);
+        }
+        System.out.print("Minibus: " + ((MyMessage)message).getMinibus().getID()+ "| Prichod na T2 v cese: " + mySim().currentTime());
+        System.out.println(" Pasažieri: " + " pocet: " + ((MyMessage)message).getMinibus().getSize());
     }
 
     //meta! userInfo="Process messages defined in code", id="0"
@@ -74,6 +90,10 @@ public class ManagerT2 extends Manager {
     @Override
     public AgentT2 myAgent() {
         return (AgentT2) super.myAgent();
+    }
+    
+    private MyMessage myMessage(MessageForm message){
+        return (MyMessage)message;
     }
 
 }
