@@ -23,6 +23,7 @@ public class ProcessMovingMinibusToT1 extends Process
 	//meta! sender="AgentT1", id="69", type="Start"
 	public void processStart(MessageForm message)
 	{
+            hold(Config.LengthRentalToT1,message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -40,8 +41,12 @@ public class ProcessMovingMinibusToT1 extends Process
 		switch (message.code())
 		{
 		case Mc.start:
+                        message.setCode(Mc.movingMinibusDone);
 			processStart(message);
 		break;
+                
+                case Mc.movingMinibusDone:
+			assistantFinished(message);
 
 		default:
 			processDefault(message);
@@ -51,9 +56,9 @@ public class ProcessMovingMinibusToT1 extends Process
 	//meta! tag="end"
 
 	@Override
-	public AgentT1 myAgent()
+	public AgentAirport myAgent()
 	{
-		return (AgentT1)super.myAgent();
+		return (AgentAirport)super.myAgent();
 	}
 
 }

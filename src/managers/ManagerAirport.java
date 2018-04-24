@@ -64,8 +64,25 @@ public class ManagerAirport extends Manager {
     //meta! sender="AgentT1", id="44", type="Response"
     public void processFinishProcessMovingMinibusToT1(MessageForm message) {
         message.setCode(Mc.arrivalMinibus);
-        message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusToT1));         
-        startContinualAssistant(message); 
+        message.setAddressee(mySim().findAgent(Id.agentT1));
+        notice(message);
+    }
+
+    private void processmovMinibusToT1(MessageForm message) {
+        message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusToT1));
+        startContinualAssistant(message);
+    }
+
+    private void processmovMinibusToT2(MessageForm message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void processmovMinibusToRental(MessageForm message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void processmovMinibusToT3(MessageForm message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     //meta! userInfo="Process messages defined in code", id="0"
@@ -133,11 +150,11 @@ public class ManagerAirport extends Manager {
             case Mc.movMinibusToT2:
                 processmovMinibusToT2(message);
                 break;
-                
+
             case Mc.movMinibusToT3:
                 processmovMinibusToT3(message);
                 break;
-                
+
             case Mc.movMinibusToRental:
                 processmovMinibusToRental(message);
                 break;
@@ -152,21 +169,5 @@ public class ManagerAirport extends Manager {
     @Override
     public AgentAirport myAgent() {
         return (AgentAirport) super.myAgent();
-    }
-
-    private void processmovMinibusToT1(MessageForm message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void processmovMinibusToT2(MessageForm message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void processmovMinibusToRental(MessageForm message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void processmovMinibusToT3(MessageForm message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

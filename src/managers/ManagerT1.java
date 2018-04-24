@@ -39,7 +39,9 @@ public class ManagerT1 extends Manager {
     }
 
     //meta! sender="AgentAirport", id="44", type="Request"
-    public void processMovMinibusToT1(MessageForm message) {
+    public void processArrivalMinibus(MessageForm message) {
+        System.out.print("Minibus: " + ((MyMessage)message).getMinibus().getID()+ "| Prichod na T1 v cese: " + mySim().currentTime());
+        System.out.println(" Pasažieri: " + " pocet: " + ((MyMessage)message).getMinibus().getSize());
     }
 
     //meta! userInfo="Process messages defined in code", id="0"
@@ -55,8 +57,8 @@ public class ManagerT1 extends Manager {
     @Override
     public void processMessage(MessageForm message) {
         switch (message.code()) {
-            case Mc.movMinibusToT1:
-                processMovMinibusToT1(message);
+            case Mc.arrivalMinibus:
+                processArrivalMinibus(message);
                 break;
 
             case Mc.arrivalCustomer:

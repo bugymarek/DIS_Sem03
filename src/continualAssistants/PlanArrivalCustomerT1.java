@@ -9,7 +9,7 @@ import entity.Customer;
 //meta! id="12"
 public class PlanArrivalCustomerT1 extends Scheduler {
 
-    private static ExponentialRNG _exp = new ExponentialRNG(((60.0 * 60.0) / 43.0)); // second
+    private static ExponentialRNG _exp = new ExponentialRNG(Config.averageArrivalT1); // second
 
     public PlanArrivalCustomerT1(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);

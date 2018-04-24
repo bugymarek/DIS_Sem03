@@ -51,9 +51,9 @@ public class ProcessMovingMinibusToT2 extends Process
 	//meta! tag="end"
 
 	@Override
-	public AgentT2 myAgent()
+	public AgentAirport myAgent()
 	{
-		return (AgentT2)super.myAgent();
+		return (AgentAirport)super.myAgent();
 	}
 
 }

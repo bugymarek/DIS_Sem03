@@ -40,7 +40,7 @@ public class ManagerT2 extends Manager {
     }
 
     //meta! sender="AgentAirport", id="43", type="Request"
-    public void processMovMinibusToT2(MessageForm message) {
+    public void processArrivalMinibus(MessageForm message) {
     }
 
     //meta! userInfo="Process messages defined in code", id="0"
@@ -56,8 +56,8 @@ public class ManagerT2 extends Manager {
     @Override
     public void processMessage(MessageForm message) {
         switch (message.code()) {
-            case Mc.movMinibusToT2:
-                processMovMinibusToT2(message);
+            case Mc.arrivalMinibus:
+                processArrivalMinibus(message);
                 break;
 
             case Mc.finish:

@@ -51,9 +51,9 @@ public class ProcessMovingMinibusToRental extends Process
 	//meta! tag="end"
 
 	@Override
-	public AgentRental myAgent()
+	public AgentAirport myAgent()
 	{
-		return (AgentRental)super.myAgent();
+		return (AgentAirport)super.myAgent();
 	}
 
 }

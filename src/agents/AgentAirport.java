@@ -32,11 +32,13 @@ public class AgentAirport extends Agent
 		addOwnMessage(Mc.arrivalCustomerT1);
                 addOwnMessage(Mc.arrivalCustomerT2);
                 addOwnMessage(Mc.arrivalCustomerRental);
+                addOwnMessage(Mc.movMinibusToT1);             
 		addOwnMessage(Mc.movMinibusToRental);
 		addOwnMessage(Mc.movMinibusToT3);
 		addOwnMessage(Mc.movMinibusToT2);
-		addOwnMessage(Mc.departureCustomer);
-		addOwnMessage(Mc.movMinibusToT1);
+                addOwnMessage(Mc.arrivalMinibus); 
+                addOwnMessage(Mc.movingMinibusDone);
+		addOwnMessage(Mc.departureCustomer);                   
 	}
 	//meta! tag="end"
 }

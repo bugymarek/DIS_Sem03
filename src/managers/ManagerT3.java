@@ -32,7 +32,7 @@ public class ManagerT3 extends Manager
 	}
 
 	//meta! sender="AgentAirport", id="45", type="Request"
-	public void processMovMinibusToT3(MessageForm message)
+	public void processArrivalMinibus(MessageForm message)
 	{
 	}
 
@@ -67,8 +67,8 @@ public class ManagerT3 extends Manager
 			processUnloadCustomer(message);
 		break;
 
-		case Mc.movMinibusToT3:
-			processMovMinibusToT3(message);
+		case Mc.arrivalMinibus:
+			processArrivalMinibus(message);
 		break;
 
 		default:

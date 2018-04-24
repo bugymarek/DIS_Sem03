@@ -27,7 +27,6 @@ public class AgentT2 extends Agent {
     //meta! userInfo="Generated code: do not modify", tag="begin"
     private void init() {
         new ManagerT2(Id.managerT2, mySim(), this);
-        new ProcessMovingMinibusToT2(Id.processMovingMinibusToT2, mySim(), this);
         addOwnMessage(Mc.arrivalCustomer);
         addOwnMessage(Mc.loadCustomer);
         addOwnMessage(Mc.arrivalMinibus);

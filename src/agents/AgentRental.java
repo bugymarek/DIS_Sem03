@@ -25,7 +25,6 @@ public class AgentRental extends Agent
 	private void init()
 	{
 		new ManagerRental(Id.managerRental, mySim(), this);
-		new ProcessMovingMinibusToRental(Id.processMovingMinibusToRental, mySim(), this);
 		addOwnMessage(Mc.serveCustomer);
 		addOwnMessage(Mc.loadCustomer);
 		addOwnMessage(Mc.arrivalCustomer);

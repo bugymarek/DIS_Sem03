@@ -23,4 +23,5 @@ public class Mc extends IdList
         public static final int arrivalCustomerT1 = 1041;
         public static final int arrivalCustomerT2 = 1042;
         public static final int arrivalCustomerRental = 1043;
+        public static final int movingMinibusDone = 1044;
 }

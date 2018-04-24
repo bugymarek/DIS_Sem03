@@ -10,7 +10,7 @@ import entity.Customer;
 public class PlanArrivalCustomerT2 extends Scheduler
 {   
 	
-    private static ExponentialRNG _exp = new ExponentialRNG((60.0 * 60.0) / 19.0); // second
+    private static ExponentialRNG _exp = new ExponentialRNG(Config.averageArrivalT2); // second
     
     public PlanArrivalCustomerT2(int id, Simulation mySim, CommonAgent myAgent)
 	{
