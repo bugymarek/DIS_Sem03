@@ -23,6 +23,8 @@ public class ProcessMovingMinibusToRental extends Process
 	//meta! sender="AgentRental", id="72", type="Start"
 	public void processStart(MessageForm message)
 	{
+            message.setCode(Mc.movingMinibusDone);
+            hold(Config.LengthT2ToRental,message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -42,6 +44,9 @@ public class ProcessMovingMinibusToRental extends Process
 		case Mc.start:
 			processStart(message);
 		break;
+                
+                case Mc.movingMinibusDone:
+			assistantFinished(message);
 
 		default:
 			processDefault(message);

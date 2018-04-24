@@ -42,6 +42,9 @@ public class ManagerAirport extends Manager {
 
     //meta! sender="AgentRental", id="46", type="Response"
     public void processFinishProcessMovingMinibusToRental(MessageForm message) {
+        message.setCode(Mc.serveArrivalMinibus);
+        message.setAddressee(mySim().findAgent(Id.agentRental));
+        request(message);
     }
 
     //meta! sender="AgentT3", id="45", type="Response"
@@ -86,7 +89,7 @@ public class ManagerAirport extends Manager {
     }
 
     private void processMovMinibusToT3(MessageForm message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        processMovMinibusToT1(message);
     }
 
     //meta! userInfo="Process messages defined in code", id="0"

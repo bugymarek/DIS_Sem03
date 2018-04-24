@@ -28,9 +28,16 @@ public class ManagerBoardingCustomers extends Manager {
         message.setAddressee(myAgent().findAssistant(Id.processLoadCustomer));
         startContinualAssistant(message);
     }
+    
+     public void processUnLoadCustomer(MessageForm message) {
+        message.setAddressee(myAgent().findAssistant(Id.processUnloadCustomer));
+        startContinualAssistant(message);
+    }
 
     //meta! sender="ProcessUnloadCustomer", id="87", type="Finish"
     public void processFinishProcessUnloadCustomer(MessageForm message) {
+        message.setCode(Mc.unloadCustomerDone);
+        response(message);
     }
 
     //meta! sender="ProcessLoadCustomer", id="81", type="Finish"
@@ -70,6 +77,7 @@ public class ManagerBoardingCustomers extends Manager {
                 break;
 
             case Mc.unloadCustomer:
+                processUnLoadCustomer(message);
                 break;
 
             case Mc.loadCustomer:

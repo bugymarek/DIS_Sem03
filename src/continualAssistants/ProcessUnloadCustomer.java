@@ -22,7 +22,9 @@ public class ProcessUnloadCustomer extends Process
 
 	//meta! sender="AgentBoardingCustomers", id="87", type="Start"
 	public void processStart(MessageForm message)
-	{
+	{          
+            message.setCode(Mc.unloadCustomerDone);
+            hold(Config.GetOutOfBusLowerLimit,message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -42,6 +44,9 @@ public class ProcessUnloadCustomer extends Process
 		case Mc.start:
 			processStart(message);
 		break;
+                
+                case Mc.unloadCustomerDone:
+			assistantFinished(message);
 
 		default:
 			processDefault(message);
