@@ -23,6 +23,8 @@ public class ProcessLoadCustomer extends Process
 	//meta! sender="AgentBoardingCustomers", id="81", type="Start"
 	public void processStart(MessageForm message)
 	{
+            message.setCode(Mc.loadCustomerDone);
+            hold(Config.BoardingLowerLimit,message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -39,9 +41,12 @@ public class ProcessLoadCustomer extends Process
 	{
 		switch (message.code())
 		{
-		case Mc.start:
+		case Mc.start:                     
 			processStart(message);
 		break;
+                
+                case Mc.loadCustomerDone:
+			assistantFinished(message);
 
 		default:
 			processDefault(message);

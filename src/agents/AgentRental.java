@@ -26,10 +26,10 @@ public class AgentRental extends Agent
 	{
 		new ManagerRental(Id.managerRental, mySim(), this);
 		addOwnMessage(Mc.serveCustomer);
-		addOwnMessage(Mc.loadCustomer);
+		addOwnMessage(Mc.loadCustomerDone);
 		addOwnMessage(Mc.arrivalCustomer);
-		addOwnMessage(Mc.arrivalMinibus);
-		addOwnMessage(Mc.unloadCustomer);
+		addOwnMessage(Mc.serveArrivalMinibus);
+		addOwnMessage(Mc.unloadCustomerDone);
 	}
 	//meta! tag="end"
 }

@@ -28,8 +28,8 @@ public class AgentT1 extends Agent {
     private void init() {
         new ManagerT1(Id.managerT1, mySim(), this);
         addOwnMessage(Mc.arrivalCustomer);
-        addOwnMessage(Mc.loadCustomer);
-        addOwnMessage(Mc.arrivalMinibus);
+        addOwnMessage(Mc.loadCustomerDone);
+        addOwnMessage(Mc.serveArrivalMinibus);
     }
     
     public SimQueue<MessageForm> getCustomersQueue() {

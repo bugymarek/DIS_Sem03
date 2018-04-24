@@ -23,6 +23,7 @@ public class ProcessMovingMinibusToT1 extends Process
 	//meta! sender="AgentT1", id="69", type="Start"
 	public void processStart(MessageForm message)
 	{
+            message.setCode(Mc.movingMinibusDone);
             hold(Config.LengthRentalToT1,message);
 	}
 
@@ -41,7 +42,6 @@ public class ProcessMovingMinibusToT1 extends Process
 		switch (message.code())
 		{
 		case Mc.start:
-                        message.setCode(Mc.movingMinibusDone);
 			processStart(message);
 		break;
                 

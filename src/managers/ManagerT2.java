@@ -32,13 +32,9 @@ public class ManagerT2 extends Manager {
     }
 
     //meta! sender="AgentBoardingCustomers", id="57", type="Response"
-    public void processLoadCustomer(MessageForm message) {
+    public void processLoadCustomerDone(MessageForm message) {
     }
-
-    //meta! sender="ProcessMovingMinibusToT2", id="78", type="Finish"
-    public void processFinish(MessageForm message) {
-    }
-
+    
     //meta! sender="AgentAirport", id="43", type="Request"
     public void processArrivalMinibus(MessageForm message) {
     }
@@ -56,20 +52,16 @@ public class ManagerT2 extends Manager {
     @Override
     public void processMessage(MessageForm message) {
         switch (message.code()) {
-            case Mc.arrivalMinibus:
+            case Mc.serveArrivalMinibus:
                 processArrivalMinibus(message);
-                break;
-
-            case Mc.finish:
-                processFinish(message);
                 break;
 
             case Mc.arrivalCustomer:
                 processArrivalCustomer(message);
                 break;
 
-            case Mc.loadCustomer:
-                processLoadCustomer(message);
+            case Mc.loadCustomerDone:
+                processLoadCustomerDone(message);
                 break;
 
             default:

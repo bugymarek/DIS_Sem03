@@ -6,133 +6,86 @@ import agents.*;
 import continualAssistants.*;
 
 //meta! id="52"
-public class ManagerBoardingCustomers extends Manager
-{
-	public ManagerBoardingCustomers(int id, Simulation mySim, Agent myAgent)
-	{
-		super(id, mySim, myAgent);
-		init();
-	}
+public class ManagerBoardingCustomers extends Manager {
 
-	@Override
-	public void prepareReplication()
-	{
-		super.prepareReplication();
-		// Setup component for the next replication
+    public ManagerBoardingCustomers(int id, Simulation mySim, Agent myAgent) {
+        super(id, mySim, myAgent);
+        init();
+    }
 
-		if (petriNet() != null)
-		{
-			petriNet().clear();
-		}
-	}
+    @Override
+    public void prepareReplication() {
+        super.prepareReplication();
+        // Setup component for the next replication
 
-	//meta! sender="AgentRental", id="82", type="Request"
-	public void processLoadCustomerAgentRental(MessageForm message)
-	{
-	}
+        if (petriNet() != null) {
+            petriNet().clear();
+        }
+    }
 
-	//meta! sender="AgentT2", id="57", type="Request"
-	public void processLoadCustomerAgentT2(MessageForm message)
-	{
-	}
+    //meta! sender="AgentT1", id="83", type="Request"
+    public void processLoadCustomer(MessageForm message) {
+        message.setAddressee(myAgent().findAssistant(Id.processLoadCustomer));
+        startContinualAssistant(message);
+    }
 
-	//meta! sender="AgentT1", id="83", type="Request"
-	public void processLoadCustomerAgentT1(MessageForm message)
-	{
-	}
+    //meta! sender="ProcessUnloadCustomer", id="87", type="Finish"
+    public void processFinishProcessUnloadCustomer(MessageForm message) {
+    }
 
-	//meta! sender="ProcessUnloadCustomer", id="87", type="Finish"
-	public void processFinishProcessUnloadCustomer(MessageForm message)
-	{
-	}
+    //meta! sender="ProcessLoadCustomer", id="81", type="Finish"
+    public void processFinishProcessLoadCustomer(MessageForm message) {
+        message.setCode(Mc.loadCustomerDone);
+        ((MyMessage) message).getMinibus().addCustomerToBus(((MyMessage) message).getCustomer());
+        response(message);
+    }
 
-	//meta! sender="ProcessLoadCustomer", id="81", type="Finish"
-	public void processFinishProcessLoadCustomer(MessageForm message)
-	{
-	}
+    //meta! sender="AgentT3", id="85", type="Request"
+    public void processUnloadCustomer(MessageForm message) {
+    }
 
-	//meta! sender="AgentRental", id="84", type="Request"
-	public void processUnloadCustomerAgentRental(MessageForm message)
-	{
-	}
+    //meta! userInfo="Process messages defined in code", id="0"
+    public void processDefault(MessageForm message) {
+        switch (message.code()) {
+        }
+    }
 
-	//meta! sender="AgentT3", id="85", type="Request"
-	public void processUnloadCustomerAgentT3(MessageForm message)
-	{
-	}
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    public void init() {
+    }
 
-	//meta! userInfo="Process messages defined in code", id="0"
-	public void processDefault(MessageForm message)
-	{
-		switch (message.code())
-		{
-		}
-	}
+    @Override
+    public void processMessage(MessageForm message) {
+        switch (message.code()) {
+            case Mc.finish:
+                switch (message.sender().id()) {
+                    case Id.processUnloadCustomer:
+                        processFinishProcessUnloadCustomer(message);
+                        break;
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	public void init()
-	{
-	}
+                    case Id.processLoadCustomer:
+                        processFinishProcessLoadCustomer(message);
+                        break;
+                }
+                break;
 
-	@Override
-	public void processMessage(MessageForm message)
-	{
-		switch (message.code())
-		{
-		case Mc.finish:
-			switch (message.sender().id())
-			{
-			case Id.processUnloadCustomer:
-				processFinishProcessUnloadCustomer(message);
-			break;
+            case Mc.unloadCustomer:
+                break;
 
-			case Id.processLoadCustomer:
-				processFinishProcessLoadCustomer(message);
-			break;
-			}
-		break;
+            case Mc.loadCustomer:
+                processLoadCustomer(message);
+                break;
 
-		case Mc.unloadCustomer:
-			switch (message.sender().id())
-			{
-			case Id.agentRental:
-				processUnloadCustomerAgentRental(message);
-			break;
+            default:
+                processDefault(message);
+                break;
+        }
+    }
+    //meta! tag="end"
 
-			case Id.agentT3:
-				processUnloadCustomerAgentT3(message);
-			break;
-			}
-		break;
-
-		case Mc.loadCustomer:
-			switch (message.sender().id())
-			{
-			case Id.agentRental:
-				processLoadCustomerAgentRental(message);
-			break;
-
-			case Id.agentT2:
-				processLoadCustomerAgentT2(message);
-			break;
-
-			case Id.agentT1:
-				processLoadCustomerAgentT1(message);
-			break;
-			}
-		break;
-
-		default:
-			processDefault(message);
-		break;
-		}
-	}
-	//meta! tag="end"
-
-	@Override
-	public AgentBoardingCustomers myAgent()
-	{
-		return (AgentBoardingCustomers)super.myAgent();
-	}
+    @Override
+    public AgentBoardingCustomers myAgent() {
+        return (AgentBoardingCustomers) super.myAgent();
+    }
 
 }

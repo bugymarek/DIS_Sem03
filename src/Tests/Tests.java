@@ -33,7 +33,7 @@ public class Tests {
 		
 		try
 		{
-			Config.countMinibuses = Integer.parseInt("5");
+			Config.countMinibuses = Integer.parseInt("2");
 		}
 		catch (RuntimeException ex)
 		{

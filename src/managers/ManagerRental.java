@@ -32,7 +32,7 @@ public class ManagerRental extends Manager
 	}
 
 	//meta! sender="AgentBoardingCustomers", id="82", type="Response"
-	public void processLoadCustomer(MessageForm message)
+	public void processLoadCustomerDone(MessageForm message)
 	{
 	}
 
@@ -41,18 +41,12 @@ public class ManagerRental extends Manager
 	{
 	}
 
-	//meta! sender="AgentAirport", id="46", type="Request"
-	public void processMovMinibusToRental(MessageForm message)
+	//meta! sender="processserveArrivalMinibus", id="84", type="Response"
+	public void processserveArrivalMinibus(MessageForm message)
 	{
 	}
-
-	//meta! sender="ProcessMovingMinibusToRental", id="72", type="Finish"
-	public void processFinish(MessageForm message)
-	{
-	}
-
-	//meta! sender="AgentBoardingCustomers", id="84", type="Response"
-	public void processUnloadCustomer(MessageForm message)
+        
+        public void processUnloadCustomerDone(MessageForm message)
 	{
 	}
 
@@ -78,20 +72,16 @@ public class ManagerRental extends Manager
 			processServeCustomer(message);
 		break;
 
-		case Mc.finish:
-			processFinish(message);
+		case Mc.unloadCustomerDone:
+			processUnloadCustomerDone(message);
 		break;
 
-		case Mc.unloadCustomer:
-			processUnloadCustomer(message);
+		case Mc.loadCustomerDone:
+			processLoadCustomerDone(message);
 		break;
 
-		case Mc.loadCustomer:
-			processLoadCustomer(message);
-		break;
-
-		case Mc.movMinibusToRental:
-			processMovMinibusToRental(message);
+		case Mc.serveArrivalMinibus:
+			processserveArrivalMinibus(message);
 		break;
 
 		case Mc.arrivalCustomer:

@@ -63,25 +63,25 @@ public class ManagerAirport extends Manager {
 
     //meta! sender="AgentT1", id="44", type="Response"
     public void processFinishProcessMovingMinibusToT1(MessageForm message) {
-        message.setCode(Mc.arrivalMinibus);
+        message.setCode(Mc.serveArrivalMinibus);
         message.setAddressee(mySim().findAgent(Id.agentT1));
-        notice(message);
+        request(message);
     }
 
-    private void processmovMinibusToT1(MessageForm message) {
+    private void processMovMinibusToT1(MessageForm message) {
         message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusToT1));
         startContinualAssistant(message);
     }
 
-    private void processmovMinibusToT2(MessageForm message) {
+    private void processMovMinibusToT2(MessageForm message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void processmovMinibusToRental(MessageForm message) {
+    private void processMovMinibusToRental(MessageForm message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void processmovMinibusToT3(MessageForm message) {
+    private void processMovMinibusToT3(MessageForm message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -91,6 +91,33 @@ public class ManagerAirport extends Manager {
         }
     }
 
+    public void processLoadCustomerAgentRental(MessageForm message) {
+    }
+
+    //meta! sender="AgentBoardingCustomers", id="135", type="Response"
+    public void processLoadCustomerAgentBoardingCustomers(MessageForm message) {
+    }
+
+    //meta! sender="AgentT1", id="132", type="Response"
+    public void processLoadCustomerAgentT1(MessageForm message) {
+    }
+
+    //meta! sender="AgentT2", id="129", type="Request"
+    public void processLoadCustomerAgentT2(MessageForm message) {
+    }
+
+    //meta! sender="AgentBoardingCustomers", id="136", type="Response"
+    public void processUnloadCustomerAgentBoardingCustomers(MessageForm message) {
+    }
+
+    //meta! sender="AgentRental", id="134", type="Response"
+    public void processUnloadCustomerAgentRental(MessageForm message) {
+    }
+
+    //meta! sender="AgentT3", id="133", type="Request"
+    public void processUnloadCustomerAgentT3(MessageForm message) {
+    }
+
     //meta! userInfo="Generated code: do not modify", tag="begin"
     public void init() {
     }
@@ -98,6 +125,42 @@ public class ManagerAirport extends Manager {
     @Override
     public void processMessage(MessageForm message) {
         switch (message.code()) {
+
+            case Mc.unloadCustomer:
+                switch (message.sender().id()) {
+                    case Id.agentBoardingCustomers:
+                        processUnloadCustomerAgentBoardingCustomers(message);
+                        break;
+
+                    case Id.agentRental:
+                        processUnloadCustomerAgentRental(message);
+                        break;
+
+                    case Id.agentT3:
+                        processUnloadCustomerAgentT3(message);
+                        break;
+                }
+                break;
+
+            case Mc.loadCustomer:
+                switch (message.sender().id()) {
+                    case Id.agentRental:
+                        processLoadCustomerAgentRental(message);
+                        break;
+
+                    case Id.agentBoardingCustomers:
+                        processLoadCustomerAgentBoardingCustomers(message);
+                        break;
+
+                    case Id.agentT1:
+                        processLoadCustomerAgentT1(message);
+                        break;
+
+                    case Id.agentT2:
+                        processLoadCustomerAgentT2(message);
+                        break;
+                }
+                break;
 
             case Mc.departureCustomer:
                 switch (message.sender().id()) {
@@ -130,6 +193,30 @@ public class ManagerAirport extends Manager {
                         break;
                 }
                 break;
+                
+            case Mc.minibusReadyForMove:
+                switch (message.sender().id()) {
+                    case Id.agentModel:
+                        processMovMinibusToT1(message);
+                        break;
+                    
+                    case Id.agentT1:
+                        processMovMinibusToT2(message);
+                        break;
+
+                    case Id.agentT2:
+                        processMovMinibusToRental(message);
+                        break;
+
+                    case Id.agentT3:
+                        processMovMinibusToT1(message);
+                        break;
+
+                    case Id.agentRental:
+                        processMovMinibusToT3(message);
+                        break;
+                }
+                break;
 
             case Mc.arrivalCustomerT1:
                 processArrivalCustomerT1(message);
@@ -141,22 +228,6 @@ public class ManagerAirport extends Manager {
 
             case Mc.arrivalCustomerRental:
                 processArrivalCustomerRental(message);
-                break;
-
-            case Mc.movMinibusToT1:
-                processmovMinibusToT1(message);
-                break;
-
-            case Mc.movMinibusToT2:
-                processmovMinibusToT2(message);
-                break;
-
-            case Mc.movMinibusToT3:
-                processmovMinibusToT3(message);
-                break;
-
-            case Mc.movMinibusToRental:
-                processmovMinibusToRental(message);
                 break;
 
             default:

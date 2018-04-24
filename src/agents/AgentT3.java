@@ -25,8 +25,8 @@ public class AgentT3 extends Agent
 	private void init()
 	{
 		new ManagerT3(Id.managerT3, mySim(), this);
-		addOwnMessage(Mc.arrivalMinibus);
-		addOwnMessage(Mc.unloadCustomer);
+		addOwnMessage(Mc.serveArrivalMinibus);
+		addOwnMessage(Mc.unloadCustomerDone);
 	}
 	//meta! tag="end"
 }

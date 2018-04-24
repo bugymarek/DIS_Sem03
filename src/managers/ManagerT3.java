@@ -26,18 +26,13 @@ public class ManagerT3 extends Manager
 		}
 	}
 
-	//meta! sender="ProcessMovingMinibusToT3", id="75", type="Finish"
-	public void processFinish(MessageForm message)
-	{
-	}
-
 	//meta! sender="AgentAirport", id="45", type="Request"
 	public void processArrivalMinibus(MessageForm message)
 	{
 	}
 
 	//meta! sender="AgentBoardingCustomers", id="85", type="Response"
-	public void processUnloadCustomer(MessageForm message)
+	public void processUnloadCustomerDone(MessageForm message)
 	{
 	}
 
@@ -59,15 +54,11 @@ public class ManagerT3 extends Manager
 	{
 		switch (message.code())
 		{
-		case Mc.finish:
-			processFinish(message);
+		case Mc.unloadCustomerDone:
+			processUnloadCustomerDone(message);
 		break;
 
-		case Mc.unloadCustomer:
-			processUnloadCustomer(message);
-		break;
-
-		case Mc.arrivalMinibus:
+		case Mc.serveArrivalMinibus:
 			processArrivalMinibus(message);
 		break;
 

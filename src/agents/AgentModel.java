@@ -50,9 +50,9 @@ public class AgentModel extends Agent {
         
         for (int i = 0; i < _minibusesList.size(); i++) {
         MyMessage message = new MyMessage(mySim(), null, _minibusesList.get(i)); 
-        message.setCode(Mc.movMinibusToT1);
+        message.setCode(Mc.minibusReadyForMove);
         message.setAddressee(mySim().findAgent(Id.agentAirport));
-        mySim().findAgent(Id.agentAirport).manager().notice(message);
+        manager().notice(message);
         }
         
     }

@@ -28,7 +28,9 @@ public class AgentBoardingCustomers extends Agent
 		new ProcessLoadCustomer(Id.processLoadCustomer, mySim(), this);
 		new ProcessUnloadCustomer(Id.processUnloadCustomer, mySim(), this);
 		addOwnMessage(Mc.loadCustomer);
+                addOwnMessage(Mc.loadCustomerDone);
 		addOwnMessage(Mc.unloadCustomer);
+                addOwnMessage(Mc.unloadCustomerDone);
 	}
 	//meta! tag="end"
 }
