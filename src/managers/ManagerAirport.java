@@ -64,6 +64,7 @@ public class ManagerAirport extends Manager {
 
     //meta! sender="AgentRental", id="33", type="Notice"
     public void processDepartureCustomerAgentRental(MessageForm message) {
+        System.out.println("Zakaznik Odchadza ");
     }
 
     //meta! sender="AgentT1", id="44", type="Response"

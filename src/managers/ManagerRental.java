@@ -5,6 +5,7 @@ import simulation.*;
 import agents.*;
 import continualAssistants.*;
 import entity.Customer;
+import entity.Operator;
 
 //meta! id="24"
 public class ManagerRental extends Manager {
@@ -34,30 +35,59 @@ public class ManagerRental extends Manager {
 
     //meta! sender="AgentAirport", id="40", type="Notice"
     public void processArrivalCustomer(MessageForm message) {
+        processUnloadCustomerDone(message);
     }
 
     //meta! sender="processserveArrivalMinibus", id="84", type="Response"
     public void processserveArrivalMinibus(MessageForm message) {
-        System.out.print("Minibus: " + ((MyMessage)message).getMinibus().getID()+ "| Prichod na Rental v case: " + mySim().currentTime());
-        System.out.println(" Pasažieri: " + " pocet: " + ((MyMessage)message).getMinibus().getSize());
-        if(((MyMessage)message).getMinibus().isEmpty()){
-             myMessage(message).getMinibus().setPosition("Cestujem z Rental do T1");
-             message.setCode(Mc.minibusReadyForMove);
-             response(message);
-        }else {           
+        System.out.print("Minibus: " + ((MyMessage) message).getMinibus().getID() + "| Prichod na Rental v case: " + mySim().currentTime());
+        System.out.println(" Pasažieri: " + " pocet: " + ((MyMessage) message).getMinibus().getSize());
+        if (((MyMessage) message).getMinibus().isEmpty()) {
+            myMessage(message).getMinibus().setPosition("Cestujem z Rental do T1");
+            message.setCode(Mc.minibusReadyForMove);
+            response(message);
+        } else {
             myMessage(message).getMinibus().setPosition("Som na Rental");
             Customer customer = myMessage(message).getMinibus().getCustomerFromBus();
             myMessage(message).setCustomer(customer);
             message.setCode(Mc.unloadCustomer);
             message.setAddressee(mySim().findAgent(Id.agentBoardingCustomers));
             request(message);
-        }  
+        }
     }
 
     public void processUnloadCustomerDone(MessageForm message) {
-        myAgent().getCustomersUnloadQueue().enqueue(message);
-        System.out.println("AgentRental prichod do radu: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem() + "front length: " + myAgent().getCustomersUnloadQueue().size());
+        Operator freeOperator = myAgent().getFreeOperator();
+        MessageForm copyMessage = new MyMessage(myMessage(message));
+        if (freeOperator == null) {
+            myAgent().getCustomersUnloadQueue().enqueue(copyMessage);
+            System.out.println("AgentRental prichod do radu zakaznik: " + ((MyMessage) copyMessage).getCustomer().getTerminalAndID() + " front length: " + myAgent().getCustomersUnloadQueue().size());
+        }else {
+            freeOperator.setOccupied(true);
+            myMessage(copyMessage).setOperator(freeOperator);
+            copyMessage.setCode(Mc.serveCustomer);
+            copyMessage.setAddressee(myAgent().findAssistant(Id.processServeCustomer));
+            startContinualAssistant(copyMessage);
+        }
         processserveArrivalMinibus(message);
+    }
+
+    public void processFinish(MessageForm message) {
+        Operator freeOperator = myMessage(message).getOperator();
+        freeOperator.setOccupied(false);
+
+        message.setCode(Mc.departureCustomer);
+        message.setAddressee(mySim().findAgent(Id.agentAirport));
+        notice(message);
+        
+        if (!myAgent().getCustomersUnloadQueue().isEmpty()) {
+            MessageForm msg = myAgent().getCustomersUnloadQueue().dequeue();
+            freeOperator.setOccupied(true);
+            myMessage(msg).setOperator(freeOperator);
+            msg.setCode(Mc.serveCustomer);
+            msg.setAddressee(myAgent().findAssistant(Id.processServeCustomer));
+            startContinualAssistant(msg);
+        }
     }
 
     //meta! userInfo="Process messages defined in code", id="0"
@@ -73,10 +103,6 @@ public class ManagerRental extends Manager {
     @Override
     public void processMessage(MessageForm message) {
         switch (message.code()) {
-            case Mc.serveCustomer:
-                processServeCustomer(message);
-                break;
-
             case Mc.unloadCustomerDone:
                 processUnloadCustomerDone(message);
                 break;
@@ -91,6 +117,10 @@ public class ManagerRental extends Manager {
 
             case Mc.arrivalCustomer:
                 processArrivalCustomer(message);
+                break;
+
+            case Mc.finish:
+                processFinish(message);
                 break;
 
             default:

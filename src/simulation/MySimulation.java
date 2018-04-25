@@ -50,7 +50,6 @@ public class MySimulation extends Simulation
 		setAgentT2(new AgentT2(Id.agentT2, this, agentAirport()));
 		setAgentT3(new AgentT3(Id.agentT3, this, agentAirport()));
 		setAgentRental(new AgentRental(Id.agentRental, this, agentAirport()));
-		setAgentService(new AgentService(Id.agentService, this, agentRental()));
 	}
 
 	private AgentModel _agentModel;
@@ -116,13 +115,5 @@ public AgentRental agentRental()
 
 	public void setAgentRental(AgentRental agentRental)
 	{_agentRental = agentRental; }
-
-	private AgentService _agentService;
-
-public AgentService agentService()
-	{ return _agentService; }
-
-	public void setAgentService(AgentService agentService)
-	{_agentService = agentService; }
 	//meta! tag="end"
 }

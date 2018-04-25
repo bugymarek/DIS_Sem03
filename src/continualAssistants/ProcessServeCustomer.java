@@ -23,6 +23,9 @@ public class ProcessServeCustomer extends Process
 	//meta! sender="AgentService", id="98", type="Start"
 	public void processStart(MessageForm message)
 	{
+            System.out.println("AgentRental zacal som obsluhovat zakaznika: " + ((MyMessage) message).getCustomer().getTerminalAndID() + " pocet free pracovnikov: " + myAgent().getFreeOperatorsCount());
+            message.setCode(Mc.serveCustomerDone);
+            hold(Config.OperatingLowerLimit,message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -42,6 +45,9 @@ public class ProcessServeCustomer extends Process
 		case Mc.start:
 			processStart(message);
 		break;
+                
+                case Mc.serveCustomerDone:
+			assistantFinished(message);
 
 		default:
 			processDefault(message);
@@ -51,9 +57,9 @@ public class ProcessServeCustomer extends Process
 	//meta! tag="end"
 
 	@Override
-	public AgentService myAgent()
+	public AgentRental myAgent()
 	{
-		return (AgentService)super.myAgent();
+		return (AgentRental)super.myAgent();
 	}
 
 }

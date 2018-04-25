@@ -31,6 +31,8 @@ public class Config {
     public static double GetOutOfBusUpperLimit = 12.0;
 
     public static int countMinibuses;
+    public static int countOperators;
+    
 
     public static int pocetReplikacii;
     public static boolean novySposobPrace;

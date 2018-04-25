@@ -13,6 +13,7 @@ public class Mc extends IdList
 	public static final int unloadCustomer = 1023;
         public static final int unloadCustomerDone = 1024;
 	public static final int serveCustomer = 1027;
+        public static final int serveCustomerDone = 1028;
         public static final int serveArrivalMinibus = 1020;
 	//meta! tag="end"
 

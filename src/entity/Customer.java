@@ -11,12 +11,16 @@ public class Customer extends Entity
 {
 	private double _arrivalTimeToSystem;	
 	private double _allWaitingTime;
+        private int _ID;
+        private String _terminal;
 	
-	public Customer(Simulation sim)
+	public Customer(int id, String terminal, Simulation sim)
 	{
 		super(sim);		
 		_arrivalTimeToSystem = sim.currentTime();		
 		_allWaitingTime = .0; 
+                _ID = id;
+                _terminal = terminal;
 	}
 
     public void setArrivalTimeToSystem(double _arrivalTimeToSystem) {
@@ -35,6 +39,24 @@ public class Customer extends Entity
         return _allWaitingTime;
     }
 
-	
+    public int getID() {
+        return _ID;
+    }
+    
+    public void setID(int id){
+        this._ID = id;
+    }
+
+    public void setTerminal(String _terminal) {
+        this._terminal = _terminal;
+    }
+
+    public String getTerminal() {
+        return _terminal;
+    }
+    
+    public String getTerminalAndID(){
+        return this._terminal + "/" + this._ID;
+    }
 }
 

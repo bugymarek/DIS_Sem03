@@ -9,7 +9,7 @@ import entity.Customer;
 //meta! id="16"
 public class PlanArrivalCustomerT2 extends Scheduler
 {   
-	
+    private int _idCustomer;
     private static ExponentialRNG _exp = new ExponentialRNG(Config.averageArrivalT2); // second
     
     public PlanArrivalCustomerT2(int id, Simulation mySim, CommonAgent myAgent)
@@ -21,6 +21,7 @@ public class PlanArrivalCustomerT2 extends Scheduler
 	public void prepareReplication()
 	{
 		super.prepareReplication();
+                _idCustomer = 0;
 		// Setup component for the next replication
 	}
 
@@ -64,7 +65,8 @@ public class PlanArrivalCustomerT2 extends Scheduler
         MyMessage msg = new MyMessage((MyMessage) message);
         hold(_exp.sample(), msg);
 
-        ((MyMessage) message).setCustomer(new Customer(mySim()));
+        _idCustomer++;
+        ((MyMessage) message).setCustomer(new Customer(_idCustomer, "T2" ,mySim()));
         assistantFinished(message);
     }
 

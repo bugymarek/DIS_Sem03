@@ -34,6 +34,7 @@ public class Tests {
 		try
 		{
 			Config.countMinibuses = Integer.parseInt("2");
+                        Config.countOperators = Integer.parseInt("3");
 		}
 		catch (RuntimeException ex)
 		{

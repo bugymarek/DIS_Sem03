@@ -78,17 +78,17 @@ public class ManagerModel extends Manager {
     private void processArrivalCustomerT1(MessageForm message) {
         message.setAddressee(mySim().findAgent(Id.agentAirport));
         notice(message);
-        System.out.println("AgentModel Arrival T1 : " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
+        //System.out.println("AgentModel Arrival T1 : " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
     }
 
     private void processArrivalCustomerT2(MessageForm message) {
         message.setAddressee(mySim().findAgent(Id.agentAirport));
         notice(message);
-        System.out.println("AgentModel Arrival T2: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
+        //System.out.println("AgentModel Arrival T2: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
     }
 
     private void processArrivalCustomerRental(MessageForm message) {
-        System.out.println("AgentModel Arrival rental: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
+        //System.out.println("AgentModel Arrival rental: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
     }
 
 }

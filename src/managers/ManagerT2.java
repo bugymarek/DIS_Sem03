@@ -28,7 +28,7 @@ public class ManagerT2 extends Manager {
     public void processArrivalCustomer(MessageForm message) {
         myAgent().getCustomersQueue().enqueue(message);
         
-        System.out.println("AgentT2 Arrival T2: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem() + "front length: " + myAgent().getCustomersQueue().size());
+        System.out.println("AgentT2 prichod zakaznika: " + ((MyMessage) message).getCustomer().getTerminalAndID() + " v case: " + "front length: " + myAgent().getCustomersQueue().size());
 
     }
 

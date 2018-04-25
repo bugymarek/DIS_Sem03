@@ -3,12 +3,14 @@ package simulation;
 import OSPABA.*;
 import entity.Customer;
 import entity.Minibus;
+import entity.Operator;
 
 public class MyMessage extends MessageForm {
 
     private Customer _customer;
     private double _countDepartureCustomers;
     private Minibus _minibus;
+    private Operator _operator;
 
     /**
      * Kopirovaci konstruktor
@@ -18,6 +20,7 @@ public class MyMessage extends MessageForm {
         _customer = original._customer;
         _minibus = original._minibus;
         _countDepartureCustomers = original._countDepartureCustomers;
+        _operator = original._operator;
     }
     
     public MyMessage(Simulation mySim, Customer customer, Minibus minibus) {
@@ -25,6 +28,7 @@ public class MyMessage extends MessageForm {
         _customer = customer;
         _minibus = minibus;
         _countDepartureCustomers = 0;
+        _operator = null;
     }
 
     @Override
@@ -62,4 +66,14 @@ public class MyMessage extends MessageForm {
     public Minibus getMinibus() {
         return _minibus;
     }  
+
+    public void setOperator(Operator _operator) {
+        this._operator = _operator;
+    }
+
+    public Operator getOperator() {
+        return _operator;
+    }
+    
+    
 }
