@@ -24,8 +24,12 @@ public class Tests {
 		sim.onSimulationWillStart(s ->{
 			System.out.println("Simulating...");
 		});
+                
+                sim.onReplicationWillStart(s ->{
+                    System.out.println("Replikacia: " + sim.currentReplication());
+                });
 
-		sim.simulate(3, 90000000d);
+		sim.simulate(1000, Config.SimulationTime);
     }
     
     public static boolean parseSimParams()
@@ -33,8 +37,8 @@ public class Tests {
 		
 		try
 		{
-			Config.countMinibuses = Integer.parseInt("2");
-                        Config.countOperators = Integer.parseInt("3");
+			Config.countMinibuses = Integer.parseInt("7");
+                        Config.countOperators = Integer.parseInt("18");
 		}
 		catch (RuntimeException ex)
 		{

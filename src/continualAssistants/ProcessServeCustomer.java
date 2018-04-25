@@ -4,10 +4,13 @@ import OSPABA.*;
 import simulation.*;
 import agents.*;
 import OSPABA.Process;
-
+import generators.UniformRangeDistribution;
+import java.util.Random;
 //meta! id="97"
 public class ProcessServeCustomer extends Process
 {
+    private static UniformRangeDistribution _uniform = new UniformRangeDistribution(Config.OperatingUpperLimit,Config.OperatingLowerLimit, new Random()); // second
+    
 	public ProcessServeCustomer(int id, Simulation mySim, CommonAgent myAgent)
 	{
 		super(id, mySim, myAgent);
@@ -23,9 +26,9 @@ public class ProcessServeCustomer extends Process
 	//meta! sender="AgentService", id="98", type="Start"
 	public void processStart(MessageForm message)
 	{
-            System.out.println("AgentRental zacal som obsluhovat zakaznika: " + ((MyMessage) message).getCustomer().getTerminalAndID() + " pocet free pracovnikov: " + myAgent().getFreeOperatorsCount());
+            //System.out.println("AgentRental zacal som obsluhovat zakaznika: " + ((MyMessage) message).getCustomer().getTerminalAndID() + " pocet free pracovnikov: " + myAgent().getFreeOperatorsCount());
             message.setCode(Mc.serveCustomerDone);
-            hold(Config.OperatingLowerLimit,message);
+            hold(_uniform.next(), message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

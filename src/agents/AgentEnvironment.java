@@ -1,6 +1,7 @@
 package agents;
 
 import OSPABA.*;
+import OSPStat.Stat;
 import simulation.*;
 import managers.*;
 import continualAssistants.*;
@@ -8,6 +9,8 @@ import continualAssistants.*;
 //meta! id="3"
 public class AgentEnvironment extends Agent
 {
+        private Stat _statWaitingTime;
+        
 	public AgentEnvironment(int id, Simulation mySim, Agent parent)
 	{
 		super(id, mySim, parent);
@@ -18,6 +21,7 @@ public class AgentEnvironment extends Agent
 	public void prepareReplication()
 	{
 		super.prepareReplication();
+                _statWaitingTime = new Stat();
 		// Setup component for the next replication
 	}
 
@@ -33,4 +37,8 @@ public class AgentEnvironment extends Agent
 		addOwnMessage(Mc.departureCustomer);
 	}
 	//meta! tag="end"
+        
+       public Stat getStatWaitingTime() {
+        return _statWaitingTime;
+    } 
 }

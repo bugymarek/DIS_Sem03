@@ -1,119 +1,141 @@
 package simulation;
 
 import OSPABA.*;
+import OSPStat.Stat;
 import agents.*;
 
-public class MySimulation extends Simulation
-{
-	public MySimulation()
-	{
-		init();
-	}
+public class MySimulation extends Simulation {
 
-	@Override
-	public void prepareSimulation()
-	{
-		super.prepareSimulation();
-		// Create global statistcis
-	}
+    private Stat _waitingTimeStat;
 
-	@Override
-	public void prepareReplication()
-	{
-		super.prepareReplication();
-		// Reset entities, queues, local statistics, etc...
-                agentModel().startSimulation();
-	}
+    public MySimulation() {
+        init();
+    }
 
-	@Override
-	public void replicationFinished()
-	{
-		// Collect local statistics into global, update UI, etc...
-		super.replicationFinished();
-	}
+    @Override
+    public void prepareSimulation() {
+        super.prepareSimulation();
+        _waitingTimeStat = new Stat();
+        // Create global statistcis
+    }
 
-	@Override
-	public void simulationFinished()
-	{
-		// Dysplay simulation results
-		super.simulationFinished();
-	}
+    @Override
+    public void prepareReplication() {
+        super.prepareReplication();
+        // Reset entities, queues, local statistics, etc...
+        agentModel().startSimulation();
+    }
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	private void init()
-	{
-		setAgentModel(new AgentModel(Id.agentModel, this, null) {});
-		setAgentAirport(new AgentAirport(Id.agentAirport, this, agentModel()));
-		setAgentEnvironment(new AgentEnvironment(Id.agentEnvironment, this, agentModel()));
-		setAgentBoardingCustomers(new AgentBoardingCustomers(Id.agentBoardingCustomers, this, agentAirport()));
-		setAgentT1(new AgentT1(Id.agentT1, this, agentAirport()));
-		setAgentT2(new AgentT2(Id.agentT2, this, agentAirport()));
-		setAgentT3(new AgentT3(Id.agentT3, this, agentAirport()));
-		setAgentRental(new AgentRental(Id.agentRental, this, agentAirport()));
-	}
+    @Override
+    public void replicationFinished() {
+        // Collect local statistics into global, update UI, etc...
+        super.replicationFinished();
+        _waitingTimeStat.addSample(agentEnvironment().getStatWaitingTime().mean());
+        System.out.println("R" + currentReplication() + " celkový priemer: " + convertTimeToString(_waitingTimeStat.mean()) + " priemer danej replikácie(" + convertTimeToString(agentEnvironment().getStatWaitingTime().mean()) + ")");
+    }
 
-	private AgentModel _agentModel;
+    @Override
+    public void simulationFinished() {
+        // Dysplay simulation results
+        super.simulationFinished();
+    }
 
-public AgentModel agentModel()
-	{ return _agentModel; }
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    private void init() {
+        setAgentModel(new AgentModel(Id.agentModel, this, null) {
+        });
+        setAgentAirport(new AgentAirport(Id.agentAirport, this, agentModel()));
+        setAgentEnvironment(new AgentEnvironment(Id.agentEnvironment, this, agentModel()));
+        setAgentBoardingCustomers(new AgentBoardingCustomers(Id.agentBoardingCustomers, this, agentAirport()));
+        setAgentT1(new AgentT1(Id.agentT1, this, agentAirport()));
+        setAgentT2(new AgentT2(Id.agentT2, this, agentAirport()));
+        setAgentT3(new AgentT3(Id.agentT3, this, agentAirport()));
+        setAgentRental(new AgentRental(Id.agentRental, this, agentAirport()));
+    }
 
-	public void setAgentModel(AgentModel agentModel)
-	{_agentModel = agentModel; }
+    private AgentModel _agentModel;
 
-	private AgentAirport _agentAirport;
+    public AgentModel agentModel() {
+        return _agentModel;
+    }
 
-public AgentAirport agentAirport()
-	{ return _agentAirport; }
+    public void setAgentModel(AgentModel agentModel) {
+        _agentModel = agentModel;
+    }
 
-	public void setAgentAirport(AgentAirport agentAirport)
-	{_agentAirport = agentAirport; }
+    private AgentAirport _agentAirport;
 
-	private AgentEnvironment _agentEnvironment;
+    public AgentAirport agentAirport() {
+        return _agentAirport;
+    }
 
-public AgentEnvironment agentEnvironment()
-	{ return _agentEnvironment; }
+    public void setAgentAirport(AgentAirport agentAirport) {
+        _agentAirport = agentAirport;
+    }
 
-	public void setAgentEnvironment(AgentEnvironment agentEnvironment)
-	{_agentEnvironment = agentEnvironment; }
+    private AgentEnvironment _agentEnvironment;
 
-	private AgentBoardingCustomers _agentBoardingCustomers;
+    public AgentEnvironment agentEnvironment() {
+        return _agentEnvironment;
+    }
 
-public AgentBoardingCustomers agentBoardingCustomers()
-	{ return _agentBoardingCustomers; }
+    public void setAgentEnvironment(AgentEnvironment agentEnvironment) {
+        _agentEnvironment = agentEnvironment;
+    }
 
-	public void setAgentBoardingCustomers(AgentBoardingCustomers agentBoardingCustomers)
-	{_agentBoardingCustomers = agentBoardingCustomers; }
+    private AgentBoardingCustomers _agentBoardingCustomers;
 
-	private AgentT1 _agentT1;
+    public AgentBoardingCustomers agentBoardingCustomers() {
+        return _agentBoardingCustomers;
+    }
 
-public AgentT1 agentT1()
-	{ return _agentT1; }
+    public void setAgentBoardingCustomers(AgentBoardingCustomers agentBoardingCustomers) {
+        _agentBoardingCustomers = agentBoardingCustomers;
+    }
 
-	public void setAgentT1(AgentT1 agentT1)
-	{_agentT1 = agentT1; }
+    private AgentT1 _agentT1;
 
-	private AgentT2 _agentT2;
+    public AgentT1 agentT1() {
+        return _agentT1;
+    }
 
-public AgentT2 agentT2()
-	{ return _agentT2; }
+    public void setAgentT1(AgentT1 agentT1) {
+        _agentT1 = agentT1;
+    }
 
-	public void setAgentT2(AgentT2 agentT2)
-	{_agentT2 = agentT2; }
+    private AgentT2 _agentT2;
 
-	private AgentT3 _agentT3;
+    public AgentT2 agentT2() {
+        return _agentT2;
+    }
 
-public AgentT3 agentT3()
-	{ return _agentT3; }
+    public void setAgentT2(AgentT2 agentT2) {
+        _agentT2 = agentT2;
+    }
 
-	public void setAgentT3(AgentT3 agentT3)
-	{_agentT3 = agentT3; }
+    private AgentT3 _agentT3;
 
-	private AgentRental _agentRental;
+    public AgentT3 agentT3() {
+        return _agentT3;
+    }
 
-public AgentRental agentRental()
-	{ return _agentRental; }
+    public void setAgentT3(AgentT3 agentT3) {
+        _agentT3 = agentT3;
+    }
 
-	public void setAgentRental(AgentRental agentRental)
-	{_agentRental = agentRental; }
-	//meta! tag="end"
+    private AgentRental _agentRental;
+
+    public AgentRental agentRental() {
+        return _agentRental;
+    }
+
+    public void setAgentRental(AgentRental agentRental) {
+        _agentRental = agentRental;
+    }
+    //meta! tag="end"
+
+    private String convertTimeToString(double value) {
+        return (String.format("%.3f min", value / 60.0) + " = " + (int) Math.floor((value / 60.0) % 60.0) + " min " + String.format("%.0f", (value % 60.0)) + " sec");
+    }
+
 }

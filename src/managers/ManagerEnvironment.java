@@ -61,6 +61,7 @@ public class ManagerEnvironment extends Manager
 	//meta! sender="AgentModel", id="10", type="Notice"
 	public void processDepartureCustomer(MessageForm message)
 	{
+            myAgent().getStatWaitingTime().addSample(((MyMessage) message).getCustomer().getAllWaitingTime());
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

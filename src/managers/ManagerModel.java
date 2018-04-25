@@ -25,6 +25,8 @@ public class ManagerModel extends Manager {
 
     //meta! sender="AgentAirport", id="41", type="Notice"
     public void processDepartureCustomer(MessageForm message) {
+        message.setAddressee(mySim().findAgent(Id.agentEnvironment));
+        notice(message);
     }
 
     //meta! userInfo="Process messages defined in code", id="0"

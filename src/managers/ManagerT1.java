@@ -27,7 +27,7 @@ public class ManagerT1 extends Manager {
     //meta! sender="AgentAirport", id="39", type="Notice"
     public void processArrivalCustomer(MessageForm message) {
         myAgent().getCustomersQueue().enqueue(message);
-        System.out.println("AgentT1 prichod zakaznika: " + ((MyMessage) message).getCustomer().getTerminalAndID() + " v case: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem() + "front length: " + myAgent().getCustomersQueue().size());
+        //System.out.println("AgentT1 prichod zakaznika: " + ((MyMessage) message).getCustomer().getTerminalAndID() + " v case: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem() + "front length: " + myAgent().getCustomersQueue().size());
 
     }
 
@@ -43,15 +43,15 @@ public class ManagerT1 extends Manager {
              message.setCode(Mc.minibusReadyForMove);
              response(message);
         }else {           
-            myMessage(message).getMinibus().setPosition("Som na T1");
+            //myMessage(message).getMinibus().setPosition("Som na T1");
             Customer customer = myMessage(myAgent().getCustomersQueue().dequeue()).getCustomer();
             myMessage(message).setCustomer(customer);
             message.setCode(Mc.loadCustomer);
             message.setAddressee(mySim().findAgent(Id.agentBoardingCustomers));
             request(message);
         }
-        System.out.print("Minibus: " + ((MyMessage)message).getMinibus().getID()+ "| Prichod na T1 v cese: " + mySim().currentTime());
-        System.out.println(" Pasažieri: " + " pocet: " + ((MyMessage)message).getMinibus().getSize());
+        //System.out.print("Minibus: " + ((MyMessage)message).getMinibus().getID()+ "| Prichod na T1 v cese: " + mySim().currentTime());
+        //System.out.println(" Pasažieri: " + " pocet: " + ((MyMessage)message).getMinibus().getSize());
     }
 
     //meta! userInfo="Process messages defined in code", id="0"

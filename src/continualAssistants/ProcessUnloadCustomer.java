@@ -4,10 +4,14 @@ import OSPABA.*;
 import simulation.*;
 import agents.*;
 import OSPABA.Process;
+import generators.UniformRangeDistribution;
+import java.util.Random;
 
 //meta! id="86"
 public class ProcessUnloadCustomer extends Process
 {
+        private static UniformRangeDistribution _uniform = new UniformRangeDistribution(Config.GetOutOfBusUpperLimit,Config.GetOutOfBusLowerLimit, new Random()); // second
+
 	public ProcessUnloadCustomer(int id, Simulation mySim, CommonAgent myAgent)
 	{
 		super(id, mySim, myAgent);
@@ -24,7 +28,7 @@ public class ProcessUnloadCustomer extends Process
 	public void processStart(MessageForm message)
 	{          
             message.setCode(Mc.unloadCustomerDone);
-            hold(Config.GetOutOfBusLowerLimit,message);
+            hold(_uniform.next(), message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

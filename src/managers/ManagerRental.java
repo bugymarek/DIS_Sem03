@@ -40,14 +40,14 @@ public class ManagerRental extends Manager {
 
     //meta! sender="processserveArrivalMinibus", id="84", type="Response"
     public void processserveArrivalMinibus(MessageForm message) {
-        System.out.print("Minibus: " + ((MyMessage) message).getMinibus().getID() + "| Prichod na Rental v case: " + mySim().currentTime());
-        System.out.println(" Pasažieri: " + " pocet: " + ((MyMessage) message).getMinibus().getSize());
+        //System.out.print("Minibus: " + ((MyMessage) message).getMinibus().getID() + "| Prichod na Rental v case: " + mySim().currentTime());
+        //System.out.println(" Pasažieri: " + " pocet: " + ((MyMessage) message).getMinibus().getSize());
         if (((MyMessage) message).getMinibus().isEmpty()) {
-            myMessage(message).getMinibus().setPosition("Cestujem z Rental do T1");
+            //myMessage(message).getMinibus().setPosition("Cestujem z Rental do T1");
             message.setCode(Mc.minibusReadyForMove);
             response(message);
         } else {
-            myMessage(message).getMinibus().setPosition("Som na Rental");
+           // myMessage(message).getMinibus().setPosition("Som na Rental");
             Customer customer = myMessage(message).getMinibus().getCustomerFromBus();
             myMessage(message).setCustomer(customer);
             message.setCode(Mc.unloadCustomer);
@@ -61,7 +61,7 @@ public class ManagerRental extends Manager {
         MessageForm copyMessage = new MyMessage(myMessage(message));
         if (freeOperator == null) {
             myAgent().getCustomersUnloadQueue().enqueue(copyMessage);
-            System.out.println("AgentRental prichod do radu zakaznik: " + ((MyMessage) copyMessage).getCustomer().getTerminalAndID() + " front length: " + myAgent().getCustomersUnloadQueue().size());
+            //System.out.println("AgentRental prichod do radu zakaznik: " + ((MyMessage) copyMessage).getCustomer().getTerminalAndID() + " front length: " + myAgent().getCustomersUnloadQueue().size());
         }else {
             freeOperator.setOccupied(true);
             myMessage(copyMessage).setOperator(freeOperator);
@@ -78,6 +78,7 @@ public class ManagerRental extends Manager {
 
         message.setCode(Mc.departureCustomer);
         message.setAddressee(mySim().findAgent(Id.agentAirport));
+        myMessage(message).getCustomer().setAllWaitingTime(mySim().currentTime() - myMessage(message).getCustomer().getArrivalTimeToSystem());
         notice(message);
         
         if (!myAgent().getCustomersUnloadQueue().isEmpty()) {
