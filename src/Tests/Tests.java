@@ -31,14 +31,14 @@ public class Tests {
 
 		sim.simulate(1000, Config.SimulationTime);
     }
-    
+        
     public static boolean parseSimParams()
 	{
 		
 		try
 		{
-			Config.countMinibuses = Integer.parseInt("7");
-                        Config.countOperators = Integer.parseInt("18");
+			Config.MinibusesCount = Integer.parseInt("7");
+                        Config.OperatorsCount = Integer.parseInt("18");
 		}
 		catch (RuntimeException ex)
 		{

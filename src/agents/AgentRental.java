@@ -24,6 +24,7 @@ public class AgentRental extends Agent {
     public void prepareReplication() {
         super.prepareReplication();      
         _customersUnloadQueue = new SimQueue<>(new WStat(mySim()));
+        initOperatorsList();
         setAllOperatorsNotWork();
         // Setup component for the next replication
     }
@@ -52,7 +53,7 @@ public class AgentRental extends Agent {
     
     private void initOperatorsList(){
         _operatorsList = new ArrayList<>();
-        for (int i = 0; i < Config.countOperators; i++) {
+        for (int i = 0; i < Config.OperatorsCount; i++) {
             _operatorsList.add(new Operator(mySim()));
         }
     }

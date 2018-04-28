@@ -13,6 +13,7 @@ public class Config {
     //  all constants are represented as second units
 
     public static double SimulationTime = 30.0 * 24.0 * 60.0 * 60.0;
+    public static int ReplicationsCount;
 
     public static double LengthRentalToT1 = ((60.0 * 60.0) / 35.0) * 6.4;
     public static double LengthT1ToT2 = ((60.0 * 60.0) / 35.0) * 0.5;
@@ -30,13 +31,6 @@ public class Config {
     public static double GetOutOfBusLowerLimit = 4.0;
     public static double GetOutOfBusUpperLimit = 12.0;
 
-    public static int countMinibuses;
-    public static int countOperators;
-    
-
-    public static int pocetReplikacii;
-    public static boolean novySposobPrace;
-    public static int pocetPracovnikovZelenina;
-    public static int pocetPracovnikovMasoSyr;
-    public static int pocetPracovnikovPokladne;
+    public static int MinibusesCount;
+    public static int OperatorsCount;
 }

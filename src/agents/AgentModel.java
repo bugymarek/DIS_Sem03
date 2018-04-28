@@ -22,8 +22,8 @@ public class AgentModel extends Agent {
     @Override
     public void prepareReplication() {
         super.prepareReplication();
-        _minibusesList = new ArrayList<>(Config.countMinibuses);
-        for (int i = 0; i < Config.countMinibuses; ++i) {
+        _minibusesList = new ArrayList<>(Config.MinibusesCount);
+        for (int i = 0; i < Config.MinibusesCount; ++i) {
             Minibus mb = new Minibus(_mySim);
             mb.setID(i);
             _minibusesList.add(mb);

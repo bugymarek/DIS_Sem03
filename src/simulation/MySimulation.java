@@ -6,7 +6,8 @@ import agents.*;
 
 public class MySimulation extends Simulation {
 
-    private Stat _waitingTimeStat;
+    private Stat _statWaitingTimeForBoringCar;
+    private Stat _statWaitingTimeForDepartureFromT3;
 
     public MySimulation() {
         init();
@@ -14,9 +15,10 @@ public class MySimulation extends Simulation {
 
     @Override
     public void prepareSimulation() {
-        super.prepareSimulation();
-        _waitingTimeStat = new Stat();
+        super.prepareSimulation();      
         // Create global statistcis
+        _statWaitingTimeForBoringCar = new Stat();
+        _statWaitingTimeForDepartureFromT3 = new Stat();
     }
 
     @Override
@@ -30,8 +32,8 @@ public class MySimulation extends Simulation {
     public void replicationFinished() {
         // Collect local statistics into global, update UI, etc...
         super.replicationFinished();
-        _waitingTimeStat.addSample(agentEnvironment().getStatWaitingTime().mean());
-        System.out.println("R" + currentReplication() + " celkový priemer: " + convertTimeToString(_waitingTimeStat.mean()) + " priemer danej replikácie(" + convertTimeToString(agentEnvironment().getStatWaitingTime().mean()) + ")");
+        _statWaitingTimeForBoringCar.addSample(agentEnvironment().getStatWaitingTime().mean());
+        System.out.println("R" + currentReplication() + " celkový priemer: " + convertTimeToString(_statWaitingTimeForBoringCar.mean()) + " priemer danej replikácie(" + convertTimeToString(agentEnvironment().getStatWaitingTime().mean()) + ")");
     }
 
     @Override
@@ -137,5 +139,15 @@ public class MySimulation extends Simulation {
     private String convertTimeToString(double value) {
         return (String.format("%.3f min", value / 60.0) + " = " + (int) Math.floor((value / 60.0) % 60.0) + " min " + String.format("%.0f", (value % 60.0)) + " sec");
     }
+    
+    // global stats geters
+    public Stat getStatWaitingTimeForBoringCar() {
+        return _statWaitingTimeForBoringCar;
+    } 
 
+    public Stat getStatWaitingTimeForDepartureFromT3() {
+        return _statWaitingTimeForDepartureFromT3;
+    }
+    
+    
 }
