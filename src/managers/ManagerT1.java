@@ -43,7 +43,7 @@ public class ManagerT1 extends Manager {
              message.setCode(Mc.minibusReadyForMove);
              response(message);
         }else {           
-            //myMessage(message).getMinibus().setPosition("Som na T1");
+            myMessage(message).getMinibus().setPosition("Som na T1");
             Customer customer = myMessage(myAgent().getCustomersQueue().dequeue()).getCustomer();
             myMessage(message).setCustomer(customer);
             message.setCode(Mc.loadCustomer);

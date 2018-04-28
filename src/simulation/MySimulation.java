@@ -6,8 +6,10 @@ import agents.*;
 
 public class MySimulation extends Simulation {
 
-    private Stat _statWaitingTimeForBoringCar;
+    private Stat _statWaitingTimeForBorrowCar;
     private Stat _statWaitingTimeForDepartureFromT3;
+    private Stat _lengthMeanT1Stat;
+    private Stat _lengthMeanT2Stat;
 
     public MySimulation() {
         init();
@@ -17,8 +19,10 @@ public class MySimulation extends Simulation {
     public void prepareSimulation() {
         super.prepareSimulation();      
         // Create global statistcis
-        _statWaitingTimeForBoringCar = new Stat();
+        _statWaitingTimeForBorrowCar = new Stat();
         _statWaitingTimeForDepartureFromT3 = new Stat();
+        _lengthMeanT1Stat = new Stat();
+        _lengthMeanT2Stat = new Stat();
     }
 
     @Override
@@ -32,8 +36,10 @@ public class MySimulation extends Simulation {
     public void replicationFinished() {
         // Collect local statistics into global, update UI, etc...
         super.replicationFinished();
-        _statWaitingTimeForBoringCar.addSample(agentEnvironment().getStatWaitingTime().mean());
-        System.out.println("R" + currentReplication() + " celkový priemer: " + convertTimeToString(_statWaitingTimeForBoringCar.mean()) + " priemer danej replikácie(" + convertTimeToString(agentEnvironment().getStatWaitingTime().mean()) + ")");
+        _statWaitingTimeForBorrowCar.addSample(agentEnvironment().getStatWaitingTime().mean());
+        _lengthMeanT1Stat.addSample(agentT1().lengthQueueWStat().mean());
+        _lengthMeanT2Stat.addSample(agentT2().lengthQueueWStat().mean());
+        System.out.println("R" + currentReplication() + " celkový priemer: " + convertTimeToString(_statWaitingTimeForBorrowCar.mean()) + " priemer danej replikácie(" + convertTimeToString(agentEnvironment().getStatWaitingTime().mean()) + ")");
     }
 
     @Override
@@ -141,13 +147,19 @@ public class MySimulation extends Simulation {
     }
     
     // global stats geters
-    public Stat getStatWaitingTimeForBoringCar() {
-        return _statWaitingTimeForBoringCar;
+    public Stat getStatWaitingTimeForBorrowCar() {
+        return _statWaitingTimeForBorrowCar;
     } 
 
     public Stat getStatWaitingTimeForDepartureFromT3() {
         return _statWaitingTimeForDepartureFromT3;
     }
+
+    public Stat getLengthMeanT1Stat() {
+        return _lengthMeanT1Stat;
+    }
     
-    
+    public Stat getLengthMeanT2Stat() {
+        return _lengthMeanT2Stat;
+    }
 }

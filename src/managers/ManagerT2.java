@@ -40,11 +40,11 @@ public class ManagerT2 extends Manager {
     //meta! sender="AgentAirport", id="43", type="Request"
     public void processArrivalMinibus(MessageForm message) {
         if(myAgent().getCustomersQueue().isEmpty() || !((MyMessage)message).getMinibus().isPlaceInBus()){
-             //myMessage(message).getMinibus().setPosition("Cestujem z T2 do T3");
+             myMessage(message).getMinibus().setPosition("Cestujem z T2 do Rental");
              message.setCode(Mc.minibusReadyForMove);
              response(message);
         }else {           
-            //myMessage(message).getMinibus().setPosition("Som na T2");
+            myMessage(message).getMinibus().setPosition("Som na T2");
             Customer customer = myMessage(myAgent().getCustomersQueue().dequeue()).getCustomer();
             myMessage(message).setCustomer(customer);
             message.setCode(Mc.loadCustomer);

@@ -43,11 +43,11 @@ public class ManagerRental extends Manager {
         //System.out.print("Minibus: " + ((MyMessage) message).getMinibus().getID() + "| Prichod na Rental v case: " + mySim().currentTime());
         //System.out.println(" Pasažieri: " + " pocet: " + ((MyMessage) message).getMinibus().getSize());
         if (((MyMessage) message).getMinibus().isEmpty()) {
-            //myMessage(message).getMinibus().setPosition("Cestujem z Rental do T1");
+            myMessage(message).getMinibus().setPosition("Cestujem z Rental do T1");
             message.setCode(Mc.minibusReadyForMove);
             response(message);
         } else {
-           // myMessage(message).getMinibus().setPosition("Som na Rental");
+            myMessage(message).getMinibus().setPosition("Som na Rental");
             Customer customer = myMessage(message).getMinibus().getCustomerFromBus();
             myMessage(message).setCustomer(customer);
             message.setCode(Mc.unloadCustomer);

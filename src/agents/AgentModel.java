@@ -53,7 +53,10 @@ public class AgentModel extends Agent {
         message.setCode(Mc.minibusReadyForMove);
         message.setAddressee(mySim().findAgent(Id.agentAirport));
         manager().notice(message);
-        }
-        
+        }     
+    }
+
+    public List<Minibus> getMinibusesList() {
+        return _minibusesList;
     }
 }
