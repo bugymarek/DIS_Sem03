@@ -14,17 +14,40 @@ import OSPABA.Simulation;
  */
 public class Operator extends Entity {
     private boolean Occupied;
+    private int _id;
+    private double _allWorkingTime;
+    private double _startWorkingTime;
     
-    public Operator(Simulation mySim) {
+    public Operator(Simulation mySim, int id) {
         super(mySim);
         this.Occupied = false;
+        this._id = id;
+        this._allWorkingTime = 0;
+        this._startWorkingTime = 0;
     }
     
     public boolean isOccupied() {
         return Occupied;
     }
 
-    public void setOccupied(boolean Occupied) {
-        this.Occupied = Occupied;
+    public void setOccupied(boolean occupied) {
+        this.Occupied = occupied;
+        if(occupied){
+            _startWorkingTime = mySim().currentTime();
+        }else{
+            _allWorkingTime += (mySim().currentTime() - _startWorkingTime);
+        }
     }
+
+    public double getAllWorkingTime() {
+//        if(this.Occupied){
+//           return _allWorkingTime += (mySim().currentTime() - _startWorkingTime);
+//        }
+        return _allWorkingTime;
+    }
+
+    public int getId() {
+        return _id;
+    }
+    
 }

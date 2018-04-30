@@ -25,7 +25,6 @@ public class AgentRental extends Agent {
         super.prepareReplication();      
         _customersUnloadQueue = new SimQueue<>(new WStat(mySim()));
         initOperatorsList();
-        setAllOperatorsNotWork();
         // Setup component for the next replication
     }
 
@@ -54,7 +53,7 @@ public class AgentRental extends Agent {
     private void initOperatorsList(){
         _operatorsList = new ArrayList<>();
         for (int i = 0; i < Config.OperatorsCount; i++) {
-            _operatorsList.add(new Operator(mySim()));
+            _operatorsList.add(new Operator(mySim(), i));
         }
     }
     
@@ -62,6 +61,14 @@ public class AgentRental extends Agent {
         for (Operator operator : _operatorsList) {
             operator.setOccupied(false);
         }
+    }
+    
+    public double getAllWorkingTime(){
+        double allWorkingTime = 0; 
+        for (Operator operator : _operatorsList) {
+            allWorkingTime += operator.getAllWorkingTime();
+        }
+        return allWorkingTime;
     }
     
     public Operator getFreeOperator() {
@@ -82,4 +89,9 @@ public class AgentRental extends Agent {
         }
         return count;
     }
+
+    public ArrayList<Operator> getOperatorsList() {
+        return _operatorsList;
+    }
+    
 }

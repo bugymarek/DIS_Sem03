@@ -26,6 +26,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
 
     private MySimulation _sim;
     private DefaultTableModel MinibusTableModel;
+    private DefaultTableModel OperatorsTableModel;
 
     /**
      * Creates new form App
@@ -99,8 +100,6 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
         jTextFieldQueueT3Mean = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jTextFieldFreeOperatorsCount = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
         jTextFieldQueueBorowBringCarCount = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jTextFieldQueueRentalBorrowBringMean = new javax.swing.JTextField();
@@ -109,6 +108,8 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
         jTextFieldQueueRentalWaitingForMinibusMean = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableOperators = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -502,8 +503,6 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
 
         jTabbedPane2.addTab("Terminál 3", jPanel8);
 
-        jLabel16.setText("Počet voľných pracovníkov");
-
         jLabel15.setText("Počet v rade požičanie/vratenie auta");
 
         jLabel28.setText("Priemerna dĺžka radu požičanie/vratenie auta");
@@ -512,6 +511,19 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
 
         jLabel30.setText("Priemerna dĺžka radu na minibus");
 
+        jTableOperators.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableOperators);
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -519,19 +531,13 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel28)
-                    .addComponent(jTextFieldQueueRentalBorrowBringMean, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldQueueBorowBringCarCount)))
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldFreeOperatorsCount, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16))
-                        .addGap(137, 137, 137))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
+                            .addComponent(jLabel28)
+                            .addComponent(jTextFieldQueueRentalBorrowBringMean, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldQueueBorowBringCarCount)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel30)
@@ -539,7 +545,9 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                             .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextFieldQueueRentalWaitingForMinibusCount, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 216, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,11 +570,9 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                         .addComponent(jLabel30)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldQueueRentalWaitingForMinibusMean, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(53, 53, 53)
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldFreeOperatorsCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Rental", jPanel9);
@@ -924,7 +930,6 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
         jTextFieldArrivalCount.setEditable(false);
         jTextFieldDepartureCount.setEditable(false);
         jTextFieldInterval.setEditable(false);
-        jTextFieldFreeOperatorsCount.setEditable(false);
         jTextFieldMean.setEditable(false);
 
         _sim = new MySimulation();
@@ -1039,7 +1044,6 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -1082,15 +1086,16 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JPanel jPanelOperatorsFixedChart;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSlider jSliderInterval;
     private javax.swing.JSlider jSliderSpeed;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTableMinibuses;
+    private javax.swing.JTable jTableOperators;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextFieldArrivalCount;
     private javax.swing.JTextField jTextFieldDepartureCount;
-    private javax.swing.JTextField jTextFieldFreeOperatorsCount;
     private javax.swing.JTextField jTextFieldInterval;
     private javax.swing.JTextField jTextFieldMean;
     private javax.swing.JTextField jTextFieldMinibus;
@@ -1178,6 +1183,15 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                 MinibusTableModel.addRow(data);
             }
             
+            OperatorsTableModel.setRowCount(0);
+            for (int i = 0; i < Config.OperatorsCount; i++) {
+                Vector<Object> data = new Vector<>();
+                data.add(_sim.agentRental().getOperatorsList().get(i).getId());
+                data.add(_sim.agentRental().getOperatorsList().get(i).isOccupied());
+                data.add(String.format("%.2f %%",_sim.agentRental().getOperatorsList().get(i).getAllWorkingTime()*100.0/_sim.currentTime()));
+                OperatorsTableModel.addRow(data);
+            }
+            
             //T1
             jTextFieldQueueT1.setText(""+_sim.agentT1().getCustomersQueue().size());
             jTextFieldQueueT1Mean.setText(""+_sim.agentT1().lengthQueueWStat().mean());
@@ -1195,5 +1209,10 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
         String header[] = new String[]{"Id minibusu", "Pozícia", "Počet pasažierov"};
         MinibusTableModel.setColumnIdentifiers(header);
         jTableMinibuses.setModel(MinibusTableModel);
+        
+        OperatorsTableModel = new DefaultTableModel(0, 0);
+        header = new String[]{"Id pracovníka", "Obsluhuje","Vyťaženosť"};
+        OperatorsTableModel.setColumnIdentifiers(header);
+        jTableOperators.setModel(OperatorsTableModel);
     }
 }
