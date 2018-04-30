@@ -960,6 +960,10 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
 
         _sim.onSimulationDidFinish((sim)
                 -> {
+            System.out.println(_sim.getDeparturesCustomers().mean());
+            System.out.println("T1: " + _sim.getArrivalCustomersT1().mean());
+            System.out.println("T2: " + _sim.getArrivalCustomersT2().mean());
+            System.out.println("Rental: " + _sim.getArrivalCustomersRental().mean());
         });
     }
 

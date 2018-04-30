@@ -90,6 +90,8 @@ public class ManagerModel extends Manager {
     }
 
     private void processArrivalCustomerRental(MessageForm message) {
+        message.setAddressee(mySim().findAgent(Id.agentAirport));
+        notice(message);
         //System.out.println("AgentModel Arrival rental: " + ((MyMessage) message).getCustomer().getArrivalTimeToSystem());
     }
 

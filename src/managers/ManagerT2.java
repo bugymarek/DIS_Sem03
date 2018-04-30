@@ -27,7 +27,7 @@ public class ManagerT2 extends Manager {
     //meta! sender="AgentAirport", id="36", type="Notice"
     public void processArrivalCustomer(MessageForm message) {
         myAgent().getCustomersQueue().enqueue(message);
-        
+        myAgent().incrementCustomersCount();
         //System.out.println("AgentT2 prichod zakaznika: " + ((MyMessage) message).getCustomer().getTerminalAndID() + " v case: " + "front length: " + myAgent().getCustomersQueue().size());
 
     }

@@ -67,25 +67,25 @@ public class ProcessServeCustomer extends Process {
         double valueRate = _rate.nextDouble();
         double valueGenerated;
         if (((MyMessage) message).getCustomer().getTerminal().equals("Rental")) {
-            if (valueRate <= 13.394683) {
+            if (valueRate <= 0.13394683) {
                 valueGenerated = _outSecondTriang.sample();
-                System.out.println("Out second: " + valueGenerated);
-                return convertToMinutes(valueGenerated);
+                //System.out.println("Out second: " + valueGenerated);
+                return convertToSecunds(valueGenerated);
             }
             valueGenerated = _outFirstTriang.sample();
-            System.out.println("Out first: " + valueGenerated);
-            return convertToMinutes(valueGenerated);
+            //System.out.println("Out first: " + valueGenerated);
+            return convertToSecunds(valueGenerated);
         } else if (valueRate <= 0.234375) {
             valueGenerated = _inSecondTriang.sample();
             //System.out.println("in second: " + valueTest);
-            return convertToMinutes(valueGenerated);
+            return convertToSecunds(valueGenerated);
         }
         valueGenerated = _inFirstTriang.sample();
         //System.out.println("in first: " + valueTest);
-        return convertToMinutes(valueGenerated);
+        return convertToSecunds(valueGenerated);
     }
 
-    private double convertToMinutes(double value) {
+    private double convertToSecunds(double value) {
         return value * 60.0;
     }
 }

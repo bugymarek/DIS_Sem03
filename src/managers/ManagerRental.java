@@ -35,6 +35,7 @@ public class ManagerRental extends Manager {
 
     //meta! sender="AgentAirport", id="40", type="Notice"
     public void processArrivalCustomer(MessageForm message) {
+        myAgent().incrementCustomersCount();
         processUnloadCustomerDone(message);
     }
 
@@ -69,13 +70,21 @@ public class ManagerRental extends Manager {
             copyMessage.setAddressee(myAgent().findAssistant(Id.processServeCustomer));
             startContinualAssistant(copyMessage);
         }
-        processserveArrivalMinibus(message);
+        
+        if(myMessage(message).getMinibus()!= null){
+            processserveArrivalMinibus(message);
+        }
     }
 
     public void processFinish(MessageForm message) {
         Operator freeOperator = myMessage(message).getOperator();
         freeOperator.setOccupied(false);
 
+//        if(myMessage(message).getCustomer().getTerminal().equals("Rental")){
+//                myAgent().getCustomersLoadQueue().enqueue(copyMessage);
+//            } else {
+//                myAgent().getCustomersUnloadQueue().enqueue(copyMessage);
+//            }
         message.setCode(Mc.departureCustomer);
         message.setAddressee(mySim().findAgent(Id.agentAirport));
         myMessage(message).getCustomer().setAllWaitingTime(mySim().currentTime() - myMessage(message).getCustomer().getArrivalTimeToSystem());

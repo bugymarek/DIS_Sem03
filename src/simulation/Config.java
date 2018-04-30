@@ -12,7 +12,8 @@ package simulation;
 public class Config {
     //  all constants are represented as second units
 
-    public static double SimulationTime = 30.0 * 24.0 * 60.0 * 60.0;
+    //public static double SimulationTime = 30.0 * 24.0 * 60.0 * 60.0;
+    public static double SimulationTime = 270.0*60.0;
     public static int ReplicationsCount;
 
     public static double LengthRentalToT1 = ((60.0 * 60.0) / 35.0) * 6.4;
@@ -21,6 +22,7 @@ public class Config {
 
     public static double averageArrivalT1 = ((60.0 * 60.0) / 43.0);
     public static double averageArrivalT2 = ((60.0 * 60.0) / 19.0);
+    public static double averageArrivalRental = ((60.0 * 60.0) / 25.0);
 
     public static double OperatingLowerLimit = 2.0 * 60.0;
     public static double OperatingUpperLimit = 10.0 * 60.0;

@@ -37,7 +37,9 @@ public class ManagerAirport extends Manager {
     }
 
     private void processArrivalCustomerRental(MessageForm message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        message.setCode(Mc.arrivalCustomer);
+        message.setAddressee(mySim().findAgent(Id.agentRental));
+        notice(message);
     }
 
     //meta! sender="AgentRental", id="46", type="Response"

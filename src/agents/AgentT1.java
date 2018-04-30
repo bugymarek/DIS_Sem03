@@ -11,6 +11,7 @@ import continualAssistants.*;
 public class AgentT1 extends Agent {
 
     private SimQueue< MessageForm> _customersQueue;
+    private int _arrivalCustomersCount;
 
     public AgentT1(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
@@ -21,6 +22,7 @@ public class AgentT1 extends Agent {
     public void prepareReplication() {
         super.prepareReplication();
         _customersQueue = new SimQueue<>(new WStat(mySim()));
+        _arrivalCustomersCount = 0;
         // Setup component for the next replication
     }
 
@@ -40,4 +42,13 @@ public class AgentT1 extends Agent {
         return _customersQueue.lengthStatistic();
     }
     //meta! tag="end"
+
+    public int getArrivalCustomersCount() {
+        return _arrivalCustomersCount;
+    }
+    
+    public void incrementCustomersCount() {
+        _arrivalCustomersCount++;
+    }
+    
 }

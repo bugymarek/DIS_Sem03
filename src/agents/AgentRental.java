@@ -13,7 +13,9 @@ import java.util.ArrayList;
 public class AgentRental extends Agent {
 
     private SimQueue< MessageForm> _customersUnloadQueue;
+    private SimQueue< MessageForm> _customersLoadQueue;
     private ArrayList<Operator> _operatorsList;
+    private int _arrivalCustomersCount;
 
     public AgentRental(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
@@ -24,6 +26,8 @@ public class AgentRental extends Agent {
     public void prepareReplication() {
         super.prepareReplication();      
         _customersUnloadQueue = new SimQueue<>(new WStat(mySim()));
+        _customersLoadQueue = new SimQueue<>(new WStat(mySim()));
+        _arrivalCustomersCount = 0;
         initOperatorsList();
         // Setup component for the next replication
     }
@@ -44,6 +48,10 @@ public class AgentRental extends Agent {
 
     public SimQueue<MessageForm> getCustomersUnloadQueue() {
         return _customersUnloadQueue;
+    }
+
+    public SimQueue<MessageForm> getCustomersLoadQueue() {
+        return _customersLoadQueue;
     }
 
     public WStat lengthUnloadQueueWStat() {
@@ -94,4 +102,11 @@ public class AgentRental extends Agent {
         return _operatorsList;
     }
     
+    public int getArrivalCustomersCount() {
+        return _arrivalCustomersCount;
+    }
+    
+    public void incrementCustomersCount() {
+        _arrivalCustomersCount++;
+    }
 }

@@ -35,12 +35,19 @@ public class ManagerEnvironment extends Manager
             MyMessage msg = new MyMessage(mySim(), null, null);
             msg.setAddressee(myAgent().findAssistant(Id.planArrivalCustomerT2));         
             startContinualAssistant(msg);
+            
+            MyMessage msg2 = new MyMessage(mySim(), null, null);
+            msg2.setAddressee(myAgent().findAssistant(Id.planArrivalCustomerRental));         
+            startContinualAssistant(msg2);
 	}
 
 	//meta! sender="PlanArrivalCustomerRental", id="19", type="Finish"
 	public void processFinishPlanArrivalCustomerRental(MessageForm message)
 	{
             myAgent().incrementGeneratedCustomersCount();
+            message.setCode(Mc.arrivalCustomerRental);
+            message.setAddressee(myAgent().findAssistant(Id.agentModel));
+            notice(message);
 	}
 
 	//meta! sender="PlanArrivalCustomerT2", id="17", type="Finish"

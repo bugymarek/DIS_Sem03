@@ -10,6 +10,10 @@ public class MySimulation extends Simulation {
     private Stat _statWaitingTimeForDepartureFromT3;
     private Stat _lengthMeanT1Stat;
     private Stat _lengthMeanT2Stat;
+    private Stat _departuresCustomers;
+    private Stat _arrivalCustomersT1;
+    private Stat _arrivalCustomersT2;
+    private Stat _arrivalCustomersRental;
 
     public MySimulation() {
         init();
@@ -17,12 +21,16 @@ public class MySimulation extends Simulation {
 
     @Override
     public void prepareSimulation() {
-        super.prepareSimulation();      
+        super.prepareSimulation();
         // Create global statistcis
         _statWaitingTimeForBorrowCar = new Stat();
         _statWaitingTimeForDepartureFromT3 = new Stat();
         _lengthMeanT1Stat = new Stat();
         _lengthMeanT2Stat = new Stat();
+        _departuresCustomers = new Stat();
+        _arrivalCustomersT1 = new Stat();
+        _arrivalCustomersT2 = new Stat();
+        _arrivalCustomersRental = new Stat();
     }
 
     @Override
@@ -39,7 +47,11 @@ public class MySimulation extends Simulation {
         _statWaitingTimeForBorrowCar.addSample(agentEnvironment().getStatWaitingTime().mean());
         _lengthMeanT1Stat.addSample(agentT1().lengthQueueWStat().mean());
         _lengthMeanT2Stat.addSample(agentT2().lengthQueueWStat().mean());
-        System.out.println("R" + currentReplication() + " celkový priemer: " + convertTimeToString(_statWaitingTimeForBorrowCar.mean()) + " priemer danej replikácie(" + convertTimeToString(agentEnvironment().getStatWaitingTime().mean()) + ")");
+        _departuresCustomers.addSample(agentEnvironment().getDeparturesCustomersCount());
+        _arrivalCustomersT1.addSample(agentT1().getArrivalCustomersCount());
+        _arrivalCustomersT2.addSample(agentT2().getArrivalCustomersCount());
+        _arrivalCustomersRental.addSample(agentRental().getArrivalCustomersCount());
+        //System.out.println("R" + currentReplication() + " celkový priemer: " + convertTimeToString(_statWaitingTimeForBorrowCar.mean()) + " priemer danej replikácie(" + convertTimeToString(agentEnvironment().getStatWaitingTime().mean()) + ")");
     }
 
     @Override
@@ -145,11 +157,11 @@ public class MySimulation extends Simulation {
     private String convertTimeToString(double value) {
         return (String.format("%.3f min", value / 60.0) + " = " + (int) Math.floor((value / 60.0) % 60.0) + " min " + String.format("%.0f", (value % 60.0)) + " sec");
     }
-    
+
     // global stats geters
     public Stat getStatWaitingTimeForBorrowCar() {
         return _statWaitingTimeForBorrowCar;
-    } 
+    }
 
     public Stat getStatWaitingTimeForDepartureFromT3() {
         return _statWaitingTimeForDepartureFromT3;
@@ -158,8 +170,26 @@ public class MySimulation extends Simulation {
     public Stat getLengthMeanT1Stat() {
         return _lengthMeanT1Stat;
     }
-    
+
     public Stat getLengthMeanT2Stat() {
         return _lengthMeanT2Stat;
     }
+
+    public Stat getDeparturesCustomers() {
+        return _departuresCustomers;
+    }
+
+    public Stat getArrivalCustomersT1() {
+        return _arrivalCustomersT1;
+    }
+
+    public Stat getArrivalCustomersT2() {
+        return _arrivalCustomersT2;
+    }
+
+    public Stat getArrivalCustomersRental() {
+        return _arrivalCustomersRental;
+    }
+    
+    
 }
