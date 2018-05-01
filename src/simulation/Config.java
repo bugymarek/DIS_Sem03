@@ -26,12 +26,12 @@ public class Config {
     public static double LengthT1ToT2 = ((60.0 * 60.0) / 35.0) * 0.5;
     public static double LengthT2ToRental = ((60.0 * 60.0) / 35.0) * 3.4;
 
-    public static double averageArrivalT1 = ((60.0 * 60.0) / 43.0);
-    public static double averageArrivalT2 = ((60.0 * 60.0) / 19.0);
-    public static double averageArrivalRental = ((60.0 * 60.0) / 25.0);
+    //public static double averageArrivalT1 = ((60.0 * 60.0) / 43.0);
+    //public static double averageArrivalT2 = ((60.0 * 60.0) / 19.0);
+    //public static double averageArrivalRental = ((60.0 * 60.0) / 25.0);
 
-    public static double OperatingLowerLimit = 2.0 * 60.0;
-    public static double OperatingUpperLimit = 10.0 * 60.0;
+    //public static double OperatingLowerLimit = 2.0 * 60.0;
+    //public static double OperatingUpperLimit = 10.0 * 60.0;
 
 //    public static double BoardingLowerLimit = 10.0;
 //    public static double BoardingUpperLimit = 14.0;

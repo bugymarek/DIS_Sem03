@@ -18,7 +18,6 @@ public class PlanArrivalCustomerT2 extends Scheduler {
     private int _idCustomer;
     //private static ExponentialRNG _exp = new ExponentialRNG(Config.averageArrivalT2); // second
     private IntervalGenerator _intervalGenerator;
-    private UniformContinuousRNG _followPassengersProbabilityGeneratro = new UniformContinuousRNG(0d, 1d);
 
     public PlanArrivalCustomerT2(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
@@ -76,7 +75,7 @@ public class PlanArrivalCustomerT2 extends Scheduler {
         hold(_intervalGenerator.sample(), msg);
 
         _idCustomer++;
-        ((MyMessage) message).setCustomer(new Customer(_idCustomer, "T2", mySim(), _followPassengersProbabilityGeneratro.sample()));
+        ((MyMessage) message).setCustomer(new Customer(_idCustomer, "T2", mySim()));
         assistantFinished(message);
     }
 

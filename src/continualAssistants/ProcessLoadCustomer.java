@@ -4,13 +4,14 @@ import OSPABA.*;
 import simulation.*;
 import agents.*;
 import OSPABA.Process;
+import OSPRNG.UniformContinuousRNG;
 import generators.UniformRangeDistribution;
 import java.util.Random;
 
 //meta! id="80"
 public class ProcessLoadCustomer extends Process
 {
-        private static UniformRangeDistribution _uniform = new UniformRangeDistribution(Config.BoardingUpperLimit,Config.BoardingLowerLimit, new Random()); // second
+        private static UniformContinuousRNG _uniform = new UniformContinuousRNG(Config.BoardingLowerLimit,Config.BoardingUpperLimit); // second
 
 	public ProcessLoadCustomer(int id, Simulation mySim, CommonAgent myAgent)
 	{
@@ -70,7 +71,7 @@ public class ProcessLoadCustomer extends Process
         int count = ((MyMessage) message).getCustomer().getPassengersCount();
         double wait = 0;
         for (int i = 0; i < count; i++) {
-            wait += _uniform.next();
+            wait += _uniform.sample();
         }
         return wait;
     }

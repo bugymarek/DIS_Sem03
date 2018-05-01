@@ -231,7 +231,7 @@ public class ManagerAirport extends Manager {
             case Mc.minibusReadyForMove:
                 switch (message.sender().id()) {
                     case Id.agentModel:
-                        processMovMinibusToT1(message);
+                        processMovMinibusFromT3ToT1(message);
                         break;
 
                     case Id.agentT1:

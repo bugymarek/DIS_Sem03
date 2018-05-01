@@ -32,7 +32,7 @@ public class ManagerRental extends Manager {
     //meta! sender="AgentBoardingCustomers", id="82", type="Response"
     public void processLoadCustomerDone(MessageForm message) {
         boolean place = ((MyMessage) message).getMinibus().isPlaceInBus();
-        if (!place | myAgent().getCustomersLoadQueue().isEmpty()) {
+        if (!place || myAgent().getCustomersLoadQueue().isEmpty()) {
             myMessage(message).getMinibus().setPosition("Cestujem z rental do T3");
             message.setCode(Mc.minibusReadyForMove);
             response(message);

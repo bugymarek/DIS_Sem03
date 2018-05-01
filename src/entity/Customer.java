@@ -14,15 +14,16 @@ public class Customer extends Entity
         private int _ID;
         private String _terminal;
         private int _passengersCount;
+        private static UniformContinuousRNG _followPassengersProbabilityGeneratro = new UniformContinuousRNG(0d, 1d);
 	
-	public Customer(int id, String terminal, Simulation sim, double probability)
+	public Customer(int id, String terminal, Simulation sim)
 	{
 		super(sim);		
 		_arrivalTimeToSystem = sim.currentTime();		
 		_allWaitingTime = .0; 
                 _ID = id;
                 _terminal = terminal;
-                _passengersCount = generatePassengersCount(probability);
+                _passengersCount = generatePassengersCount(_followPassengersProbabilityGeneratro.sample());
 	}
 
     public void setArrivalTimeToSystem(double _arrivalTimeToSystem) {

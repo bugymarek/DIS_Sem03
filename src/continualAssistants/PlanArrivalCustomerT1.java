@@ -81,7 +81,7 @@ public class PlanArrivalCustomerT1 extends Scheduler {
         hold(_intervalGenerator.sample(), msg);
 
         _idCustomer++;
-        ((MyMessage) message).setCustomer(new Customer(_idCustomer, "T1", mySim(), _followPassengersProbabilityGeneratro.sample()));
+        ((MyMessage) message).setCustomer(new Customer(_idCustomer, "T1", mySim()));
         assistantFinished(message);
     }
 
