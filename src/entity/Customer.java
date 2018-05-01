@@ -13,14 +13,16 @@ public class Customer extends Entity
 	private double _allWaitingTime;
         private int _ID;
         private String _terminal;
+        private int _passengersCount;
 	
-	public Customer(int id, String terminal, Simulation sim)
+	public Customer(int id, String terminal, Simulation sim, double probability)
 	{
 		super(sim);		
 		_arrivalTimeToSystem = sim.currentTime();		
 		_allWaitingTime = .0; 
                 _ID = id;
                 _terminal = terminal;
+                _passengersCount = generatePassengersCount(probability);
 	}
 
     public void setArrivalTimeToSystem(double _arrivalTimeToSystem) {
@@ -57,6 +59,21 @@ public class Customer extends Entity
     
     public String getTerminalAndID(){
         return this._terminal + "/" + this._ID;
+    }
+
+    public int getPassengersCount() {
+        return _passengersCount;
+    }
+
+    private int generatePassengersCount(double probability) {
+        if(probability <= 0.60){
+            return 1;
+        }else if(probability <= 0.80){
+            return 2;
+        }else if(probability <= 0.95){
+            return 3;
+        }
+        return 4;
     }
 }
 

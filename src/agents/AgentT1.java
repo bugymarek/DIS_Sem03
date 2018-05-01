@@ -37,6 +37,15 @@ public class AgentT1 extends Agent {
     public SimQueue<MessageForm> getCustomersQueue() {
         return _customersQueue;
     }
+    
+    public MessageForm getAvailableCustomersFromQueue(int freePlaces) {
+        for (int i = _customersQueue.size() - 1; i >= 0; i--) {
+            if(((MyMessage)_customersQueue.get(i)).getCustomer().getPassengersCount() <= freePlaces){
+                return _customersQueue.remove(i);
+            }
+        }
+        return null;
+    }
 
     public WStat lengthQueueWStat() {
         return _customersQueue.lengthStatistic();

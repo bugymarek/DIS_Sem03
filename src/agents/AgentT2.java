@@ -50,4 +50,13 @@ public class AgentT2 extends Agent {
     public void incrementCustomersCount() {
         _arrivalCustomersCount++;
     }
+    
+    public MessageForm getAvailableCustomersFromQueue(int freePlaces) {
+        for (int i = _customersQueue.size() - 1; i >= 0; i--) {
+            if(((MyMessage)_customersQueue.get(i)).getCustomer().getPassengersCount() <= freePlaces){
+                return _customersQueue.remove(i);
+            }
+        }
+        return null;
+    }
 }

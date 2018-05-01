@@ -27,8 +27,9 @@ public class ProcessLoadCustomer extends Process
 	//meta! sender="AgentBoardingCustomers", id="81", type="Start"
 	public void processStart(MessageForm message)
 	{
+            double wait = getWaitingTimeForGroup(message);
             message.setCode(Mc.loadCustomerDone);
-            hold(_uniform.next(), message);
+            hold(wait, message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -65,4 +66,12 @@ public class ProcessLoadCustomer extends Process
 		return (AgentBoardingCustomers)super.myAgent();
 	}
 
+    private double getWaitingTimeForGroup(MessageForm message) {
+        int count = ((MyMessage) message).getCustomer().getPassengersCount();
+        double wait = 0;
+        for (int i = 0; i < count; i++) {
+            wait += _uniform.next();
+        }
+        return wait;
+    }
 }

@@ -1183,7 +1183,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                 Vector<Object> data = new Vector<>();
                 data.add(_sim.agentModel().getMinibusesList().get(i).getID());
                 data.add(_sim.agentModel().getMinibusesList().get(i).getPosition());
-                data.add(_sim.agentModel().getMinibusesList().get(i).getSize());
+                data.add(_sim.agentModel().getMinibusesList().get(i).getPassengersCount());
                 MinibusTableModel.addRow(data);
             }
             

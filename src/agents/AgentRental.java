@@ -53,6 +53,15 @@ public class AgentRental extends Agent {
     public SimQueue<MessageForm> getCustomersLoadQueue() {
         return _customersLoadQueue;
     }
+    
+    public MessageForm getAvailableCustomersFromQueue(int freePlaces) {
+        for (int i = _customersLoadQueue.size() - 1; i >= 0; i--) {
+            if(((MyMessage)_customersLoadQueue.get(i)).getCustomer().getPassengersCount() <= freePlaces){
+                return _customersLoadQueue.remove(i);
+            }
+        }
+        return null;
+    }
 
     public WStat lengthUnloadQueueWStat() {
         return _customersUnloadQueue.lengthStatistic();

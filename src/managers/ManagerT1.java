@@ -39,17 +39,25 @@ public class ManagerT1 extends Manager {
 
     //meta! sender="AgentAirport", id="44", type="Request"
     public void processArrivalMinibus(MessageForm message) {
-        if(myAgent().getCustomersQueue().isEmpty() || !((MyMessage)message).getMinibus().isPlaceInBus()){
-             myMessage(message).getMinibus().setPosition("Cestujem z T1 do T2");
-             message.setCode(Mc.minibusReadyForMove);
-             response(message);
-        }else {           
+        if (myAgent().getCustomersQueue().isEmpty() || !((MyMessage) message).getMinibus().isPlaceInBus()) {
+            myMessage(message).getMinibus().setPosition("Cestujem z T1 do T2");
+            message.setCode(Mc.minibusReadyForMove);
+            response(message);
+        } else {
             myMessage(message).getMinibus().setPosition("Som na T1");
-            Customer customer = myMessage(myAgent().getCustomersQueue().dequeue()).getCustomer();
-            myMessage(message).setCustomer(customer);
-            message.setCode(Mc.loadCustomer);
-            message.setAddressee(mySim().findAgent(Id.agentBoardingCustomers));
-            request(message);
+
+            MyMessage msg = myMessage(myAgent().getAvailableCustomersFromQueue(myMessage(message).getMinibus().getFreePlaces()));
+            if (msg == null) {
+                myMessage(message).getMinibus().setPosition("Cestujem z T1 do T2");
+                message.setCode(Mc.minibusReadyForMove);
+                response(message);
+            } else {
+                Customer customer = msg.getCustomer();
+                myMessage(message).setCustomer(customer);
+                message.setCode(Mc.loadCustomer);
+                message.setAddressee(mySim().findAgent(Id.agentBoardingCustomers));
+                request(message);
+            }
         }
         //System.out.print("Minibus: " + ((MyMessage)message).getMinibus().getID()+ "| Prichod na T1 v cese: " + mySim().currentTime());
         //System.out.println(" Pasažieri: " + " pocet: " + ((MyMessage)message).getMinibus().getSize());
@@ -91,9 +99,9 @@ public class ManagerT1 extends Manager {
     public AgentT1 myAgent() {
         return (AgentT1) super.myAgent();
     }
-    
-    private MyMessage myMessage(MessageForm message){
-        return (MyMessage)message;
+
+    private MyMessage myMessage(MessageForm message) {
+        return (MyMessage) message;
     }
 
 }

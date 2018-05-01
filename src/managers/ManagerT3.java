@@ -4,75 +4,90 @@ import OSPABA.*;
 import simulation.*;
 import agents.*;
 import continualAssistants.*;
+import entity.Customer;
 
 //meta! id="23"
-public class ManagerT3 extends Manager
-{
-	public ManagerT3(int id, Simulation mySim, Agent myAgent)
-	{
-		super(id, mySim, myAgent);
-		init();
-	}
+public class ManagerT3 extends Manager {
 
-	@Override
-	public void prepareReplication()
-	{
-		super.prepareReplication();
-		// Setup component for the next replication
+    public ManagerT3(int id, Simulation mySim, Agent myAgent) {
+        super(id, mySim, myAgent);
+        init();
+    }
 
-		if (petriNet() != null)
-		{
-			petriNet().clear();
-		}
-	}
+    @Override
+    public void prepareReplication() {
+        super.prepareReplication();
+        // Setup component for the next replication
 
-	//meta! sender="AgentAirport", id="45", type="Request"
-	public void processArrivalMinibus(MessageForm message)
-	{
-	}
+        if (petriNet() != null) {
+            petriNet().clear();
+        }
+    }
 
-	//meta! sender="AgentBoardingCustomers", id="85", type="Response"
-	public void processUnloadCustomerDone(MessageForm message)
-	{
-	}
+    //meta! sender="AgentAirport", id="45", type="Request"
+    public void processArrivalMinibus(MessageForm message) {
+        if (((MyMessage) message).getMinibus().isEmpty()) {
+                myMessage(message).getMinibus().setPosition("Cestujem z T3 do T1");
+                message.setCode(Mc.minibusReadyForMove);
+                response(message);
+        } else {
+            //System.out.println("Prisiel minibus: " + myMessage(message).getMinibus().getID() + " pasazierov: " + myMessage(message).getMinibus().getSize());
+            myMessage(message).getMinibus().setPosition("Som na T3");
+            Customer customer = myMessage(message).getMinibus().getCustomerFromBus();
+            myMessage(message).setCustomer(customer);
+            message.setCode(Mc.unloadCustomer);
+            message.setAddressee(mySim().findAgent(Id.agentBoardingCustomers));
+            request(message);
+        }
+    }
 
-	//meta! userInfo="Process messages defined in code", id="0"
-	public void processDefault(MessageForm message)
-	{
-		switch (message.code())
-		{
-		}
-	}
+    //meta! sender="AgentBoardingCustomers", id="85", type="Response"
+    public void processUnloadCustomerDone(MessageForm message) {
+        MessageForm copyMessage = new MyMessage(myMessage(message));
+        
+            myMessage(copyMessage).setCode(Mc.departureCustomer);
+            copyMessage.setAddressee(mySim().findAgent(Id.agentAirport));
+            myMessage(copyMessage).getCustomer().setAllWaitingTime(mySim().currentTime() - myMessage(message).getCustomer().getArrivalTimeToSystem());
+            notice(copyMessage);
+  
+            processArrivalMinibus(message);
+    }
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	public void init()
-	{
-	}
+    //meta! userInfo="Process messages defined in code", id="0"
+    public void processDefault(MessageForm message) {
+        switch (message.code()) {
+        }
+    }
 
-	@Override
-	public void processMessage(MessageForm message)
-	{
-		switch (message.code())
-		{
-		case Mc.unloadCustomerDone:
-			processUnloadCustomerDone(message);
-		break;
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    public void init() {
+    }
 
-		case Mc.serveArrivalMinibus:
-			processArrivalMinibus(message);
-		break;
+    @Override
+    public void processMessage(MessageForm message) {
+        switch (message.code()) {
+            case Mc.unloadCustomerDone:
+                processUnloadCustomerDone(message);
+                break;
 
-		default:
-			processDefault(message);
-		break;
-		}
-	}
-	//meta! tag="end"
+            case Mc.serveArrivalMinibus:
+                processArrivalMinibus(message);
+                break;
 
-	@Override
-	public AgentT3 myAgent()
-	{
-		return (AgentT3)super.myAgent();
-	}
+            default:
+                processDefault(message);
+                break;
+        }
+    }
+    //meta! tag="end"
+
+    @Override
+    public AgentT3 myAgent() {
+        return (AgentT3) super.myAgent();
+    }
+
+    private MyMessage myMessage(MessageForm message) {
+        return (MyMessage) message;
+    }
 
 }

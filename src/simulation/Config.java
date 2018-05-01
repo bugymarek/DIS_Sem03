@@ -16,9 +16,15 @@ public class Config {
     public static double SimulationTime = 270.0*60.0;
     public static int ReplicationsCount;
 
-    public static double LengthRentalToT1 = ((60.0 * 60.0) / 35.0) * 6.4;
+//    public static double LengthRentalToT1 = ((60.0 * 60.0) / 35.0) * 6.4;
+//    public static double LengthT1ToT2 = ((60.0 * 60.0) / 35.0) * 0.5;
+//    public static double LengthT2ToRental = ((60.0 * 60.0) / 35.0) * 2.5;
+    
+    public static double LengthRentalToT3 = ((60.0 * 60.0) / 35.0) * 2.9;
+    public static double LengthRentalToT1 = ((60.0 * 60.0) / 35.0) * 2.5;
+    public static double LengthT3ToT1 = ((60.0 * 60.0) / 35.0) * 0.9;
     public static double LengthT1ToT2 = ((60.0 * 60.0) / 35.0) * 0.5;
-    public static double LengthT2ToRental = ((60.0 * 60.0) / 35.0) * 2.5;
+    public static double LengthT2ToRental = ((60.0 * 60.0) / 35.0) * 3.4;
 
     public static double averageArrivalT1 = ((60.0 * 60.0) / 43.0);
     public static double averageArrivalT2 = ((60.0 * 60.0) / 19.0);
@@ -27,11 +33,17 @@ public class Config {
     public static double OperatingLowerLimit = 2.0 * 60.0;
     public static double OperatingUpperLimit = 10.0 * 60.0;
 
+//    public static double BoardingLowerLimit = 10.0;
+//    public static double BoardingUpperLimit = 14.0;
+//
+//    public static double GetOutOfBusLowerLimit = 4.0;
+//    public static double GetOutOfBusUpperLimit = 12.0;
+    
     public static double BoardingLowerLimit = 10.0;
     public static double BoardingUpperLimit = 14.0;
 
-    public static double GetOutOfBusLowerLimit = 4.0;
-    public static double GetOutOfBusUpperLimit = 12.0;
+    public static double GetOutOfBusLowerLimit = 2.0;
+    public static double GetOutOfBusUpperLimit = 10.0;
 
     public static int MinibusesCount;
     public static int OperatorsCount;

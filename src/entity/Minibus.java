@@ -19,10 +19,12 @@ public class Minibus extends Entity{
     private SimQueue<Customer> _customersQueue; 
     private int _ID;
     private String _position;
+    private int _passengersCount;
     
     public Minibus(Simulation mySim) {
         super(mySim);
         _customersQueue = new SimQueue<>(new WStat(mySim()));
+        _passengersCount = 0;
     }
     
     public String getPosition() {
@@ -46,11 +48,15 @@ public class Minibus extends Entity{
     }
     
     public boolean isPlaceInBus(){
-        return _customersQueue.size()<12;
+        return _passengersCount<12;
     }
     
-    public int getSize(){
-        return _customersQueue.size();
+    public int getFreePlaces(){
+        return 12 - _passengersCount;
+    }
+    
+    public int getPassengersCount(){
+        return _passengersCount;
     }
     
     public boolean isEmpty(){
@@ -58,11 +64,15 @@ public class Minibus extends Entity{
     }
     
     public Customer getCustomerFromBus(){
-        return _customersQueue.dequeue();
+        Customer cus = _customersQueue.dequeue();
+        _passengersCount -= cus.getPassengersCount();
+        return cus;
     }
     
     public void addCustomerToBus(Customer cus){
         _customersQueue.enqueue(cus);
+        _passengersCount += cus.getPassengersCount();
+        
     }
 
     public WStat lengthQueueWStat() {

@@ -5,6 +5,7 @@
  */
 package Tests;
 
+import java.util.LinkedList;
 import simulation.Config;
 import simulation.MySimulation;
 
@@ -18,18 +19,19 @@ public class Tests {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        parseSimParams();
-        MySimulation sim = new MySimulation();
-		
-		sim.onSimulationWillStart(s ->{
-			System.out.println("Simulating...");
-		});
-                
-                sim.onReplicationWillStart(s ->{
-                    System.out.println("Replikacia: " + sim.currentReplication());
-                });
-
-		sim.simulate(1000, Config.SimulationTime);
+//        parseSimParams();
+//        MySimulation sim = new MySimulation();
+//		
+//		sim.onSimulationWillStart(s ->{
+//			System.out.println("Simulating...");
+//		});
+//                
+//                sim.onReplicationWillStart(s ->{
+//                    System.out.println("Replikacia: " + sim.currentReplication());
+//                });
+//
+//		sim.simulate(1000, Config.SimulationTime);
+        testLinkedList();
     }
         
     public static boolean parseSimParams()
@@ -48,5 +50,23 @@ public class Tests {
 		}
 		return true;
 	}
+
+    private static void testLinkedList() {
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        for (Integer integer : list) {
+            System.out.println(integer);
+        }
+        System.out.println("");
+        list.get(3);
+        for (Integer integer : list) {
+            System.out.println(integer);
+        }
+     }
     
 }

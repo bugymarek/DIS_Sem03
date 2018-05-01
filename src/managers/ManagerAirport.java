@@ -51,6 +51,9 @@ public class ManagerAirport extends Manager {
 
     //meta! sender="AgentT3", id="45", type="Response"
     public void processFinishProcessMovingMinibusToT3(MessageForm message) {
+        message.setCode(Mc.serveArrivalMinibus);
+        message.setAddressee(mySim().findAgent(Id.agentT3));
+        request(message);
     }
 
     //meta! sender="AgentT2", id="43", type="Response"
@@ -62,6 +65,8 @@ public class ManagerAirport extends Manager {
 
     //meta! sender="AgentT3", id="32", type="Notice"
     public void processDepartureCustomerAgentT3(MessageForm message) {
+        message.setAddressee(mySim().findAgent(Id.agentModel));
+        notice(message);
     }
 
     //meta! sender="AgentRental", id="33", type="Notice"
@@ -79,7 +84,14 @@ public class ManagerAirport extends Manager {
     }
 
     private void processMovMinibusToT1(MessageForm message) {
+        myMessage(message).getMinibus().setPosition("Cestujem z rental do T1");
         message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusToT1));
+        startContinualAssistant(message);
+    }
+
+    private void processMovMinibusFromT3ToT1(MessageForm message) {
+        myMessage(message).getMinibus().setPosition("Cestujem z T3 do T1");
+        message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusFromT3ToT1));
         startContinualAssistant(message);
     }
 
@@ -93,8 +105,14 @@ public class ManagerAirport extends Manager {
         startContinualAssistant(message);
     }
 
-    private void processMovMinibusToT3(MessageForm message) {
-        processMovMinibusToT1(message);
+    private void processMovMinibusToT3orT1(MessageForm message) {
+        if (((MyMessage) message).getMinibus().isEmpty()) {
+            processMovMinibusToT1(message);
+        } else {
+            myMessage(message).getMinibus().setPosition("Cestujem z rental do T3");
+            message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusToT3));
+            startContinualAssistant(message);
+        }
     }
 
     //meta! userInfo="Process messages defined in code", id="0"
@@ -203,15 +221,19 @@ public class ManagerAirport extends Manager {
                     case Id.processMovingMinibusToT1:
                         processFinishProcessMovingMinibusToT1(message);
                         break;
+
+                    case Id.processMovingMinibusFromT3ToT1:
+                        processFinishProcessMovingMinibusToT1(message);
+                        break;
                 }
                 break;
-                
+
             case Mc.minibusReadyForMove:
                 switch (message.sender().id()) {
                     case Id.agentModel:
                         processMovMinibusToT1(message);
                         break;
-                    
+
                     case Id.agentT1:
                         processMovMinibusToT2(message);
                         break;
@@ -221,11 +243,11 @@ public class ManagerAirport extends Manager {
                         break;
 
                     case Id.agentT3:
-                        processMovMinibusToT1(message);
+                        processMovMinibusFromT3ToT1(message);
                         break;
 
                     case Id.agentRental:
-                        processMovMinibusToT3(message);
+                        processMovMinibusToT3orT1(message);
                         break;
                 }
                 break;
@@ -252,5 +274,9 @@ public class ManagerAirport extends Manager {
     @Override
     public AgentAirport myAgent() {
         return (AgentAirport) super.myAgent();
+    }
+
+    private MyMessage myMessage(MessageForm message) {
+        return (MyMessage) message;
     }
 }

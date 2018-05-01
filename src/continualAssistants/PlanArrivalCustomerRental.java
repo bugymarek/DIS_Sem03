@@ -3,6 +3,7 @@ package continualAssistants;
 import Generators.IntervalGenerator;
 import OSPABA.*;
 import OSPRNG.ExponentialRNG;
+import OSPRNG.UniformContinuousRNG;
 import simulation.*;
 import agents.*;
 import entity.Customer;
@@ -17,6 +18,7 @@ public class PlanArrivalCustomerRental extends Scheduler {
     private int _idCustomer;
     //private static ExponentialRNG _exp = new ExponentialRNG(2d); // second
     private IntervalGenerator _intervalGenerator;
+    private UniformContinuousRNG _followPassengersProbabilityGeneratro = new UniformContinuousRNG(0d, 1d);
 
     public PlanArrivalCustomerRental(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
@@ -50,7 +52,7 @@ public class PlanArrivalCustomerRental extends Scheduler {
         hold(_intervalGenerator.sample(), msg);
 
         _idCustomer++;
-        ((MyMessage) message).setCustomer(new Customer(_idCustomer, "Rental", mySim()));
+        ((MyMessage) message).setCustomer(new Customer(_idCustomer, "Rental", mySim(), _followPassengersProbabilityGeneratro.sample()));
         assistantFinished(message);
     }
 

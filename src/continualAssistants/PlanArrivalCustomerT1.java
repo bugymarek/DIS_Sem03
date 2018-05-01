@@ -3,6 +3,7 @@ package continualAssistants;
 import Generators.IntervalGenerator;
 import OSPABA.*;
 import OSPRNG.ExponentialRNG;
+import OSPRNG.UniformContinuousRNG;
 import simulation.*;
 import agents.*;
 import entity.Customer;
@@ -13,9 +14,11 @@ import java.util.List;
 
 //meta! id="12"
 public class PlanArrivalCustomerT1 extends Scheduler {
+
     private int _idCustomer;
     //private static ExponentialRNG _exp = new ExponentialRNG(Config.averageArrivalT1); // second
     private IntervalGenerator _intervalGenerator;
+    private UniformContinuousRNG _followPassengersProbabilityGeneratro = new UniformContinuousRNG(0d, 1d);
 
     public PlanArrivalCustomerT1(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
@@ -23,7 +26,7 @@ public class PlanArrivalCustomerT1 extends Scheduler {
         Pair pair;
 
         for (int i = 0; i < Pairs.T1Pairs.length; i++) {
-            pair = new Pair(Pairs.T1Pairs[i][0]*60.0,Pairs.T1Pairs[i][1]);
+            pair = new Pair(Pairs.T1Pairs[i][0] * 60.0, Pairs.T1Pairs[i][1]);
             pair.setIndex(i);
             pairs.add(pair);
         }
@@ -58,7 +61,7 @@ public class PlanArrivalCustomerT1 extends Scheduler {
                 break;
 
             case Mc.newCustomer:
-                processNewCustomer(message);            	
+                processNewCustomer(message);
                 break;
 
             default:
@@ -76,9 +79,9 @@ public class PlanArrivalCustomerT1 extends Scheduler {
     private void processNewCustomer(MessageForm message) {
         MyMessage msg = new MyMessage((MyMessage) message);
         hold(_intervalGenerator.sample(), msg);
-        
+
         _idCustomer++;
-        ((MyMessage) message).setCustomer(new Customer(_idCustomer, "T1" ,mySim()));
+        ((MyMessage) message).setCustomer(new Customer(_idCustomer, "T1", mySim(), _followPassengersProbabilityGeneratro.sample()));
         assistantFinished(message);
     }
 

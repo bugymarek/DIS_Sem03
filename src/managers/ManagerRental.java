@@ -31,6 +31,14 @@ public class ManagerRental extends Manager {
 
     //meta! sender="AgentBoardingCustomers", id="82", type="Response"
     public void processLoadCustomerDone(MessageForm message) {
+        boolean place = ((MyMessage) message).getMinibus().isPlaceInBus();
+        if (!place | myAgent().getCustomersLoadQueue().isEmpty()) {
+            myMessage(message).getMinibus().setPosition("Cestujem z rental do T3");
+            message.setCode(Mc.minibusReadyForMove);
+            response(message);
+        } else {
+            loadCustomer(message);
+        }
     }
 
     //meta! sender="AgentAirport", id="40", type="Notice"
@@ -44,9 +52,14 @@ public class ManagerRental extends Manager {
         //System.out.print("Minibus: " + ((MyMessage) message).getMinibus().getID() + "| Prichod na Rental v case: " + mySim().currentTime());
         //System.out.println(" Pasažieri: " + " pocet: " + ((MyMessage) message).getMinibus().getSize());
         if (((MyMessage) message).getMinibus().isEmpty()) {
-            myMessage(message).getMinibus().setPosition("Cestujem z Rental do T1");
-            message.setCode(Mc.minibusReadyForMove);
-            response(message);
+            if (myAgent().getCustomersLoadQueue().isEmpty()) {
+                myMessage(message).getMinibus().setPosition("Cestujem z rental do T1");
+                message.setCode(Mc.minibusReadyForMove);
+                response(message);
+            } else {
+                loadCustomer(message);
+            }
+
         } else {
             myMessage(message).getMinibus().setPosition("Som na Rental");
             Customer customer = myMessage(message).getMinibus().getCustomerFromBus();
@@ -63,15 +76,15 @@ public class ManagerRental extends Manager {
         if (freeOperator == null) {
             myAgent().getCustomersUnloadQueue().enqueue(copyMessage);
             //System.out.println("AgentRental prichod do radu zakaznik: " + ((MyMessage) copyMessage).getCustomer().getTerminalAndID() + " front length: " + myAgent().getCustomersUnloadQueue().size());
-        }else {
+        } else {
             freeOperator.setOccupied(true);
             myMessage(copyMessage).setOperator(freeOperator);
             copyMessage.setCode(Mc.serveCustomer);
             copyMessage.setAddressee(myAgent().findAssistant(Id.processServeCustomer));
             startContinualAssistant(copyMessage);
         }
-        
-        if(myMessage(message).getMinibus()!= null){
+
+        if (myMessage(message).getMinibus() != null) {
             processserveArrivalMinibus(message);
         }
     }
@@ -80,16 +93,15 @@ public class ManagerRental extends Manager {
         Operator freeOperator = myMessage(message).getOperator();
         freeOperator.setOccupied(false);
 
-//        if(myMessage(message).getCustomer().getTerminal().equals("Rental")){
-//                myAgent().getCustomersLoadQueue().enqueue(copyMessage);
-//            } else {
-//                myAgent().getCustomersUnloadQueue().enqueue(copyMessage);
-//            }
-        message.setCode(Mc.departureCustomer);
-        message.setAddressee(mySim().findAgent(Id.agentAirport));
-        myMessage(message).getCustomer().setAllWaitingTime(mySim().currentTime() - myMessage(message).getCustomer().getArrivalTimeToSystem());
-        notice(message);
-        
+        if (myMessage(message).getCustomer().getTerminal().equals("Rental")) {
+            myAgent().getCustomersLoadQueue().enqueue(message);
+        } else {
+            message.setCode(Mc.departureCustomer);
+            message.setAddressee(mySim().findAgent(Id.agentAirport));
+            myMessage(message).getCustomer().setAllWaitingTime(mySim().currentTime() - myMessage(message).getCustomer().getArrivalTimeToSystem());
+            notice(message);
+        }
+
         if (!myAgent().getCustomersUnloadQueue().isEmpty()) {
             MessageForm msg = myAgent().getCustomersUnloadQueue().dequeue();
             freeOperator.setOccupied(true);
@@ -147,5 +159,20 @@ public class ManagerRental extends Manager {
 
     private MyMessage myMessage(MessageForm message) {
         return (MyMessage) message;
+    }
+
+    private void loadCustomer(MessageForm message) {
+        MyMessage msg = myMessage(myAgent().getAvailableCustomersFromQueue(myMessage(message).getMinibus().getFreePlaces()));
+            if (msg == null) {
+                myMessage(message).getMinibus().setPosition("Cestujem z rental do T3");
+                message.setCode(Mc.minibusReadyForMove);
+                response(message);
+            } else {
+                Customer customer = msg.getCustomer();
+                myMessage(message).setCustomer(customer);
+                message.setCode(Mc.loadCustomer);
+                message.setAddressee(mySim().findAgent(Id.agentBoardingCustomers));
+                request(message);
+            }
     }
 }

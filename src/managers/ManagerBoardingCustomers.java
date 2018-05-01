@@ -25,11 +25,13 @@ public class ManagerBoardingCustomers extends Manager {
 
     //meta! sender="AgentT1", id="83", type="Request"
     public void processLoadCustomer(MessageForm message) {
+        ((MyMessage) message).getMinibus().setPosition("Nastupovanie");
         message.setAddressee(myAgent().findAssistant(Id.processLoadCustomer));
         startContinualAssistant(message);
     }
     
      public void processUnLoadCustomer(MessageForm message) {
+        ((MyMessage) message).getMinibus().setPosition("Vystupovanie");
         message.setAddressee(myAgent().findAssistant(Id.processUnloadCustomer));
         startContinualAssistant(message);
     }

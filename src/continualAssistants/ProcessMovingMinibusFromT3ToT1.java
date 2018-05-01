@@ -6,9 +6,9 @@ import agents.*;
 import OSPABA.Process;
 
 //meta! id="74"
-public class ProcessMovingMinibusToT3 extends Process
+public class ProcessMovingMinibusFromT3ToT1 extends Process
 {
-	public ProcessMovingMinibusToT3(int id, Simulation mySim, CommonAgent myAgent)
+	public ProcessMovingMinibusFromT3ToT1(int id, Simulation mySim, CommonAgent myAgent)
 	{
 		super(id, mySim, myAgent);
 	}
@@ -24,7 +24,7 @@ public class ProcessMovingMinibusToT3 extends Process
 	public void processStart(MessageForm message)
 	{
             message.setCode(Mc.movingMinibusDone);
-            hold(Config.LengthRentalToT3,message);
+            hold(Config.LengthT3ToT1,message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

@@ -8,61 +8,63 @@ import generators.UniformRangeDistribution;
 import java.util.Random;
 
 //meta! id="86"
-public class ProcessUnloadCustomer extends Process
-{
-        private static UniformRangeDistribution _uniform = new UniformRangeDistribution(Config.GetOutOfBusUpperLimit,Config.GetOutOfBusLowerLimit, new Random()); // second
+public class ProcessUnloadCustomer extends Process {
 
-	public ProcessUnloadCustomer(int id, Simulation mySim, CommonAgent myAgent)
-	{
-		super(id, mySim, myAgent);
-	}
+    private static UniformRangeDistribution _uniform = new UniformRangeDistribution(Config.GetOutOfBusUpperLimit, Config.GetOutOfBusLowerLimit, new Random()); // second
 
-	@Override
-	public void prepareReplication()
-	{
-		super.prepareReplication();
-		// Setup component for the next replication
-	}
+    public ProcessUnloadCustomer(int id, Simulation mySim, CommonAgent myAgent) {
+        super(id, mySim, myAgent);
+    }
 
-	//meta! sender="AgentBoardingCustomers", id="87", type="Start"
-	public void processStart(MessageForm message)
-	{          
-            message.setCode(Mc.unloadCustomerDone);
-            hold(_uniform.next(), message);
-	}
+    @Override
+    public void prepareReplication() {
+        super.prepareReplication();
+        // Setup component for the next replication
+    }
 
-	//meta! userInfo="Process messages defined in code", id="0"
-	public void processDefault(MessageForm message)
-	{
-		switch (message.code())
-		{
-		}
-	}
+    //meta! sender="AgentBoardingCustomers", id="87", type="Start"
+    public void processStart(MessageForm message) {
+        double wait = getWaitingTimeForGroup(message);
+        message.setCode(Mc.unloadCustomerDone);
+        hold(wait, message);
+    }
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	@Override
-	public void processMessage(MessageForm message)
-	{
-		switch (message.code())
-		{
-		case Mc.start:
-			processStart(message);
-		break;
-                
-                case Mc.unloadCustomerDone:
-			assistantFinished(message);
+    //meta! userInfo="Process messages defined in code", id="0"
+    public void processDefault(MessageForm message) {
+        switch (message.code()) {
+        }
+    }
 
-		default:
-			processDefault(message);
-		break;
-		}
-	}
-	//meta! tag="end"
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    @Override
+    public void processMessage(MessageForm message) {
+        switch (message.code()) {
+            case Mc.start:
+                processStart(message);
+                break;
 
-	@Override
-	public AgentBoardingCustomers myAgent()
-	{
-		return (AgentBoardingCustomers)super.myAgent();
-	}
+            case Mc.unloadCustomerDone:
+                assistantFinished(message);
+
+            default:
+                processDefault(message);
+                break;
+        }
+    }
+    //meta! tag="end"
+
+    @Override
+    public AgentBoardingCustomers myAgent() {
+        return (AgentBoardingCustomers) super.myAgent();
+    }
+
+    private double getWaitingTimeForGroup(MessageForm message) {
+        int count = ((MyMessage) message).getCustomer().getPassengersCount();
+        double wait = 0;
+        for (int i = 0; i < count; i++) {
+            wait += _uniform.next();
+        }
+        return wait;
+    }
 
 }
