@@ -2,15 +2,9 @@ package continualAssistants;
 
 import Generators.IntervalGenerator;
 import OSPABA.*;
-import OSPRNG.ExponentialRNG;
-import OSPRNG.UniformContinuousRNG;
 import simulation.*;
 import agents.*;
 import entity.Customer;
-import generators.Pair;
-import generators.Pairs;
-import java.util.ArrayList;
-import java.util.List;
 
 //meta! id="16"
 public class PlanArrivalCustomerT2 extends Scheduler {
@@ -21,15 +15,8 @@ public class PlanArrivalCustomerT2 extends Scheduler {
 
     public PlanArrivalCustomerT2(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
-        List<Pair> pairs = new ArrayList<>();
-        Pair pair;
-
-        for (int i = 0; i < Pairs.T2Pairs.length; i++) {
-            pair = new Pair(Pairs.T2Pairs[i][0] * 60.0, Pairs.T2Pairs[i][1]);
-            pair.setIndex(i);
-            pairs.add(pair);
-        }
-        _intervalGenerator = new IntervalGenerator(pairs, mySim);
+        
+        _intervalGenerator = new IntervalGenerator(2, mySim);
     }
 
     @Override

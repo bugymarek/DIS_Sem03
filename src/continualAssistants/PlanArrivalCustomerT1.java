@@ -7,10 +7,6 @@ import OSPRNG.UniformContinuousRNG;
 import simulation.*;
 import agents.*;
 import entity.Customer;
-import generators.Pair;
-import generators.Pairs;
-import java.util.ArrayList;
-import java.util.List;
 
 //meta! id="12"
 public class PlanArrivalCustomerT1 extends Scheduler {
@@ -22,15 +18,7 @@ public class PlanArrivalCustomerT1 extends Scheduler {
 
     public PlanArrivalCustomerT1(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
-        List<Pair> pairs = new ArrayList<>();
-        Pair pair;
-
-        for (int i = 0; i < Pairs.T1Pairs.length; i++) {
-            pair = new Pair(Pairs.T1Pairs[i][0] * 60.0, Pairs.T1Pairs[i][1]);
-            pair.setIndex(i);
-            pairs.add(pair);
-        }
-        _intervalGenerator = new IntervalGenerator(pairs, mySim);
+        _intervalGenerator = new IntervalGenerator(1, mySim);
     }
 
     @Override
@@ -84,5 +72,4 @@ public class PlanArrivalCustomerT1 extends Scheduler {
         ((MyMessage) message).setCustomer(new Customer(_idCustomer, "T1", mySim()));
         assistantFinished(message);
     }
-
 }

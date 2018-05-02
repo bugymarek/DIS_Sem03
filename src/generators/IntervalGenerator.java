@@ -2,55 +2,59 @@ package Generators;
 
 import OSPABA.Simulation;
 import OSPRNG.ExponentialRNG;
-import generators.Pair;
-import simulation.MyMessage;
-import simulation.MySimulation;
-
 import java.util.ArrayList;
-import java.util.List;
+import simulation.Config;
 
 public class IntervalGenerator {
 
-    private List<ExponentialRNG> generators;
-    private List<Pair> pairs;
-    private Simulation mySim;
+    private Simulation _mySim;
+    private ArrayList<ExponentialRNG> _generators;
+    private int _indexTermininal;
 
-    public IntervalGenerator(List<Pair> values, Simulation sim) {
-        generators = new ArrayList<>();
-        mySim = sim;
-        pairs = values;
-        int i = 0;
-        for (Pair value : values) {
-            value.setIndex(i);
-            i++;
-            generators.add(new ExponentialRNG((60.0*60.0)/value.getLambda()));
-        }
+    public IntervalGenerator(int index, Simulation sim) {
+        _indexTermininal = index;
+        _mySim = sim;
+        generateGenerators();
     }
 
     public double sample(){
-        Pair pair = null;
-        for (Pair p : pairs) {
-            if(((p.getInterval()) - (15.0*60.0) )<= mySim.currentTime()){
-                pair = p;
+        int intervalIndex = -1;
+        double interval = 0;
+        double lambda = 0;
+        for (int i = 0; i < Config.Intervals.length; i++) {
+            if ((Config.Intervals[i][0] - (15d * 60d) ) <= _mySim.currentTime()) {
+                interval = Config.Intervals[i][0];
+                intervalIndex = i;
+                lambda = Config.Intervals[i][_indexTermininal];
             }
         }
         
-        double result = generators.get(pair.getIndex()).sample();
-        double timeResult = result + mySim.currentTime();
-        if (timeResult > pair.getInterval()) {
-            int index = pair.getIndex();
-            double space = timeResult - pair.getInterval();
-            double lowerSpace = result - space;
-            double thisLambda = pair.getLambda();
-            int size = pairs.size();
-            int biggerIndex = index + 1;
-            int nextIndex = (index == size - 1) ? index : biggerIndex;
-            double nextLambda = pairs.get(nextIndex).getLambda();
-            double rate = thisLambda / nextLambda;
-            result = ((space) * (rate) + lowerSpace);
+        return checkGeneratedValue(intervalIndex, interval, lambda);
+    }
+
+    private void generateGenerators() {
+        _generators = new ArrayList<>();
+        for (double[] Interval : Config.Intervals) {
+            _generators.add(new ExponentialRNG((60.0 * 60.0) / Interval[_indexTermininal]));
+        }
+    }
+    
+    private double checkGeneratedValue(int intervalIndex, double interval,double lambda){
+        double generatedValue = _generators.get(intervalIndex).sample();
+        double timeResult = generatedValue + _mySim.currentTime();
+        if (timeResult > interval) {
+            double space = timeResult - interval;
+            double lowerSpace = generatedValue - space;
+  
+            if(intervalIndex != Config.Intervals.length - 1){
+                intervalIndex++;
+            }
+            double nextLambda = Config.Intervals[intervalIndex][_indexTermininal];
+            double rate = lambda / nextLambda;
+            generatedValue = ((space) * (rate) + lowerSpace);
         }
 
-        return result;
+        return generatedValue;
     }
 
 }
