@@ -57,9 +57,9 @@ public class AgentT1 extends Agent {
         return null;
     }
 
-    public WStat lengthQueueWStatInteger() {
-        return _customersStatQueue.lengthStatistic();
-    }
+        public WStat lengthQueueWStatInteger() {
+            return _customersStatQueue.lengthStatistic();
+        }
 
     //meta! tag="end"
 
@@ -79,7 +79,9 @@ public class AgentT1 extends Agent {
         _departureCustomersCount += value;
     }
 
-    public void addToStatQueue(int passengersCount) {
+    public void enqueuQueue(MessageForm message) {
+        _customersQueue.enqueue(message);
+        int passengersCount = ((MyMessage)message).getCustomer().getPassengersCount();
         for (int i = 0; i < passengersCount; i++) {
             _customersStatQueue.enqueue(1);
         }

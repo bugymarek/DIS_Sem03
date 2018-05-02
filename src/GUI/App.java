@@ -120,7 +120,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
         jTextFieldDepartureCountT3 = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jTextFieldQueueBorowBringCarCount = new javax.swing.JTextField();
+        jTextFieldQueueRentalRentBringCarCount = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jTextFieldQueueRentalRentBringMean = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
@@ -152,6 +152,22 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
         jTextFieldIntervalStatMeanRentCar = new javax.swing.JTextField();
         jLabel46 = new javax.swing.JLabel();
         jPanelMinibusesFixed = new javax.swing.JPanel();
+        jTextFieldStatMeanLengthT1 = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jTextFieldStatIntervalLengthT1 = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jTextFieldStatMeanLengthT2 = new javax.swing.JTextField();
+        jTextFieldStatIntervalLengthT2 = new javax.swing.JTextField();
+        jLabel48 = new javax.swing.JLabel();
+        jTextFieldStatMeanLengthRentReturn = new javax.swing.JTextField();
+        jTextFieldStatIntervalLengthRentReturn = new javax.swing.JTextField();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jTextFieldStatMeanLengthWaitForMinibus = new javax.swing.JTextField();
+        jTextFieldStatIntervalLengthWaitForMinibus = new javax.swing.JTextField();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
         jPanelOperatorsFixed = new javax.swing.JPanel();
         jTextFieldStatMeanOperatorsFixed = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
@@ -672,7 +688,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jTextFieldQueueRentalWaitingForMinibusCount)
-                                    .addComponent(jTextFieldQueueBorowBringCarCount))
+                                    .addComponent(jTextFieldQueueRentalRentBringCarCount))
                                 .addGap(10, 10, 10)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel28)
@@ -716,7 +732,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldQueueBorowBringCarCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldQueueRentalRentBringCarCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -859,15 +875,115 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
 
         jTabbedPane1.addTab("Priem. čas v systéme", jPanel4);
 
+        jLabel20.setText("T1");
+
+        jLabel22.setText("90% interval spoľahlivosti");
+
+        jLabel47.setText("T2");
+
+        jLabel48.setText("90% interval spoľahlivosti");
+
+        jLabel49.setText("90% interval spoľahlivosti");
+
+        jLabel50.setText("Požičanie/vratenie auta");
+
+        jLabel51.setText("90% interval spoľahlivosti");
+
+        jLabel52.setText("Odchod na autobus");
+
         javax.swing.GroupLayout jPanelMinibusesFixedLayout = new javax.swing.GroupLayout(jPanelMinibusesFixed);
         jPanelMinibusesFixed.setLayout(jPanelMinibusesFixedLayout);
         jPanelMinibusesFixedLayout.setHorizontalGroup(
             jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 568, Short.MAX_VALUE)
+            .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                        .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldStatMeanLengthT1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldStatIntervalLengthT1)
+                            .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                                .addComponent(jLabel22)
+                                .addGap(0, 204, Short.MAX_VALUE))))
+                    .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                        .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldStatMeanLengthT2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldStatIntervalLengthT2)
+                            .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                                .addComponent(jLabel48)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                        .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldStatMeanLengthRentReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldStatIntervalLengthRentReturn)
+                            .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                                .addComponent(jLabel49)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMinibusesFixedLayout.createSequentialGroup()
+                        .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldStatMeanLengthWaitForMinibus, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldStatIntervalLengthWaitForMinibus)
+                            .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                                .addComponent(jLabel51)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         jPanelMinibusesFixedLayout.setVerticalGroup(
             jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 429, Short.MAX_VALUE)
+            .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldStatIntervalLengthT1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldStatMeanLengthT1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                        .addComponent(jLabel48)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldStatIntervalLengthT2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                        .addComponent(jLabel47)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldStatMeanLengthT2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                        .addComponent(jLabel49)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldStatIntervalLengthRentReturn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                        .addComponent(jLabel50)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldStatMeanLengthRentReturn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                        .addComponent(jLabel51)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldStatIntervalLengthWaitForMinibus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
+                        .addComponent(jLabel52)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldStatMeanLengthWaitForMinibus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Priem. dĺžky radov", jPanelMinibusesFixed);
@@ -1093,7 +1209,10 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             jTextFieldStatMean.setText(convertTimeToString(_sim.getStatWaitingTimeForAll().mean()));
             jTextFieldStatMeanReturnCar.setText(convertTimeToString(_sim.getStatWaitingTimeForReturnCar().mean()));
             jTextFieldStatMeanRentCar.setText(convertTimeToString(_sim.getStatWaitingTimeForRentCar().mean()));
-            System.out.println("Priem dlzka frontu: " + _sim.getLengthMeanT1Stat().mean());
+            jTextFieldStatMeanLengthT1.setText(""+_sim.getLengthMeanT1Stat().mean());
+            jTextFieldStatMeanLengthT2.setText(""+_sim.getLengthMeanT2Stat().mean());
+            jTextFieldStatMeanLengthWaitForMinibus.setText(""+_sim.getLengthMeanRentalWaitForMinibusStat().mean());
+            jTextFieldStatMeanLengthRentReturn.setText(""+_sim.getLengthMeanRentalRentReturnStat().mean());
         });
 
         _sim.onSimulationDidFinish((sim)
@@ -1102,6 +1221,8 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             System.out.println("T1: " + _sim.getArrivalCustomersT1().mean());
             System.out.println("T2: " + _sim.getArrivalCustomersT2().mean());
             System.out.println("Rental: " + _sim.getArrivalCustomersRental().mean());
+            System.out.println("Priem dlzka frontu: T1 " + _sim.getLengthMeanT1Stat().mean());
+            System.out.println("Priem dlzka frontu: T2 " + _sim.getLengthMeanT2Stat().mean());
         });
     }
 
@@ -1191,7 +1312,9 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1217,7 +1340,13 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1267,7 +1396,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JTextField jTextFieldMeanReturnCar;
     private javax.swing.JTextField jTextFieldMinibus;
     private javax.swing.JTextField jTextFieldOperators;
-    private javax.swing.JTextField jTextFieldQueueBorowBringCarCount;
+    private javax.swing.JTextField jTextFieldQueueRentalRentBringCarCount;
     private javax.swing.JTextField jTextFieldQueueRentalRentBringMean;
     private javax.swing.JTextField jTextFieldQueueRentalWaitingForMinibusCount;
     private javax.swing.JTextField jTextFieldQueueRentalWaitingForMinibusMean;
@@ -1281,7 +1410,15 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JTextField jTextFieldReplications;
     private javax.swing.JTextField jTextFieldReturnCount;
     private javax.swing.JTextField jTextFieldStatInterval;
+    private javax.swing.JTextField jTextFieldStatIntervalLengthRentReturn;
+    private javax.swing.JTextField jTextFieldStatIntervalLengthT1;
+    private javax.swing.JTextField jTextFieldStatIntervalLengthT2;
+    private javax.swing.JTextField jTextFieldStatIntervalLengthWaitForMinibus;
     private javax.swing.JTextField jTextFieldStatMean;
+    private javax.swing.JTextField jTextFieldStatMeanLengthRentReturn;
+    private javax.swing.JTextField jTextFieldStatMeanLengthT1;
+    private javax.swing.JTextField jTextFieldStatMeanLengthT2;
+    private javax.swing.JTextField jTextFieldStatMeanLengthWaitForMinibus;
     private javax.swing.JTextField jTextFieldStatMeanOperatorsFixed;
     private javax.swing.JTextField jTextFieldStatMeanRentCar;
     private javax.swing.JTextField jTextFieldStatMeanReturnCar;
@@ -1372,8 +1509,8 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             //T2
             jTextFieldArrivalCountT2.setText("" + _sim.agentT2().getArrivalCustomersCount());
             jTextFieldDepartureCountT2.setText("" + _sim.agentT2().getDepartureCustomersCount());
-            jTextFieldQueueT2.setText("" + _sim.agentT2().getCustomersQueue().size());
-            jTextFieldQueueT2Mean.setText("" + _sim.agentT2().lengthQueueWStat().mean());
+            jTextFieldQueueT2.setText("" + _sim.agentT2().getCustomersStatQueue().size());
+            jTextFieldQueueT2Mean.setText("" + _sim.agentT2().lengthQueueWStatInteger().mean());
 
             //T3
             jTextFieldArrivalCountT3.setText("" + _sim.agentT3().getArrivalCustomersCount());
@@ -1383,6 +1520,10 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             jTextFieldArrivalCountRental.setText("" + _sim.agentRental().getArrivalCustomersCount());
             jTextFieldRentCount.setText("" + _sim.agentRental().getRentCarCustomersCount());
             jTextFieldReturnCount.setText("" + _sim.agentRental().getReturnCarCustomersCount());
+            jTextFieldQueueRentalWaitingForMinibusCount.setText("" + _sim.agentRental().getCustomersStatLoadQueue().size());
+            jTextFieldQueueRentalWaitingForMinibusMean.setText("" + _sim.agentRental().lengthLoadQueueWStatInteger().mean());
+            jTextFieldQueueRentalRentBringCarCount.setText("" + _sim.agentRental().getCustomersUnloadQueue().size());
+            jTextFieldQueueRentalRentBringMean.setText("" + _sim.agentRental().lengthUnloadQueueWStat().mean());
 
             this.repaint();
         });

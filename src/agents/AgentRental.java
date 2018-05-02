@@ -18,6 +18,7 @@ public class AgentRental extends Agent {
     private int _arrivalCustomersCount;
     private int _returnCarCustomersCount;
     private int _rentCarCustomersCount;
+    private SimQueue< Integer> _customersStatLoadQueue;
 
     public AgentRental(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
@@ -29,6 +30,7 @@ public class AgentRental extends Agent {
         super.prepareReplication();      
         _customersUnloadQueue = new SimQueue<>(new WStat(mySim()));
         _customersLoadQueue = new SimQueue<>(new WStat(mySim()));
+        _customersStatLoadQueue = new SimQueue<>(new WStat(mySim()));
         _arrivalCustomersCount = 0;
         _returnCarCustomersCount =0;
         _rentCarCustomersCount = 0;
@@ -60,13 +62,19 @@ public class AgentRental extends Agent {
     
     public MessageForm getAvailableCustomersFromQueue(int freePlaces) {
         for (int i = _customersLoadQueue.size() - 1; i >= 0; i--) {
-            if(((MyMessage)_customersLoadQueue.get(i)).getCustomer().getPassengersCount() <= freePlaces){
+            int passengersCount = ((MyMessage)_customersLoadQueue.get(i)).getCustomer().getPassengersCount();
+            if(passengersCount <= freePlaces){
+                getFromStatLoadQueue(passengersCount);
                 return _customersLoadQueue.remove(i);
             }
         }
         return null;
     }
-
+    
+    public WStat lengthLoadQueueWStatInteger() {
+        return _customersStatLoadQueue.lengthStatistic();
+    }
+    
     public WStat lengthUnloadQueueWStat() {
         return _customersUnloadQueue.lengthStatistic();
     }
@@ -109,6 +117,24 @@ public class AgentRental extends Agent {
             }
         }
         return count;
+    }
+    
+    public void enqueuLoadQueue(MessageForm message) {
+        _customersLoadQueue.enqueue(message);
+        int passengersCount = ((MyMessage)message).getCustomer().getPassengersCount();
+        for (int i = 0; i < passengersCount; i++) {
+            _customersStatLoadQueue.enqueue(1);
+        }
+    }
+    
+    public void getFromStatLoadQueue(int passengersCount) {
+        for (int i = 0; i < passengersCount; i++) {
+            _customersStatLoadQueue.dequeue();
+        }
+    }
+
+    public SimQueue<Integer> getCustomersStatLoadQueue() {
+        return _customersStatLoadQueue;
     }
 
     public ArrayList<Operator> getOperatorsList() {

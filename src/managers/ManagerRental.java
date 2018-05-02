@@ -94,7 +94,7 @@ public class ManagerRental extends Manager {
         freeOperator.setOccupied(false);
 
         if (myMessage(message).getCustomer().getGeneratedTerminal().equals(Config.RentalName)) {
-            myAgent().getCustomersLoadQueue().enqueue(message);
+            myAgent().enqueuLoadQueue(message);
             myAgent().incrementReturnCustomersCount(myMessage(message).getCustomer().getPassengersCount());
         } else {
             myAgent().incrementRentCustomersCount(myMessage(message).getCustomer().getPassengersCount());

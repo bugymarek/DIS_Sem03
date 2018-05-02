@@ -11,6 +11,8 @@ public class MySimulation extends Simulation {
     private Stat _statWaitingTimeForReturnCar;
     private Stat _lengthMeanT1Stat;
     private Stat _lengthMeanT2Stat;
+    private Stat _lengthMeanRentalWaitForMinibusStat;
+    private Stat _lengthMeanRentalRentReturnStat;
     private Stat _departuresCustomers;
     private Stat _arrivalCustomersT1;
     private Stat _arrivalCustomersT2;
@@ -29,6 +31,8 @@ public class MySimulation extends Simulation {
         _statWaitingTimeForReturnCar = new Stat();
         _lengthMeanT1Stat = new Stat();
         _lengthMeanT2Stat = new Stat();
+        _lengthMeanRentalWaitForMinibusStat = new Stat();
+        _lengthMeanRentalRentReturnStat = new Stat();
         _departuresCustomers = new Stat();
         _arrivalCustomersT1 = new Stat();
         _arrivalCustomersT2 = new Stat();
@@ -50,7 +54,9 @@ public class MySimulation extends Simulation {
         _statWaitingTimeForRentCar.addSample(agentEnvironment().getStatWaitingTimeRentCarCustomers().mean());
         _statWaitingTimeForReturnCar.addSample(agentEnvironment().getStatWaitingTimeReturnCarCustomers().mean());
         _lengthMeanT1Stat.addSample(agentT1().lengthQueueWStatInteger().mean());
-        _lengthMeanT2Stat.addSample(agentT2().lengthQueueWStat().mean());
+        _lengthMeanT2Stat.addSample(agentT2().lengthQueueWStatInteger().mean());
+        _lengthMeanRentalWaitForMinibusStat.addSample(agentRental().lengthLoadQueueWStatInteger().mean());
+        _lengthMeanRentalRentReturnStat.addSample(agentRental().lengthUnloadQueueWStat().mean());
         _departuresCustomers.addSample(agentEnvironment().getDeparturesCustomersCount());
         _arrivalCustomersT1.addSample(agentT1().getArrivalCustomersCount());
         _arrivalCustomersT2.addSample(agentT2().getArrivalCustomersCount());
@@ -177,6 +183,14 @@ public class MySimulation extends Simulation {
 
     public Stat getLengthMeanT2Stat() {
         return _lengthMeanT2Stat;
+    }
+
+    public Stat getLengthMeanRentalWaitForMinibusStat() {
+        return _lengthMeanRentalWaitForMinibusStat;
+    }
+
+    public Stat getLengthMeanRentalRentReturnStat() {
+        return _lengthMeanRentalRentReturnStat;
     }
 
     public Stat getDeparturesCustomers() {
