@@ -12,6 +12,7 @@ public class AgentT2 extends Agent {
 
     private SimQueue<MessageForm> _customersQueue;
     private int _arrivalCustomersCount;
+    private int _departureCustomersCount;
 
     public AgentT2(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
@@ -23,6 +24,7 @@ public class AgentT2 extends Agent {
         super.prepareReplication();
         _customersQueue = new SimQueue<>(new WStat(mySim()));
         _arrivalCustomersCount = 0;
+        _departureCustomersCount = 0;
         // Setup component for the next replication
     }
 
@@ -47,9 +49,18 @@ public class AgentT2 extends Agent {
         return _arrivalCustomersCount;
     }
     
-    public void incrementCustomersCount() {
-        _arrivalCustomersCount++;
+    public void incrementCustomersCount(int value) {
+        _arrivalCustomersCount += value;
     }
+    
+    public int getDepartureCustomersCount() {
+        return _departureCustomersCount;
+    }
+    
+    public void incrementDepartureCustomersCount(int value) {
+        _departureCustomersCount+= value;
+    }
+    
     
     public MessageForm getAvailableCustomersFromQueue(int freePlaces) {
         for (int i = _customersQueue.size() - 1; i >= 0; i--) {

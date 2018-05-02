@@ -69,5 +69,7 @@ public class Config {
         {270d*60d,   2,  3,  4}
     };
     
+    public static String RentalName = "Rental";
+    
    
 }

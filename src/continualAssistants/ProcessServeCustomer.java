@@ -66,7 +66,7 @@ public class ProcessServeCustomer extends Process {
     private double next(MessageForm message) {
         double valueRate = _rate.nextDouble();
         double valueGenerated;
-        if (((MyMessage) message).getCustomer().getTerminal().equals("Rental")) {
+        if (((MyMessage) message).getCustomer().getGeneratedTerminal().equals(Config.RentalName)) {
             if (valueRate <= 0.13394683) {
                 valueGenerated = _outSecondTriang.sample();
                 //System.out.println("Out second: " + valueGenerated);

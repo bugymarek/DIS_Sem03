@@ -27,9 +27,9 @@ public class ManagerT3 extends Manager {
     //meta! sender="AgentAirport", id="45", type="Request"
     public void processArrivalMinibus(MessageForm message) {
         if (((MyMessage) message).getMinibus().isEmpty()) {
-                myMessage(message).getMinibus().setPosition("Cestujem z T3 do T1");
-                message.setCode(Mc.minibusReadyForMove);
-                response(message);
+            myMessage(message).getMinibus().setPosition("Cestujem z T3 do T1");
+            message.setCode(Mc.minibusReadyForMove);
+            response(message);
         } else {
             //System.out.println("Prisiel minibus: " + myMessage(message).getMinibus().getID() + " pasazierov: " + myMessage(message).getMinibus().getSize());
             myMessage(message).getMinibus().setPosition("Som na T3");
@@ -43,14 +43,18 @@ public class ManagerT3 extends Manager {
 
     //meta! sender="AgentBoardingCustomers", id="85", type="Response"
     public void processUnloadCustomerDone(MessageForm message) {
+        myAgent().incrementCustomersCount(myMessage(message).getCustomer().getPassengersCount());
         MessageForm copyMessage = new MyMessage(myMessage(message));
+
+        myMessage(copyMessage).setCode(Mc.departureCustomer);
+        copyMessage.setAddressee(mySim().findAgent(Id.agentAirport));
+        myMessage(copyMessage).getCustomer().setAllWaitingTime(mySim().currentTime() - myMessage(message).getCustomer().getArrivalTimeToSystem());
+        notice(copyMessage);
         
-            myMessage(copyMessage).setCode(Mc.departureCustomer);
-            copyMessage.setAddressee(mySim().findAgent(Id.agentAirport));
-            myMessage(copyMessage).getCustomer().setAllWaitingTime(mySim().currentTime() - myMessage(message).getCustomer().getArrivalTimeToSystem());
-            notice(copyMessage);
-  
-            processArrivalMinibus(message);
+        myAgent().incrementDepartureCustomersCount(myMessage(message).getCustomer().getPassengersCount());
+        
+        processArrivalMinibus(message);
+        
     }
 
     //meta! userInfo="Process messages defined in code", id="0"

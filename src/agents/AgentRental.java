@@ -16,6 +16,8 @@ public class AgentRental extends Agent {
     private SimQueue< MessageForm> _customersLoadQueue;
     private ArrayList<Operator> _operatorsList;
     private int _arrivalCustomersCount;
+    private int _returnCarCustomersCount;
+    private int _rentCarCustomersCount;
 
     public AgentRental(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
@@ -28,6 +30,8 @@ public class AgentRental extends Agent {
         _customersUnloadQueue = new SimQueue<>(new WStat(mySim()));
         _customersLoadQueue = new SimQueue<>(new WStat(mySim()));
         _arrivalCustomersCount = 0;
+        _returnCarCustomersCount =0;
+        _rentCarCustomersCount = 0;
         initOperatorsList();
         // Setup component for the next replication
     }
@@ -114,8 +118,24 @@ public class AgentRental extends Agent {
     public int getArrivalCustomersCount() {
         return _arrivalCustomersCount;
     }
+
+    public int getReturnCarCustomersCount() {
+        return _returnCarCustomersCount;
+    }
+
+    public int getRentCarCustomersCount() {
+        return _rentCarCustomersCount;
+    }
     
-    public void incrementCustomersCount() {
-        _arrivalCustomersCount++;
+    public void incrementCustomersCount(int value) {
+        _arrivalCustomersCount += value;
+    }
+    
+    public void incrementReturnCustomersCount(int value) {
+        _returnCarCustomersCount += value;
+    }
+    
+    public void incrementRentCustomersCount(int value) {
+        _rentCarCustomersCount += value;
     }
 }

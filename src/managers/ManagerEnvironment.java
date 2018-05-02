@@ -44,7 +44,7 @@ public class ManagerEnvironment extends Manager
 	//meta! sender="PlanArrivalCustomerRental", id="19", type="Finish"
 	public void processFinishPlanArrivalCustomerRental(MessageForm message)
 	{
-            myAgent().incrementGeneratedCustomersCount();
+            myAgent().incrementGeneratedCustomersCount(((MyMessage) message).getCustomer().getPassengersCount());
             message.setCode(Mc.arrivalCustomerRental);
             message.setAddressee(myAgent().findAssistant(Id.agentModel));
             notice(message);
@@ -53,7 +53,7 @@ public class ManagerEnvironment extends Manager
 	//meta! sender="PlanArrivalCustomerT2", id="17", type="Finish"
 	public void processFinishPlanArrivalCustomerT2(MessageForm message)
 	{
-            myAgent().incrementGeneratedCustomersCount();
+            myAgent().incrementGeneratedCustomersCount(((MyMessage) message).getCustomer().getPassengersCount());
             message.setCode(Mc.arrivalCustomerT2);
             message.setAddressee(myAgent().findAssistant(Id.agentModel));
             notice(message);
@@ -62,7 +62,7 @@ public class ManagerEnvironment extends Manager
 	//meta! sender="PlanArrivalCustomerT1", id="13", type="Finish"
 	public void processFinishPlanArrivalCustomerT1(MessageForm message)
 	{
-            myAgent().incrementGeneratedCustomersCount();
+            myAgent().incrementGeneratedCustomersCount(((MyMessage) message).getCustomer().getPassengersCount());
             message.setCode(Mc.arrivalCustomerT1);
             message.setAddressee(myAgent().findAssistant(Id.agentModel));
             notice(message);
@@ -71,8 +71,15 @@ public class ManagerEnvironment extends Manager
 	//meta! sender="AgentModel", id="10", type="Notice"
 	public void processDepartureCustomer(MessageForm message)
 	{
-            myAgent().getStatWaitingTime().addSample(((MyMessage) message).getCustomer().getAllWaitingTime());
-            myAgent().incrementDeparturesCustomersCount();
+            double allWaitingTime = ((MyMessage) message).getCustomer().getAllWaitingTime();
+            myAgent().incrementDeparturesCustomersCount(((MyMessage) message).getCustomer().getPassengersCount());
+            myAgent().getStatWaitingTimeForAllCustomers().addSample(allWaitingTime);
+            
+            if(((MyMessage) message).getCustomer().getGeneratedTerminal().equals(Config.RentalName)){
+                myAgent().getStatWaitingTimeReturnCarCustomers().addSample(allWaitingTime);
+            }else {
+                myAgent().getStatWaitingTimeRentCarCustomers().addSample(allWaitingTime);
+            }
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

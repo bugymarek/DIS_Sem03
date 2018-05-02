@@ -9,7 +9,9 @@ import continualAssistants.*;
 //meta! id="3"
 public class AgentEnvironment extends Agent {
 
-    private Stat _statWaitingTime;
+    private Stat _statWaitingTimeForAllCustomers;
+    private Stat _statWaitingTimeReturnCarCustomers;
+    private Stat _statWaitingTimeRentCarCustomers;
     private int _generatedCustomerCount;
     private int _departuresCustomersCount;
 
@@ -21,7 +23,9 @@ public class AgentEnvironment extends Agent {
     @Override
     public void prepareReplication() {
         super.prepareReplication();
-        _statWaitingTime = new Stat();
+        _statWaitingTimeForAllCustomers = new Stat();
+        _statWaitingTimeRentCarCustomers = new Stat();
+        _statWaitingTimeReturnCarCustomers = new Stat();
         _generatedCustomerCount = 0;
         _departuresCustomersCount = 0;
         // Setup component for the next replication
@@ -39,23 +43,32 @@ public class AgentEnvironment extends Agent {
     }
     //meta! tag="end"
 
-    public Stat getStatWaitingTime() {
-        return _statWaitingTime;
+    public Stat getStatWaitingTimeForAllCustomers() {
+        return _statWaitingTimeForAllCustomers;
     }
 
+    public Stat getStatWaitingTimeReturnCarCustomers() {
+        return _statWaitingTimeReturnCarCustomers;
+    }
+
+    public Stat getStatWaitingTimeRentCarCustomers() {
+        return _statWaitingTimeRentCarCustomers;
+    }
+    
+    
     public int getGeneretedCustomerCount() {
         return _generatedCustomerCount;
     }
     
-    public void incrementGeneratedCustomersCount(){
-        _generatedCustomerCount++;
+    public void incrementGeneratedCustomersCount(int value){
+        _generatedCustomerCount += value;
     }
 
     public int getDeparturesCustomersCount() {
         return _departuresCustomersCount;
     }
     
-    public void incrementDeparturesCustomersCount(){
-        _departuresCustomersCount++;
+    public void incrementDeparturesCustomersCount(int value){
+        _departuresCustomersCount +=value;
     }
 }

@@ -36,7 +36,7 @@ public class PlanArrivalCustomerRental extends Scheduler {
         hold(_intervalGenerator.sample(), msg);
 
         _idCustomer++;
-        ((MyMessage) message).setCustomer(new Customer(_idCustomer, "Rental", mySim()));
+        ((MyMessage) message).setCustomer(new Customer(_idCustomer, Config.RentalName, mySim()));
         assistantFinished(message);
     }
 

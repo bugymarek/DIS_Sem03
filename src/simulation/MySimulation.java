@@ -6,8 +6,9 @@ import agents.*;
 
 public class MySimulation extends Simulation {
 
-    private Stat _statWaitingTimeForBorrowCar;
-    private Stat _statWaitingTimeForDepartureFromT3;
+    private Stat _statWaitingTimeForAll;
+    private Stat _statWaitingTimeForRentCar;
+    private Stat _statWaitingTimeForReturnCar;
     private Stat _lengthMeanT1Stat;
     private Stat _lengthMeanT2Stat;
     private Stat _departuresCustomers;
@@ -23,8 +24,9 @@ public class MySimulation extends Simulation {
     public void prepareSimulation() {
         super.prepareSimulation();
         // Create global statistcis
-        _statWaitingTimeForBorrowCar = new Stat();
-        _statWaitingTimeForDepartureFromT3 = new Stat();
+        _statWaitingTimeForAll = new Stat();
+        _statWaitingTimeForRentCar = new Stat();
+        _statWaitingTimeForReturnCar = new Stat();
         _lengthMeanT1Stat = new Stat();
         _lengthMeanT2Stat = new Stat();
         _departuresCustomers = new Stat();
@@ -44,8 +46,10 @@ public class MySimulation extends Simulation {
     public void replicationFinished() {
         // Collect local statistics into global, update UI, etc...
         super.replicationFinished();
-        _statWaitingTimeForBorrowCar.addSample(agentEnvironment().getStatWaitingTime().mean());
-        _lengthMeanT1Stat.addSample(agentT1().lengthQueueWStat().mean());
+        _statWaitingTimeForAll.addSample(agentEnvironment().getStatWaitingTimeForAllCustomers().mean());
+        _statWaitingTimeForRentCar.addSample(agentEnvironment().getStatWaitingTimeRentCarCustomers().mean());
+        _statWaitingTimeForReturnCar.addSample(agentEnvironment().getStatWaitingTimeReturnCarCustomers().mean());
+        _lengthMeanT1Stat.addSample(agentT1().lengthQueueWStatInteger().mean());
         _lengthMeanT2Stat.addSample(agentT2().lengthQueueWStat().mean());
         _departuresCustomers.addSample(agentEnvironment().getDeparturesCustomersCount());
         _arrivalCustomersT1.addSample(agentT1().getArrivalCustomersCount());
@@ -159,12 +163,12 @@ public class MySimulation extends Simulation {
     }
 
     // global stats geters
-    public Stat getStatWaitingTimeForBorrowCar() {
-        return _statWaitingTimeForBorrowCar;
+    public Stat getStatWaitingTimeForRentCar() {
+        return _statWaitingTimeForRentCar;
     }
 
-    public Stat getStatWaitingTimeForDepartureFromT3() {
-        return _statWaitingTimeForDepartureFromT3;
+    public Stat getStatWaitingTimeForReturnCar() {
+        return _statWaitingTimeForReturnCar;
     }
 
     public Stat getLengthMeanT1Stat() {
@@ -190,6 +194,8 @@ public class MySimulation extends Simulation {
     public Stat getArrivalCustomersRental() {
         return _arrivalCustomersRental;
     }
-    
-    
+
+    public Stat getStatWaitingTimeForAll() {
+        return _statWaitingTimeForAll;
+    }
 }

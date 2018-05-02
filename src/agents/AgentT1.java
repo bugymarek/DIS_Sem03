@@ -12,7 +12,9 @@ public class AgentT1 extends Agent {
 
     private SimQueue< MessageForm> _customersQueue;
     private int _arrivalCustomersCount;
-
+    private int _departureCustomersCount;
+    private SimQueue< Integer> _customersStatQueue;
+    
     public AgentT1(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
         init();
@@ -22,7 +24,9 @@ public class AgentT1 extends Agent {
     public void prepareReplication() {
         super.prepareReplication();
         _customersQueue = new SimQueue<>(new WStat(mySim()));
+        _customersStatQueue = new SimQueue<>(new WStat(mySim()));
         _arrivalCustomersCount = 0;
+        _departureCustomersCount = 0;
         // Setup component for the next replication
     }
 
@@ -37,27 +41,54 @@ public class AgentT1 extends Agent {
     public SimQueue<MessageForm> getCustomersQueue() {
         return _customersQueue;
     }
+
+    public SimQueue<Integer> getCustomersStatQueue() {
+        return _customersStatQueue;
+    }
     
     public MessageForm getAvailableCustomersFromQueue(int freePlaces) {
         for (int i = _customersQueue.size() - 1; i >= 0; i--) {
-            if(((MyMessage)_customersQueue.get(i)).getCustomer().getPassengersCount() <= freePlaces){
+            int passengersCount = ((MyMessage)_customersQueue.get(i)).getCustomer().getPassengersCount();
+            if(passengersCount <= freePlaces){
+                getFromStatQueue(passengersCount);
                 return _customersQueue.remove(i);
             }
         }
         return null;
     }
 
-    public WStat lengthQueueWStat() {
-        return _customersQueue.lengthStatistic();
+    public WStat lengthQueueWStatInteger() {
+        return _customersStatQueue.lengthStatistic();
     }
+
     //meta! tag="end"
 
     public int getArrivalCustomersCount() {
         return _arrivalCustomersCount;
     }
     
-    public void incrementCustomersCount() {
-        _arrivalCustomersCount++;
+    public void incrementCustomersCount(int value) {
+        _arrivalCustomersCount += value;
+    }
+
+    public int getDepartureCustomersCount() {
+        return _departureCustomersCount;
+    }
+    
+    public void incrementDepartureCustomersCount(int value) {
+        _departureCustomersCount += value;
+    }
+
+    public void addToStatQueue(int passengersCount) {
+        for (int i = 0; i < passengersCount; i++) {
+            _customersStatQueue.enqueue(1);
+        }
+    }
+    
+    public void getFromStatQueue(int passengersCount) {
+        for (int i = 0; i < passengersCount; i++) {
+            _customersStatQueue.dequeue();
+        }
     }
     
 }

@@ -43,7 +43,6 @@ public class ManagerRental extends Manager {
 
     //meta! sender="AgentAirport", id="40", type="Notice"
     public void processArrivalCustomer(MessageForm message) {
-        myAgent().incrementCustomersCount();
         processUnloadCustomerDone(message);
     }
 
@@ -71,6 +70,7 @@ public class ManagerRental extends Manager {
     }
 
     public void processUnloadCustomerDone(MessageForm message) {
+        myAgent().incrementCustomersCount(myMessage(message).getCustomer().getPassengersCount());
         Operator freeOperator = myAgent().getFreeOperator();
         MessageForm copyMessage = new MyMessage(myMessage(message));
         if (freeOperator == null) {
@@ -93,9 +93,11 @@ public class ManagerRental extends Manager {
         Operator freeOperator = myMessage(message).getOperator();
         freeOperator.setOccupied(false);
 
-        if (myMessage(message).getCustomer().getTerminal().equals("Rental")) {
+        if (myMessage(message).getCustomer().getGeneratedTerminal().equals(Config.RentalName)) {
             myAgent().getCustomersLoadQueue().enqueue(message);
+            myAgent().incrementReturnCustomersCount(myMessage(message).getCustomer().getPassengersCount());
         } else {
+            myAgent().incrementRentCustomersCount(myMessage(message).getCustomer().getPassengersCount());
             message.setCode(Mc.departureCustomer);
             message.setAddressee(mySim().findAgent(Id.agentAirport));
             myMessage(message).getCustomer().setAllWaitingTime(mySim().currentTime() - myMessage(message).getCustomer().getArrivalTimeToSystem());
