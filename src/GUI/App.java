@@ -1251,12 +1251,15 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             jProgressBar1.setMaximum((int) (Config.ReplicationsCount));
             jProgressBar1.setValue(0);
             jLabelProgress.setText("  (" + 0 + "/" + Config.ReplicationsCount + ")");
+
         });
 
         _sim.onReplicationWillStart((sim)
                 -> {
             if (!jCheckBox1.isSelected()) {
                 _sim.setSimSpeed(simSpeed_interval(), simSpeed_duration());
+            } else {
+                _sim.setMaxSimSpeed();
             }
         });
 
@@ -1322,6 +1325,22 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Počet replikácií musí byť cele číslo", "Upozornenie", JOptionPane.WARNING_MESSAGE);
             return false;
+        }
+
+        int selectedItem = jComboBoxMinibusTipy.getSelectedIndex();
+        switch (selectedItem) {
+            case 0:
+                Config.CapaityOfMinibus = 12;
+                Config.PricePerKm = 0.28;
+                break;
+            case 1:
+                Config.CapaityOfMinibus = 18;
+                Config.PricePerKm = 0.43;
+                break;
+            case 2:
+                Config.CapaityOfMinibus = 30;
+                Config.PricePerKm = 0.54;
+                break;
         }
         return true;
     }
@@ -1584,15 +1603,15 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                 OperatorsTableModel.addRow(data);
             }
 
-            if (_sim.agentEnvironment().getStatWaitingTimeForAllCustomers().sampleSize()> 1) {
+            if (_sim.agentEnvironment().getStatWaitingTimeForAllCustomers().sampleSize() > 1) {
                 jTextFieldInterval.setText(convertConfidenceIntervalToMinutesString(_sim.agentEnvironment().getStatWaitingTimeForAllCustomers().confidenceInterval_90()));
             }
-            
-            if (_sim.agentEnvironment().getStatWaitingTimeRentCarCustomers().sampleSize()> 1) {
+
+            if (_sim.agentEnvironment().getStatWaitingTimeRentCarCustomers().sampleSize() > 1) {
                 jTextFieldIntervalMeanRentCar.setText(convertConfidenceIntervalToMinutesString(_sim.agentEnvironment().getStatWaitingTimeRentCarCustomers().confidenceInterval_90()));
             }
-            
-            if (_sim.agentEnvironment().getStatWaitingTimeReturnCarCustomers().sampleSize()> 1) {
+
+            if (_sim.agentEnvironment().getStatWaitingTimeReturnCarCustomers().sampleSize() > 1) {
                 jTextFieldIntervalMeanReturnCar.setText(convertConfidenceIntervalToMinutesString(_sim.agentEnvironment().getStatWaitingTimeReturnCarCustomers().confidenceInterval_90()));
             }
 
@@ -1601,8 +1620,8 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             jTextFieldDepartureCountT1.setText("" + _sim.agentT1().getDepartureCustomersCount());
             jTextFieldQueueT1.setText("" + _sim.agentT1().getCustomersStatQueue().size());
             jTextFieldQueueT1Mean.setText("" + _sim.agentT1().lengthQueueWStatInteger().mean());
-            
-            if (_sim.agentT1().lengthQueueWStatInteger().sampleSize()> 1) {
+
+            if (_sim.agentT1().lengthQueueWStatInteger().sampleSize() > 1) {
                 jTextFieldIntervalT1.setText(convertConfidenceIntervalToString(_sim.agentT1().lengthQueueWStatInteger().confidenceInterval_90()));
             }
 
@@ -1611,8 +1630,8 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             jTextFieldDepartureCountT2.setText("" + _sim.agentT2().getDepartureCustomersCount());
             jTextFieldQueueT2.setText("" + _sim.agentT2().getCustomersStatQueue().size());
             jTextFieldQueueT2Mean.setText("" + _sim.agentT2().lengthQueueWStatInteger().mean());
-            
-            if (_sim.agentT2().lengthQueueWStatInteger().sampleSize()> 1) {
+
+            if (_sim.agentT2().lengthQueueWStatInteger().sampleSize() > 1) {
                 jTextFieldIntervalT2.setText(convertConfidenceIntervalToString(_sim.agentT2().lengthQueueWStatInteger().confidenceInterval_90()));
             }
 
@@ -1628,11 +1647,11 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             jTextFieldQueueRentalWaitingForMinibusMean.setText("" + _sim.agentRental().lengthLoadQueueWStatInteger().mean());
             jTextFieldQueueRentalRentBringCarCount.setText("" + _sim.agentRental().getCustomersUnloadQueue().size());
             jTextFieldQueueRentalRentBringMean.setText("" + _sim.agentRental().lengthUnloadQueueWStat().mean());
-            
-            if (_sim.agentRental().lengthLoadQueueWStatInteger().sampleSize()> 1) {
+
+            if (_sim.agentRental().lengthLoadQueueWStatInteger().sampleSize() > 1) {
                 jTextFieldIntervalWaitingForMinibus.setText(convertConfidenceIntervalToString(_sim.agentRental().lengthLoadQueueWStatInteger().confidenceInterval_90()));
             }
-            if (_sim.agentRental().lengthUnloadQueueWStat().sampleSize()> 1) {
+            if (_sim.agentRental().lengthUnloadQueueWStat().sampleSize() > 1) {
                 jTextFieldIntervalRentReturn.setText(convertConfidenceIntervalToString(_sim.agentRental().lengthUnloadQueueWStat().confidenceInterval_90()));
             }
 

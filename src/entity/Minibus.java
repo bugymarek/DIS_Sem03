@@ -10,6 +10,7 @@ import OSPABA.MessageForm;
 import OSPABA.Simulation;
 import OSPDataStruct.SimQueue;
 import OSPStat.WStat;
+import simulation.Config;
 
 /**
  *
@@ -48,11 +49,11 @@ public class Minibus extends Entity{
     }
     
     public boolean isPlaceInBus(){
-        return _passengersCount<12;
+        return _passengersCount < Config.CapaityOfMinibus;
     }
     
     public int getFreePlaces(){
-        return 12 - _passengersCount;
+        return Config.CapaityOfMinibus - _passengersCount;
     }
     
     public int getPassengersCount(){

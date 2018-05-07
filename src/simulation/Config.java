@@ -49,6 +49,11 @@ public class Config {
     public static int MinibusesCount;
     public static int OperatorsCount;
     
+    public static int CapaityOfMinibus;
+    public static double PricePerKm;
+    public static double PricePerHourDriver = 12.50;
+    public static double PricePerHourOperator = 11.50;
+    
     public static final double[][] Intervals ={
         {15d*60d,    4,  3,  12},
         {30d*60d,    8,  6,  9},
