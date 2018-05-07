@@ -23,6 +23,7 @@ public class MySimulation extends Simulation {
     private Stat _statWaitingTimeT1;
     private Stat _statWaitingTimeT2;
     private Stat _statWaitingForOperatingCustomer;
+    private Stat _statOccupacyOperators;
 
     public MySimulation() {
         init();
@@ -49,6 +50,7 @@ public class MySimulation extends Simulation {
         _statWaitingTimeT1 = new Stat();
         _statWaitingTimeT2 = new Stat();
         _statWaitingForOperatingCustomer = new Stat();
+        _statOccupacyOperators = new Stat();
         
     }
 
@@ -77,6 +79,7 @@ public class MySimulation extends Simulation {
         _statWaitingTimeT1.addSample(agentEnvironment().getStatWaitingTimeT1().mean());
         _statWaitingTimeT2.addSample(agentEnvironment().getStatWaitingTimeT2().mean());
         _statWaitingForOperatingCustomer.addSample(agentEnvironment().getStatWaitingForOperatingCustomer().mean());
+        _statOccupacyOperators.addSample(agentRental().getOccupancyWorkingTime());
         //System.out.println("R" + currentReplication() + " celkový priemer: " + convertTimeToString(_statWaitingTimeForBorrowCar.mean()) + " priemer danej replikácie(" + convertTimeToString(agentEnvironment().getStatWaitingTime().mean()) + ")");
     }
 
@@ -263,6 +266,10 @@ public class MySimulation extends Simulation {
 
     public Stat getStatWaitingForOperatingCustomer() {
         return _statWaitingForOperatingCustomer;
+    }
+
+    public Stat getStatOccupacyOperators() {
+        return _statOccupacyOperators;
     }
 
     public void clearStatistics() {

@@ -2,6 +2,7 @@ package agents;
 
 import OSPABA.*;
 import OSPDataStruct.SimQueue;
+import OSPStat.Stat;
 import OSPStat.WStat;
 import simulation.*;
 import managers.*;
@@ -19,6 +20,7 @@ public class AgentRental extends Agent {
     private int _returnCarCustomersCount;
     private int _rentCarCustomersCount;
     private SimQueue< Integer> _customersStatLoadQueue;
+    private Stat _occupancyWorkingTime;
 
     public AgentRental(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
@@ -31,6 +33,7 @@ public class AgentRental extends Agent {
         _customersUnloadQueue = new SimQueue<>(new WStat(mySim()));
         _customersLoadQueue = new SimQueue<>(new WStat(mySim()));
         _customersStatLoadQueue = new SimQueue<>(new WStat(mySim()));
+        _occupancyWorkingTime = new Stat();
         _arrivalCustomersCount = 0;
         _returnCarCustomersCount =0;
         _rentCarCustomersCount = 0;
@@ -92,12 +95,11 @@ public class AgentRental extends Agent {
         }
     }
     
-    public double getAllWorkingTime(){
-        double allWorkingTime = 0; 
+    public double getOccupancyWorkingTime(){
         for (Operator operator : _operatorsList) {
-            allWorkingTime += operator.getAllWorkingTime();
+            _occupancyWorkingTime.addSample((operator.getAllWorkingTime()* 100.0) / mySim().currentTime());
         }
-        return allWorkingTime;
+        return _occupancyWorkingTime.mean();
     }
     
     public Operator getFreeOperator() {
