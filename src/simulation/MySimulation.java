@@ -212,4 +212,14 @@ public class MySimulation extends Simulation {
     public Stat getStatWaitingTimeForAll() {
         return _statWaitingTimeForAll;
     }
+
+    public void clearStatistics() {
+        agentEnvironment().getStatWaitingTimeForAllCustomers().clear();
+        agentEnvironment().getStatWaitingTimeRentCarCustomers().clear();
+        agentEnvironment().getStatWaitingTimeReturnCarCustomers().clear();
+        agentT1().lengthQueueWStatInteger().clear();
+        agentT2().lengthQueueWStatInteger().clear();
+        agentRental().lengthLoadQueueWStatInteger().clear();
+        agentRental().lengthUnloadQueueWStat().clear();
+    }
 }

@@ -13,7 +13,8 @@ public class Config {
     //  all constants are represented as second units
 
     //public static double SimulationTime = 30.0 * 24.0 * 60.0 * 60.0;
-    public static double SimulationTime = 270.0*60.0;
+    public static double SimulationTime = 330.0*60.0;
+    public static double SimHour = 60.0*60.0;
     public static int ReplicationsCount;
 
 //    public static double LengthRentalToT1 = ((60.0 * 60.0) / 35.0) * 6.4;

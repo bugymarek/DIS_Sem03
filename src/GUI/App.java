@@ -408,7 +408,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                             .addComponent(jTextFieldMean, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 36, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 22, Short.MAX_VALUE)
                                 .addComponent(jLabel17)
                                 .addGap(125, 125, 125))
                             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -508,7 +508,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                         .addComponent(jTextFieldQueueT1Mean, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                         .addComponent(jLabel24)
                         .addComponent(jTextFieldDepartureCountT1)))
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,7 +562,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                     .addComponent(jTextFieldQueueT2Mean, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel25)
                     .addComponent(jTextFieldDepartureCountT2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -616,7 +616,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                     .addComponent(jTextFieldQueueT3Mean, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                     .addComponent(jLabel27)
                     .addComponent(jTextFieldDepartureCountT3))
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -680,7 +680,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
@@ -762,7 +762,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTabbedPane2)
+                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
@@ -810,18 +810,21 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldStatMean, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldStatMean, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldStatInterval)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel19)
-                                .addGap(0, 204, Short.MAX_VALUE))))
+                                .addGap(0, 204, Short.MAX_VALUE))
+                            .addComponent(jTextFieldStatInterval)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldStatMeanReturnCar, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                            .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                                .addGap(14, 14, 14))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jTextFieldStatMeanReturnCar)
+                                .addGap(10, 10, 10)))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldIntervalStatMeanReturnCar)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -831,7 +834,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldStatMeanRentCar, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
                             .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldIntervalStatMeanRentCar)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -907,7 +910,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                             .addComponent(jTextFieldStatIntervalLengthT1)
                             .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
                                 .addComponent(jLabel22)
-                                .addGap(0, 204, Short.MAX_VALUE))))
+                                .addGap(0, 208, Short.MAX_VALUE))))
                     .addGroup(jPanelMinibusesFixedLayout.createSequentialGroup()
                         .addGroup(jPanelMinibusesFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -983,7 +986,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                         .addComponent(jLabel52)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldStatMeanLengthWaitForMinibus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Priem. dĺžky radov", jPanelMinibusesFixed);
@@ -1005,7 +1008,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                 .addGroup(jPanelOperatorsFixedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelOperatorsFixedLayout.createSequentialGroup()
                         .addComponent(jLabel23)
-                        .addGap(0, 132, Short.MAX_VALUE))
+                        .addGap(0, 136, Short.MAX_VALUE))
                     .addComponent(jTextStatMinibusesCount))
                 .addContainerGap())
         );
@@ -1022,7 +1025,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                         .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextStatMinibusesCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(378, Short.MAX_VALUE))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Fixní pracovníci", jPanelOperatorsFixed);
@@ -1206,9 +1209,9 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                 jProgressBar1.setValue((int) (_sim.currentReplication() + 1));
                 jLabelProgress.setText("  (" + (_sim.currentReplication() + 1) + "/" + Config.ReplicationsCount + ")");
             }
-            jTextFieldStatMean.setText(convertTimeToString(_sim.getStatWaitingTimeForAll().mean()));
-            jTextFieldStatMeanReturnCar.setText(convertTimeToString(_sim.getStatWaitingTimeForReturnCar().mean()));
-            jTextFieldStatMeanRentCar.setText(convertTimeToString(_sim.getStatWaitingTimeForRentCar().mean()));
+            jTextFieldStatMean.setText(convertTimeToMinute(_sim.getStatWaitingTimeForAll().mean()) + "=" + formatTime(_sim.getStatWaitingTimeForAll().mean()));
+            jTextFieldStatMeanReturnCar.setText(convertTimeToMinute(_sim.getStatWaitingTimeForReturnCar().mean()) + "=" + formatTime(_sim.getStatWaitingTimeForReturnCar().mean()));
+            jTextFieldStatMeanRentCar.setText(convertTimeToMinute(_sim.getStatWaitingTimeForRentCar().mean()) + "=" + formatTime(_sim.getStatWaitingTimeForRentCar().mean()));
             jTextFieldStatMeanLengthT1.setText(""+_sim.getLengthMeanT1Stat().mean());
             jTextFieldStatMeanLengthT2.setText(""+_sim.getLengthMeanT2Stat().mean());
             jTextFieldStatMeanLengthWaitForMinibus.setText(""+_sim.getLengthMeanRentalWaitForMinibusStat().mean());
@@ -1276,6 +1279,10 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
 
     private String convertTimeToString(double value) {
         return (String.format("%.3f min", value / 60.0) + " = " + (int) Math.floor((value / 60.0) % 60.0) + " min " + String.format("%.0f", (value % 60.0)) + " sec");
+    }
+    
+    private String convertTimeToMinute(double value){
+        return String.format("%.3f min", value / 60.0);
     }
 
     public static String formatTime(double time) {
@@ -1455,7 +1462,9 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
 
     @Override
     public void refresh(Simulation smltn) {
-        final double simTime = _sim.currentTime();
+        if(_sim.currentTime() <= Config.SimHour){
+            _sim.clearStatistics();
+        }
 
         //final int countCusomerInSystem = _sim.pocetZakaznikovVSysteme();
         //final int countServedCustomers = _sim.pocetObsluzenychZakaznikov();
@@ -1478,7 +1487,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             jTextFieldMeanRentCar.setText(convertTimeToString(_sim.agentEnvironment().getStatWaitingTimeRentCarCustomers().mean()));
             jTextFieldMeanReturnCar.setText(convertTimeToString(_sim.agentEnvironment().getStatWaitingTimeReturnCarCustomers().mean()));
             jLabelSimTime.setText(Double.toString(_sim.currentTime()));
-            jLabelRealTime.setText(formatTime(_sim.currentTime()));
+            jLabelRealTime.setText(formatTime(_sim.currentTime()+(15d*60d*60d)));
             jTextFieldArrivalCount.setText("" + _sim.agentEnvironment().getGeneretedCustomerCount());
             jTextFieldDepartureCount.setText("" + _sim.agentEnvironment().getDeparturesCustomersCount());
 
