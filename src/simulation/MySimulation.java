@@ -5,7 +5,10 @@ import OSPStat.Stat;
 import agents.*;
 
 public class MySimulation extends Simulation {
-
+    
+    private boolean isStopedArrivalT1Generator;
+    private boolean isStopedArrivalT2Generator;
+    private boolean isStopedArrivalRentalGenerator;
     private Stat _statWaitingTimeForAll;
     private Stat _statWaitingTimeForRentCar;
     private Stat _statWaitingTimeForReturnCar;
@@ -26,6 +29,9 @@ public class MySimulation extends Simulation {
     public void prepareSimulation() {
         super.prepareSimulation();
         // Create global statistcis
+        isStopedArrivalT1Generator = false;
+        isStopedArrivalT2Generator = false;
+        isStopedArrivalRentalGenerator = false;
         _statWaitingTimeForAll = new Stat();
         _statWaitingTimeForRentCar = new Stat();
         _statWaitingTimeForReturnCar = new Stat();
@@ -166,6 +172,30 @@ public class MySimulation extends Simulation {
 
     private String convertTimeToString(double value) {
         return (String.format("%.3f min", value / 60.0) + " = " + (int) Math.floor((value / 60.0) % 60.0) + " min " + String.format("%.0f", (value % 60.0)) + " sec");
+    }
+
+    public boolean isStopedArrivalT1Generator() {
+        return isStopedArrivalT1Generator;
+    }
+
+    public void setIsStopedArrivalT1Generator(boolean isStopedArrivalGenerator) {
+        this.isStopedArrivalT1Generator = isStopedArrivalGenerator;
+    }
+    
+    public boolean isStopedArrivalT2Generator() {
+        return isStopedArrivalT2Generator;
+    }
+
+    public void setIsStopedArrivalT2Generator(boolean isStopedArrivalGenerator) {
+        this.isStopedArrivalT2Generator = isStopedArrivalGenerator;
+    }
+    
+    public boolean isStopedArrivalRentalGenerator() {
+        return isStopedArrivalRentalGenerator;
+    }
+
+    public void setIsStopedArrivalRentalGenerator(boolean isStopedArrivalGenerator) {
+        this.isStopedArrivalRentalGenerator = isStopedArrivalGenerator;
     }
 
     // global stats geters

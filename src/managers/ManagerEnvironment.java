@@ -71,6 +71,7 @@ public class ManagerEnvironment extends Manager
 	//meta! sender="AgentModel", id="10", type="Notice"
 	public void processDepartureCustomer(MessageForm message)
 	{
+            
             double allWaitingTime = ((MyMessage) message).getCustomer().getAllWaitingTime();
             myAgent().incrementDeparturesCustomersCount(((MyMessage) message).getCustomer().getPassengersCount());
             myAgent().getStatWaitingTimeForAllCustomers().addSample(allWaitingTime);
@@ -79,6 +80,12 @@ public class ManagerEnvironment extends Manager
                 myAgent().getStatWaitingTimeReturnCarCustomers().addSample(allWaitingTime);
             }else {
                 myAgent().getStatWaitingTimeRentCarCustomers().addSample(allWaitingTime);
+            }
+            if(myAgent().getDeparturesCustomersCount() == myAgent().getGeneretedCustomerCount() 
+                    && ((MySimulation)mySim()).isStopedArrivalT1Generator() 
+                    && ((MySimulation)mySim()).isStopedArrivalT2Generator() 
+                    && ((MySimulation)mySim()).isStopedArrivalRentalGenerator()){
+                mySim().stopReplication();
             }
 	}
 

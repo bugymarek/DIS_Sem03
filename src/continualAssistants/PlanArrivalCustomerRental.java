@@ -33,8 +33,12 @@ public class PlanArrivalCustomerRental extends Scheduler {
 
     private void processNewCustomer(MessageForm message) {
         MyMessage msg = new MyMessage((MyMessage) message);
-        hold(_intervalGenerator.sample(), msg);
-
+        double hold = _intervalGenerator.sample();
+        if(mySim().currentTime() + hold < Config.SimulationTime){
+            hold(hold, msg);
+        }else{
+            ((MySimulation)mySim()).setIsStopedArrivalRentalGenerator(true);
+        }
         _idCustomer++;
         ((MyMessage) message).setCustomer(new Customer(_idCustomer, Config.RentalName, mySim()));
         assistantFinished(message);
