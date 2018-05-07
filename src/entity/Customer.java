@@ -10,7 +10,10 @@ import OSPRNG.UniformDiscreteRNG;
 public class Customer extends Entity {
 
     private double _arrivalTimeToSystem;
+    private double _arrivalTimeToRental;
     private double _allWaitingTime;
+    private double _waitingTertminal;
+    private double _waitingForOperating;
     private int _ID;
     private String _terminal;
     private int _passengersCount;
@@ -20,6 +23,9 @@ public class Customer extends Entity {
         super(sim);
         _arrivalTimeToSystem = sim.currentTime();
         _allWaitingTime = .0;
+        _arrivalTimeToRental = 0;
+        _waitingTertminal = 0;
+        _waitingForOperating = 0;
         _ID = id;
         _terminal = terminal;
         _passengersCount = generatePassengersCount(_followPassengersProbabilityGeneratro.sample());
@@ -74,5 +80,29 @@ public class Customer extends Entity {
             return 3;
         }
         return 4;
+    }
+
+    public double getWaitingTertminal() {
+        return _waitingTertminal;
+    }
+
+    public double getWaitingForOperating() {
+        return _waitingForOperating;
+    }
+
+    public void setWaitingTertminal(double _waitingTertminal) {
+        this._waitingTertminal = _waitingTertminal;
+    }
+
+    public void setWaitingForOperating(double _waitingForOperating) {
+        this._waitingForOperating = _waitingForOperating;
+    }
+
+    public double getArrivalTimeToRental() {
+        return _arrivalTimeToRental;
+    }
+
+    public void setArrivalTimeToRental(double _arrivalTimeToRental) {
+        this._arrivalTimeToRental = _arrivalTimeToRental;
     }
 }

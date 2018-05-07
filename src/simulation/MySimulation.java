@@ -20,6 +20,9 @@ public class MySimulation extends Simulation {
     private Stat _arrivalCustomersT1;
     private Stat _arrivalCustomersT2;
     private Stat _arrivalCustomersRental;
+    private Stat _statWaitingTimeT1;
+    private Stat _statWaitingTimeT2;
+    private Stat _statWaitingForOperatingCustomer;
 
     public MySimulation() {
         init();
@@ -43,6 +46,10 @@ public class MySimulation extends Simulation {
         _arrivalCustomersT1 = new Stat();
         _arrivalCustomersT2 = new Stat();
         _arrivalCustomersRental = new Stat();
+        _statWaitingTimeT1 = new Stat();
+        _statWaitingTimeT2 = new Stat();
+        _statWaitingForOperatingCustomer = new Stat();
+        
     }
 
     @Override
@@ -67,6 +74,9 @@ public class MySimulation extends Simulation {
         _arrivalCustomersT1.addSample(agentT1().getArrivalCustomersCount());
         _arrivalCustomersT2.addSample(agentT2().getArrivalCustomersCount());
         _arrivalCustomersRental.addSample(agentRental().getArrivalCustomersCount());
+        _statWaitingTimeT1.addSample(agentEnvironment().getStatWaitingTimeT1().mean());
+        _statWaitingTimeT2.addSample(agentEnvironment().getStatWaitingTimeT2().mean());
+        _statWaitingForOperatingCustomer.addSample(agentEnvironment().getStatWaitingForOperatingCustomer().mean());
         //System.out.println("R" + currentReplication() + " celkový priemer: " + convertTimeToString(_statWaitingTimeForBorrowCar.mean()) + " priemer danej replikácie(" + convertTimeToString(agentEnvironment().getStatWaitingTime().mean()) + ")");
     }
 
@@ -243,10 +253,25 @@ public class MySimulation extends Simulation {
         return _statWaitingTimeForAll;
     }
 
+    public Stat getStatWaitingTimeT1() {
+        return _statWaitingTimeT1;
+    }
+
+    public Stat getStatWaitingTimeT2() {
+        return _statWaitingTimeT2;
+    }
+
+    public Stat getStatWaitingForOperatingCustomer() {
+        return _statWaitingForOperatingCustomer;
+    }
+
     public void clearStatistics() {
         agentEnvironment().getStatWaitingTimeForAllCustomers().clear();
         agentEnvironment().getStatWaitingTimeRentCarCustomers().clear();
         agentEnvironment().getStatWaitingTimeReturnCarCustomers().clear();
+        agentEnvironment().getStatWaitingTimeT1().clear();      
+        agentEnvironment().getStatWaitingTimeT2().clear();
+        agentEnvironment().getStatWaitingForOperatingCustomer().clear();
         agentT1().lengthQueueWStatInteger().clear();
         agentT2().lengthQueueWStatInteger().clear();
         agentRental().lengthLoadQueueWStatInteger().clear();

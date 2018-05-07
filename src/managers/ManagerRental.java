@@ -71,6 +71,7 @@ public class ManagerRental extends Manager {
 
     public void processUnloadCustomerDone(MessageForm message) {
         myAgent().incrementCustomersCount(myMessage(message).getCustomer().getPassengersCount());
+        myMessage(message).getCustomer().setArrivalTimeToRental(mySim().currentTime());
         Operator freeOperator = myAgent().getFreeOperator();
         MessageForm copyMessage = new MyMessage(myMessage(message));
         if (freeOperator == null) {
@@ -103,6 +104,7 @@ public class ManagerRental extends Manager {
             myMessage(message).getCustomer().setAllWaitingTime(mySim().currentTime() - myMessage(message).getCustomer().getArrivalTimeToSystem());
             notice(message);
         }
+         myMessage(message).getCustomer().setWaitingForOperating(mySim().currentTime() - myMessage(message).getCustomer().getArrivalTimeToRental());
 
         if (!myAgent().getCustomersUnloadQueue().isEmpty()) {
             MessageForm msg = myAgent().getCustomersUnloadQueue().dequeue();

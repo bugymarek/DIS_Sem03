@@ -75,11 +75,17 @@ public class ManagerEnvironment extends Manager
             double allWaitingTime = ((MyMessage) message).getCustomer().getAllWaitingTime();
             myAgent().incrementDeparturesCustomersCount(((MyMessage) message).getCustomer().getPassengersCount());
             myAgent().getStatWaitingTimeForAllCustomers().addSample(allWaitingTime);
+            myAgent().getStatWaitingForOperatingCustomer().addSample(((MyMessage) message).getCustomer().getWaitingForOperating());
             
             if(((MyMessage) message).getCustomer().getGeneratedTerminal().equals(Config.RentalName)){
-                myAgent().getStatWaitingTimeReturnCarCustomers().addSample(allWaitingTime);
+                myAgent().getStatWaitingTimeReturnCarCustomers().addSample(allWaitingTime);             
             }else {
                 myAgent().getStatWaitingTimeRentCarCustomers().addSample(allWaitingTime);
+                if(((MyMessage) message).getCustomer().getGeneratedTerminal().equals("T1")){
+                    myAgent().getStatWaitingTimeT1().addSample(((MyMessage) message).getCustomer().getWaitingTertminal());
+                }else{
+                    myAgent().getStatWaitingTimeT2().addSample(((MyMessage) message).getCustomer().getWaitingTertminal());
+                }       
             }
             if(myAgent().getDeparturesCustomersCount() == myAgent().getGeneretedCustomerCount() 
                     && ((MySimulation)mySim()).isStopedArrivalT1Generator() 

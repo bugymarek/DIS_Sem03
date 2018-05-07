@@ -54,6 +54,7 @@ public class ManagerT2 extends Manager {
                 response(message);
             } else {
                 Customer customer = msg.getCustomer();
+                customer.setWaitingTertminal(mySim().currentTime() - customer.getArrivalTimeToSystem());
                 myMessage(message).setCustomer(customer);
                 message.setCode(Mc.loadCustomer);
                 message.setAddressee(mySim().findAgent(Id.agentBoardingCustomers));
