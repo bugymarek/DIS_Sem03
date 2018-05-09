@@ -7,6 +7,7 @@ package entity;
 
 import OSPABA.Entity;
 import OSPABA.Simulation;
+import simulation.Config;
 
 /**
  *
@@ -32,6 +33,8 @@ public class Operator extends Entity {
 
     public void setOccupied(boolean occupied) {
         this.Occupied = occupied;
+        // prvu hodinu zahrievam tak nepocitam ze pracuju;
+        if(mySim().currentTime()<= Config.SimHour)return;
         if(occupied){
             _startWorkingTime = mySim().currentTime();
         }else{

@@ -33,7 +33,6 @@ public class ManagerRental extends Manager {
     public void processLoadCustomerDone(MessageForm message) {
         boolean place = ((MyMessage) message).getMinibus().isPlaceInBus();
         if (!place || myAgent().getCustomersLoadQueue().isEmpty()) {
-            myMessage(message).getMinibus().setPosition("Cestujem z rental do T3");
             message.setCode(Mc.minibusReadyForMove);
             response(message);
         } else {
@@ -52,7 +51,6 @@ public class ManagerRental extends Manager {
         //System.out.println(" Pasažieri: " + " pocet: " + ((MyMessage) message).getMinibus().getSize());
         if (((MyMessage) message).getMinibus().isEmpty()) {
             if (myAgent().getCustomersLoadQueue().isEmpty()) {
-                myMessage(message).getMinibus().setPosition("Cestujem z rental do T1");
                 message.setCode(Mc.minibusReadyForMove);
                 response(message);
             } else {
@@ -168,7 +166,6 @@ public class ManagerRental extends Manager {
     private void loadCustomer(MessageForm message) {
         MyMessage msg = myMessage(myAgent().getAvailableCustomersFromQueue(myMessage(message).getMinibus().getFreePlaces()));
             if (msg == null) {
-                myMessage(message).getMinibus().setPosition("Cestujem z rental do T3");
                 message.setCode(Mc.minibusReadyForMove);
                 response(message);
             } else {

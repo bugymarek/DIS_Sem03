@@ -21,11 +21,17 @@ public class Config {
 //    public static double LengthT1ToT2 = ((60.0 * 60.0) / 35.0) * 0.5;
 //    public static double LengthT2ToRental = ((60.0 * 60.0) / 35.0) * 2.5;
     
-    public static double LengthRentalToT3 = ((60.0 * 60.0) / 35.0) * 2.9;
-    public static double LengthRentalToT1 = ((60.0 * 60.0) / 35.0) * 2.5;
-    public static double LengthT3ToT1 = ((60.0 * 60.0) / 35.0) * 0.9;
-    public static double LengthT1ToT2 = ((60.0 * 60.0) / 35.0) * 0.5;
-    public static double LengthT2ToRental = ((60.0 * 60.0) / 35.0) * 3.4;
+    public static double LengthRentalToT3 = 2.9;
+    public static double LengthRentalToT1 = 2.5;
+    public static double LengthT3ToT1 = 0.9;
+    public static double LengthT1ToT2 = 0.5;
+    public static double LengthT2ToRental = 3.4;
+    
+    public static double TimeLengthRentalToT3 = ((60.0 * 60.0) / 35.0) * LengthRentalToT3;
+    public static double TimeLengthRentalToT1 = ((60.0 * 60.0) / 35.0) * LengthRentalToT1;
+    public static double TimeLengthT3ToT1 = ((60.0 * 60.0) / 35.0) * LengthT3ToT1;
+    public static double TimeLengthT1ToT2 = ((60.0 * 60.0) / 35.0) * LengthT1ToT2;
+    public static double TimeLengthT2ToRental = ((60.0 * 60.0) / 35.0) * LengthT2ToRental;
 
     //public static double averageArrivalT1 = ((60.0 * 60.0) / 43.0);
     //public static double averageArrivalT2 = ((60.0 * 60.0) / 19.0);

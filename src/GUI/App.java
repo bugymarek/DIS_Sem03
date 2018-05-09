@@ -9,8 +9,11 @@ import OSPABA.ISimDelegate;
 import OSPABA.SimState;
 import OSPABA.Simulation;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -175,6 +178,10 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
         jLabel61 = new javax.swing.JLabel();
         jTextFieldIntervalStatMeanWaitingForOperating = new javax.swing.JTextField();
         jLabel62 = new javax.swing.JLabel();
+        jTextFieldStatMeanMonthCosts = new javax.swing.JTextField();
+        jLabel69 = new javax.swing.JLabel();
+        jTextFieldIntervalStatMeanMonthCosts = new javax.swing.JTextField();
+        jLabel70 = new javax.swing.JLabel();
         jPanelMinibusesFixed = new javax.swing.JPanel();
         jTextFieldStatMeanLengthT1 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
@@ -579,9 +586,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel53)
-                                .addGap(27, 27, 27))
+                            .addComponent(jLabel53)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addComponent(jTextFieldIntervalT1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -814,8 +819,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel9Layout.createSequentialGroup()
                                         .addGap(113, 113, 113)
-                                        .addComponent(jLabel56)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jLabel56))
                                     .addGroup(jPanel9Layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(jTextFieldIntervalWaitingForMinibus))))
@@ -865,8 +869,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel55, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel28)))
+                                    .addComponent(jLabel28))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jTextFieldQueueRentalRentBringMean, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -951,6 +954,10 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
 
         jLabel62.setText("90% interval spoľahlivosti");
 
+        jLabel69.setText("Priemerné mesačné náklady");
+
+        jLabel70.setText("90% interval spoľahlivosti");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -1021,6 +1028,16 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                             .addComponent(jTextFieldIntervalStatMeanWaitingForOperating, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel62)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldStatMeanMonthCosts)
+                            .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldIntervalStatMeanMonthCosts, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel70)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -1086,7 +1103,17 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                         .addComponent(jLabel61)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldStatMeanWaitingForOperating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel70)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldIntervalStatMeanMonthCosts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel69)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldStatMeanMonthCosts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Priem. čas ", jPanel4);
@@ -1502,7 +1529,8 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             jTextFieldStatMeanWaitingForOperating.setText(convertTimeToMinute(_sim.getStatWaitingForOperatingCustomer().mean()) + "=" + formatTime(_sim.getStatWaitingForOperatingCustomer().mean()));
             jTextFieldStatMeanOccupacyOperators.setText(convertToPercentsString(_sim.getStatOccupacyOperators().mean()));
             jTextFieldStatMeanOccupacyMinibuses.setText(convertToPercentsString(_sim.getStatOccupacyMinibuses().mean()));
-            
+            jTextFieldStatMeanMonthCosts.setText(convertToEurString(_sim.getCosts().mean()));
+
             //confidence intervals
             if (_sim.currentReplication() > 1) {
                 jTextFieldStatInterval.setText(convertConfidenceIntervalToMinutesString(_sim.getStatWaitingTimeForAll().confidenceInterval_90()));
@@ -1516,9 +1544,11 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                 jTextFieldStatIntervalLengthWaitForMinibus.setText(convertConfidenceIntervalToString(_sim.getLengthMeanRentalWaitForMinibusStat().confidenceInterval_90()));
                 jTextFieldStatIntervalLengthT1.setText(convertConfidenceIntervalToString(_sim.getLengthMeanT1Stat().confidenceInterval_90()));
                 jTextFieldStatIntervalLengthT2.setText(convertConfidenceIntervalToString(_sim.getLengthMeanT2Stat().confidenceInterval_90()));
-                
+
                 jTextFieldStatIntervalOccupacyOperators.setText(convertConfidenceIntervalToString(_sim.getStatOccupacyOperators().confidenceInterval_90()));
                 jTextFieldStatIntervalOccupacyMinibuses.setText(convertConfidenceIntervalToString(_sim.getStatOccupacyMinibuses().confidenceInterval_90()));
+
+                jTextFieldIntervalStatMeanMonthCosts.setText(convertConfidenceIntervalToString(_sim.getCosts().confidenceInterval_90()));
             }
 
         });
@@ -1693,7 +1723,9 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelProgress;
@@ -1736,6 +1768,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JTextField jTextFieldIntervalMeanRentCar;
     private javax.swing.JTextField jTextFieldIntervalMeanReturnCar;
     private javax.swing.JTextField jTextFieldIntervalRentReturn;
+    private javax.swing.JTextField jTextFieldIntervalStatMeanMonthCosts;
     private javax.swing.JTextField jTextFieldIntervalStatMeanRentCar;
     private javax.swing.JTextField jTextFieldIntervalStatMeanReturnCar;
     private javax.swing.JTextField jTextFieldIntervalStatMeanWaitingForOperating;
@@ -1776,6 +1809,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JTextField jTextFieldStatMeanLengthT1;
     private javax.swing.JTextField jTextFieldStatMeanLengthT2;
     private javax.swing.JTextField jTextFieldStatMeanLengthWaitForMinibus;
+    private javax.swing.JTextField jTextFieldStatMeanMonthCosts;
     private javax.swing.JTextField jTextFieldStatMeanOccupacyMinibuses;
     private javax.swing.JTextField jTextFieldStatMeanOccupacyOperators;
     private javax.swing.JTextField jTextFieldStatMeanOperatorsFixed;
@@ -1852,7 +1886,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                 data.add(_sim.agentModel().getMinibusesList().get(i).getID());
                 data.add(_sim.agentModel().getMinibusesList().get(i).getPosition());
                 data.add(_sim.agentModel().getMinibusesList().get(i).getPassengersCount());
-                data.add(convertToPercentsString(_sim.agentModel().getMinibusesList().get(i).lengthQueueWStatInteger().mean()*100.0/((double)Config.CapaityOfMinibus)));
+                data.add(convertToPercentsString(_sim.agentModel().getMinibusesList().get(i).lengthQueueWStatInteger().mean() * 100.0 / ((double) Config.CapaityOfMinibus)));
                 MinibusTableModel.addRow(data);
             }
 
@@ -1955,5 +1989,14 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
 
     private String convertToPercentsString(double value) {
         return String.format("%.3f %%", value);
+    }
+
+    private String convertToEurString(double value) {
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.ENGLISH);
+        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+
+        symbols.setGroupingSeparator(' ');
+        formatter.setDecimalFormatSymbols(symbols);
+        return formatter.format(value) + " €";
     }
 }

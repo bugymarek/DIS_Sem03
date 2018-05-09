@@ -50,23 +50,36 @@ public class AgentModel extends Agent {
         msg.setAddressee(this);
         msg.setCode(Mc.init);
         manager().notice(msg);
-        
+
         for (int i = 0; i < _minibusesList.size(); i++) {
-        MyMessage message = new MyMessage(mySim(), null, _minibusesList.get(i)); 
-        message.setCode(Mc.minibusReadyForMove);
-        message.setAddressee(mySim().findAgent(Id.agentAirport));
-        manager().notice(message);
-        }     
+            MyMessage message = new MyMessage(mySim(), null, _minibusesList.get(i));
+            message.setCode(Mc.minibusReadyForMove);
+            message.setAddressee(mySim().findAgent(Id.agentAirport));
+            manager().notice(message);
+        }
     }
 
     public List<Minibus> getMinibusesList() {
         return _minibusesList;
     }
-    
-    public Stat getOccupancy(){
+
+    public Stat getOccupancy() {
         for (Minibus minibus : _minibusesList) {
-            _occupancyStat.addSample((minibus.lengthQueueWStatInteger().mean()* 100.0) / ((double)Config.CapaityOfMinibus));
+            _occupancyStat.addSample((minibus.lengthQueueWStatInteger().mean() * 100.0) / ((double) Config.CapaityOfMinibus));
         }
         return _occupancyStat;
+    }
+
+    public double getCostsMileageAllMinibuses() {
+        double mileage = 0;
+        for (Minibus minibus : _minibusesList) {
+            mileage += minibus.getMileage();
+        }
+        return mileage*Config.PricePerKm;
+    }
+    
+    public double getCostsWorkingTimeAllMinibuses() {
+        double workingTime = _minibusesList.size() * ((mySim().currentTime()-Config.SimHour)/(60d*60d));
+        return workingTime*Config.PricePerHourDriver;
     }
 }

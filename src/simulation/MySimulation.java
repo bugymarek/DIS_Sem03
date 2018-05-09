@@ -25,6 +25,7 @@ public class MySimulation extends Simulation {
     private Stat _statWaitingForOperatingCustomer;
     private Stat _statOccupacyOperators;
     private Stat _statOccupacyMinibuses;
+    private Stat _costs;
 
     public MySimulation() {
         init();
@@ -53,6 +54,7 @@ public class MySimulation extends Simulation {
         _statWaitingForOperatingCustomer = new Stat();
         _statOccupacyOperators = new Stat();
         _statOccupacyMinibuses = new Stat();
+        _costs = new Stat();
         
     }
 
@@ -83,6 +85,7 @@ public class MySimulation extends Simulation {
         _statWaitingForOperatingCustomer.addSample(agentEnvironment().getStatWaitingForOperatingCustomer().mean());
         _statOccupacyOperators.addSample(agentRental().getOccupancyWorkingTime().mean());
         _statOccupacyMinibuses.addSample(agentModel().getOccupancy().mean());
+        _costs.addSample(monthCosts());
         //System.out.println("R" + currentReplication() + " celkový priemer: " + convertTimeToString(_statWaitingTimeForBorrowCar.mean()) + " priemer danej replikácie(" + convertTimeToString(agentEnvironment().getStatWaitingTime().mean()) + ")");
     }
 
@@ -278,8 +281,11 @@ public class MySimulation extends Simulation {
     public Stat getStatOccupacyMinibuses() {
         return _statOccupacyMinibuses;
     }
-    
 
+    public Stat getCosts() {
+        return _costs;
+    }
+    
     public void clearStatistics() {
         agentEnvironment().getStatWaitingTimeForAllCustomers().clear();
         agentEnvironment().getStatWaitingTimeRentCarCustomers().clear();
@@ -293,5 +299,11 @@ public class MySimulation extends Simulation {
         agentRental().lengthUnloadQueueWStat().clear();
         agentRental().getOccupancyWorkingTime().clear();
         agentModel().getOccupancy().clear();
+    }
+
+    private double monthCosts() {
+        double allcostsPerSimulation = agentModel().getCostsMileageAllMinibuses() + agentModel().getCostsWorkingTimeAllMinibuses() + agentRental().getCostsWorkingTimeAllOperators();
+        double costsPerHour = allcostsPerSimulation / ((currentTime()-Config.SimHour)/(60d*60d));
+        return costsPerHour*24*30;
     }
 }

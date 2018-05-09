@@ -85,22 +85,28 @@ public class ManagerAirport extends Manager {
 
     private void processMovMinibusToT1(MessageForm message) {
         myMessage(message).getMinibus().setPosition("Cestujem z rental do T1");
+        myMessage(message).getMinibus().addKm(Config.LengthRentalToT1);
         message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusToT1));
         startContinualAssistant(message);
     }
 
     private void processMovMinibusFromT3ToT1(MessageForm message) {
         myMessage(message).getMinibus().setPosition("Cestujem z T3 do T1");
+        myMessage(message).getMinibus().addKm(Config.LengthT3ToT1);
         message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusFromT3ToT1));
         startContinualAssistant(message);
     }
 
     private void processMovMinibusToT2(MessageForm message) {
+        myMessage(message).getMinibus().setPosition("Cestujem z T1 do T2");
+        myMessage(message).getMinibus().addKm(Config.LengthT1ToT2);
         message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusToT2));
         startContinualAssistant(message);
     }
 
     private void processMovMinibusToRental(MessageForm message) {
+        myMessage(message).getMinibus().setPosition("Cestujem z T2 do rental");
+        myMessage(message).getMinibus().addKm(Config.LengthT2ToRental);
         message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusToRental));
         startContinualAssistant(message);
     }
@@ -110,6 +116,7 @@ public class ManagerAirport extends Manager {
             processMovMinibusToT1(message);
         } else {
             myMessage(message).getMinibus().setPosition("Cestujem z rental do T3");
+            myMessage(message).getMinibus().addKm(Config.LengthRentalToT3);
             message.setAddressee(myAgent().findAssistant(Id.processMovingMinibusToT3));
             startContinualAssistant(message);
         }

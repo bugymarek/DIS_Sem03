@@ -121,6 +121,11 @@ public class AgentRental extends Agent {
         return count;
     }
     
+    public double getCostsWorkingTimeAllOperators() {
+        double workingTime = _operatorsList.size() * ((mySim().currentTime()-Config.SimHour)/(60d*60d));
+        return workingTime*Config.PricePerHourOperator;
+    }
+    
     public void enqueuLoadQueue(MessageForm message) {
         _customersLoadQueue.enqueue(message);
         int passengersCount = ((MyMessage)message).getCustomer().getPassengersCount();

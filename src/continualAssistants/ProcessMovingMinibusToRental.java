@@ -24,7 +24,7 @@ public class ProcessMovingMinibusToRental extends Process
 	public void processStart(MessageForm message)
 	{
             message.setCode(Mc.movingMinibusDone);
-            hold(Config.LengthT2ToRental,message);
+            hold(Config.TimeLengthT2ToRental,message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

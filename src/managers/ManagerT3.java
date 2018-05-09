@@ -27,7 +27,6 @@ public class ManagerT3 extends Manager {
     //meta! sender="AgentAirport", id="45", type="Request"
     public void processArrivalMinibus(MessageForm message) {
         if (((MyMessage) message).getMinibus().isEmpty()) {
-            myMessage(message).getMinibus().setPosition("Cestujem z T3 do T1");
             message.setCode(Mc.minibusReadyForMove);
             response(message);
         } else {

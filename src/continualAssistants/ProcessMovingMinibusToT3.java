@@ -24,7 +24,7 @@ public class ProcessMovingMinibusToT3 extends Process
 	public void processStart(MessageForm message)
 	{
             message.setCode(Mc.movingMinibusDone);
-            hold(Config.LengthRentalToT3,message);
+            hold(Config.TimeLengthRentalToT3,message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

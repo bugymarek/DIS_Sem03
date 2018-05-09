@@ -22,7 +22,7 @@ public class Minibus extends Entity{
     private int _ID;
     private String _position;
     private int _passengersCount;
-    private int _mileage;
+    private double _mileage;
     
     public Minibus(Simulation mySim) {
         super(mySim);
@@ -96,11 +96,13 @@ public class Minibus extends Entity{
         return _customersStatQueue.lengthStatistic();
     }
     
-    public void addKm(int kmCount){
+    public void addKm(double kmCount){
+        // prvu hodinu zahrievam tak nepocitam prejdene km;
+        if(mySim().currentTime()<= Config.SimHour)return;
         _mileage += kmCount;
     }
 
-    public int getMileage() {
+    public double getMileage() {
         return _mileage;
     }
 }
