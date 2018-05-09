@@ -95,11 +95,11 @@ public class AgentRental extends Agent {
         }
     }
     
-    public double getOccupancyWorkingTime(){
+    public Stat getOccupancyWorkingTime(){
         for (Operator operator : _operatorsList) {
             _occupancyWorkingTime.addSample((operator.getAllWorkingTime()* 100.0) / mySim().currentTime());
         }
-        return _occupancyWorkingTime.mean();
+        return _occupancyWorkingTime;
     }
     
     public Operator getFreeOperator() {

@@ -24,6 +24,7 @@ public class MySimulation extends Simulation {
     private Stat _statWaitingTimeT2;
     private Stat _statWaitingForOperatingCustomer;
     private Stat _statOccupacyOperators;
+    private Stat _statOccupacyMinibuses;
 
     public MySimulation() {
         init();
@@ -51,6 +52,7 @@ public class MySimulation extends Simulation {
         _statWaitingTimeT2 = new Stat();
         _statWaitingForOperatingCustomer = new Stat();
         _statOccupacyOperators = new Stat();
+        _statOccupacyMinibuses = new Stat();
         
     }
 
@@ -79,7 +81,8 @@ public class MySimulation extends Simulation {
         _statWaitingTimeT1.addSample(agentEnvironment().getStatWaitingTimeT1().mean());
         _statWaitingTimeT2.addSample(agentEnvironment().getStatWaitingTimeT2().mean());
         _statWaitingForOperatingCustomer.addSample(agentEnvironment().getStatWaitingForOperatingCustomer().mean());
-        _statOccupacyOperators.addSample(agentRental().getOccupancyWorkingTime());
+        _statOccupacyOperators.addSample(agentRental().getOccupancyWorkingTime().mean());
+        _statOccupacyMinibuses.addSample(agentModel().getOccupancy().mean());
         //System.out.println("R" + currentReplication() + " celkový priemer: " + convertTimeToString(_statWaitingTimeForBorrowCar.mean()) + " priemer danej replikácie(" + convertTimeToString(agentEnvironment().getStatWaitingTime().mean()) + ")");
     }
 
@@ -272,6 +275,11 @@ public class MySimulation extends Simulation {
         return _statOccupacyOperators;
     }
 
+    public Stat getStatOccupacyMinibuses() {
+        return _statOccupacyMinibuses;
+    }
+    
+
     public void clearStatistics() {
         agentEnvironment().getStatWaitingTimeForAllCustomers().clear();
         agentEnvironment().getStatWaitingTimeRentCarCustomers().clear();
@@ -283,5 +291,7 @@ public class MySimulation extends Simulation {
         agentT2().lengthQueueWStatInteger().clear();
         agentRental().lengthLoadQueueWStatInteger().clear();
         agentRental().lengthUnloadQueueWStat().clear();
+        agentRental().getOccupancyWorkingTime().clear();
+        agentModel().getOccupancy().clear();
     }
 }

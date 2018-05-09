@@ -1,6 +1,7 @@
 package agents;
 
 import OSPABA.*;
+import OSPStat.Stat;
 import simulation.*;
 import managers.*;
 import continualAssistants.*;
@@ -13,6 +14,7 @@ import java.util.List;
 public class AgentModel extends Agent {
 
     private List<Minibus> _minibusesList;
+    private Stat _occupancyStat;
 
     public AgentModel(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
@@ -28,6 +30,7 @@ public class AgentModel extends Agent {
             mb.setID(i);
             _minibusesList.add(mb);
         }
+        _occupancyStat = new Stat();
         // Setup component for the next replication
     }
 
@@ -58,5 +61,12 @@ public class AgentModel extends Agent {
 
     public List<Minibus> getMinibusesList() {
         return _minibusesList;
+    }
+    
+    public Stat getOccupancy(){
+        for (Minibus minibus : _minibusesList) {
+            _occupancyStat.addSample((minibus.lengthQueueWStatInteger().mean()* 100.0) / ((double)Config.CapaityOfMinibus));
+        }
+        return _occupancyStat;
     }
 }

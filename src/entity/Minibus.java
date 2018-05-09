@@ -18,14 +18,18 @@ import simulation.Config;
  */
 public class Minibus extends Entity{
     private SimQueue<Customer> _customersQueue; 
+    private SimQueue< Integer> _customersStatQueue;
     private int _ID;
     private String _position;
     private int _passengersCount;
+    private int _mileage;
     
     public Minibus(Simulation mySim) {
         super(mySim);
         _customersQueue = new SimQueue<>(new WStat(mySim()));
+        _customersStatQueue = new SimQueue<>(new WStat(mySim()));
         _passengersCount = 0;
+        _mileage = 0;
     }
     
     public String getPosition() {
@@ -48,6 +52,10 @@ public class Minibus extends Entity{
         return _customersQueue;
     }
     
+    public SimQueue<Integer> getCustomersStatQueue() {
+        return _customersStatQueue;
+    }
+    
     public boolean isPlaceInBus(){
         return _passengersCount < Config.CapaityOfMinibus;
     }
@@ -67,16 +75,32 @@ public class Minibus extends Entity{
     public Customer getCustomerFromBus(){
         Customer cus = _customersQueue.dequeue();
         _passengersCount -= cus.getPassengersCount();
+        for (int i = 0; i < cus.getPassengersCount(); i++) {
+            _customersStatQueue.dequeue();
+        }
         return cus;
     }
     
     public void addCustomerToBus(Customer cus){
         _customersQueue.enqueue(cus);
         _passengersCount += cus.getPassengersCount();
-        
+        for (int i = 0; i < cus.getPassengersCount(); i++) {
+            _customersStatQueue.enqueue(1);
+        }  
     }
 
     public WStat lengthQueueWStat() {
         return _customersQueue.lengthStatistic();
+    }
+    public WStat lengthQueueWStatInteger() {
+        return _customersStatQueue.lengthStatistic();
+    }
+    
+    public void addKm(int kmCount){
+        _mileage += kmCount;
+    }
+
+    public int getMileage() {
+        return _mileage;
     }
 }

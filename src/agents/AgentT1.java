@@ -14,7 +14,7 @@ public class AgentT1 extends Agent {
     private int _arrivalCustomersCount;
     private int _departureCustomersCount;
     private SimQueue< Integer> _customersStatQueue;
-    
+
     public AgentT1(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
         init();
@@ -37,7 +37,7 @@ public class AgentT1 extends Agent {
         addOwnMessage(Mc.loadCustomerDone);
         addOwnMessage(Mc.serveArrivalMinibus);
     }
-    
+
     public SimQueue<MessageForm> getCustomersQueue() {
         return _customersQueue;
     }
@@ -45,11 +45,11 @@ public class AgentT1 extends Agent {
     public SimQueue<Integer> getCustomersStatQueue() {
         return _customersStatQueue;
     }
-    
+
     public MessageForm getAvailableCustomersFromQueue(int freePlaces) {
         for (int i = _customersQueue.size() - 1; i >= 0; i--) {
-            int passengersCount = ((MyMessage)_customersQueue.get(i)).getCustomer().getPassengersCount();
-            if(passengersCount <= freePlaces){
+            int passengersCount = ((MyMessage) _customersQueue.get(i)).getCustomer().getPassengersCount();
+            if (passengersCount <= freePlaces) {
                 getFromStatQueue(passengersCount);
                 return _customersQueue.remove(i);
             }
@@ -57,16 +57,15 @@ public class AgentT1 extends Agent {
         return null;
     }
 
-        public WStat lengthQueueWStatInteger() {
-            return _customersStatQueue.lengthStatistic();
-        }
+    public WStat lengthQueueWStatInteger() {
+        return _customersStatQueue.lengthStatistic();
+    }
 
     //meta! tag="end"
-
     public int getArrivalCustomersCount() {
         return _arrivalCustomersCount;
     }
-    
+
     public void incrementCustomersCount(int value) {
         _arrivalCustomersCount += value;
     }
@@ -74,23 +73,23 @@ public class AgentT1 extends Agent {
     public int getDepartureCustomersCount() {
         return _departureCustomersCount;
     }
-    
+
     public void incrementDepartureCustomersCount(int value) {
         _departureCustomersCount += value;
     }
 
     public void enqueuQueue(MessageForm message) {
         _customersQueue.enqueue(message);
-        int passengersCount = ((MyMessage)message).getCustomer().getPassengersCount();
+        int passengersCount = ((MyMessage) message).getCustomer().getPassengersCount();
         for (int i = 0; i < passengersCount; i++) {
             _customersStatQueue.enqueue(1);
         }
     }
-    
+
     public void getFromStatQueue(int passengersCount) {
         for (int i = 0; i < passengersCount; i++) {
             _customersStatQueue.dequeue();
         }
     }
-    
+
 }

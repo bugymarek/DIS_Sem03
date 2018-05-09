@@ -863,9 +863,10 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldQueueRentalRentBringCarCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel28)
-                                    .addComponent(jLabel55))
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel55, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel28)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jTextFieldQueueRentalRentBringMean, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1500,6 +1501,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
             jTextFieldStatMeanWaitingT2.setText(convertTimeToMinute(_sim.getStatWaitingTimeT2().mean()) + "=" + formatTime(_sim.getStatWaitingTimeT2().mean()));
             jTextFieldStatMeanWaitingForOperating.setText(convertTimeToMinute(_sim.getStatWaitingForOperatingCustomer().mean()) + "=" + formatTime(_sim.getStatWaitingForOperatingCustomer().mean()));
             jTextFieldStatMeanOccupacyOperators.setText(convertToPercentsString(_sim.getStatOccupacyOperators().mean()));
+            jTextFieldStatMeanOccupacyMinibuses.setText(convertToPercentsString(_sim.getStatOccupacyMinibuses().mean()));
             
             //confidence intervals
             if (_sim.currentReplication() > 1) {
@@ -1516,6 +1518,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                 jTextFieldStatIntervalLengthT2.setText(convertConfidenceIntervalToString(_sim.getLengthMeanT2Stat().confidenceInterval_90()));
                 
                 jTextFieldStatIntervalOccupacyOperators.setText(convertConfidenceIntervalToString(_sim.getStatOccupacyOperators().confidenceInterval_90()));
+                jTextFieldStatIntervalOccupacyMinibuses.setText(convertConfidenceIntervalToString(_sim.getStatOccupacyMinibuses().confidenceInterval_90()));
             }
 
         });
@@ -1849,6 +1852,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                 data.add(_sim.agentModel().getMinibusesList().get(i).getID());
                 data.add(_sim.agentModel().getMinibusesList().get(i).getPosition());
                 data.add(_sim.agentModel().getMinibusesList().get(i).getPassengersCount());
+                data.add(convertToPercentsString(_sim.agentModel().getMinibusesList().get(i).lengthQueueWStatInteger().mean()*100.0/((double)Config.CapaityOfMinibus)));
                 MinibusTableModel.addRow(data);
             }
 
@@ -1927,7 +1931,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
 
     private void setTablesModel() {
         MinibusTableModel = new DefaultTableModel(0, 0);
-        String header[] = new String[]{"Id minibusu", "Pozícia", "Počet pasažierov"};
+        String header[] = new String[]{"Id minibusu", "Pozícia", "Počet pasažierov", "vyťaženosť"};
         MinibusTableModel.setColumnIdentifiers(header);
         jTableMinibuses.setModel(MinibusTableModel);
 
