@@ -54,6 +54,7 @@ public class Config {
 
     public static int MinibusesCount;
     public static int OperatorsCount;
+    public static double CutReplicationsPercents;
     
     public static int CapaityOfMinibus;
     public static double PricePerKm;
