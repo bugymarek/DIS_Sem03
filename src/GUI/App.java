@@ -31,8 +31,9 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private DefaultTableModel MinibusTableModel;
     private DefaultTableModel OperatorsTableModel;
     private Chart[] Charts = new Chart[2];
-    private double Min;
-    private double Max;
+    private double[][] MinMax = new double[2][2];
+    private boolean Stop;
+    private FileWriter FW;
 
     /**
      * Creates new form App
@@ -224,9 +225,13 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
         jLabel23 = new javax.swing.JLabel();
         jTextStatMinibusesCount = new javax.swing.JTextField();
         jPanel13 = new javax.swing.JPanel();
-        jTextFieldStatMeanMinibusesFixed = new javax.swing.JTextField();
-        jLabel72 = new javax.swing.JLabel();
+        jTabbedPane5 = new javax.swing.JTabbedPane();
+        jPanel11 = new javax.swing.JPanel();
+        jPanelFixedMinibusMeanRentCar = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jPanelFixedMinibusMeanReturnCar = new javax.swing.JPanel();
         jLabel73 = new javax.swing.JLabel();
+        jTextStatOperatorsCount = new javax.swing.JTextField();
         jPanel12 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel14 = new javax.swing.JPanel();
@@ -1441,7 +1446,65 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
 
         jTabbedPane1.addTab("Fixní pracovníci", jPanelOperatorsFixed);
 
-        jLabel72.setText("Priemerný čas v systéme");
+        jTabbedPane5.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+
+        javax.swing.GroupLayout jPanelFixedMinibusMeanRentCarLayout = new javax.swing.GroupLayout(jPanelFixedMinibusMeanRentCar);
+        jPanelFixedMinibusMeanRentCar.setLayout(jPanelFixedMinibusMeanRentCarLayout);
+        jPanelFixedMinibusMeanRentCarLayout.setHorizontalGroup(
+            jPanelFixedMinibusMeanRentCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 604, Short.MAX_VALUE)
+        );
+        jPanelFixedMinibusMeanRentCarLayout.setVerticalGroup(
+            jPanelFixedMinibusMeanRentCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 311, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelFixedMinibusMeanRentCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(jPanelFixedMinibusMeanRentCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane5.addTab("Požičali automobil", jPanel11);
+
+        javax.swing.GroupLayout jPanelFixedMinibusMeanReturnCarLayout = new javax.swing.GroupLayout(jPanelFixedMinibusMeanReturnCar);
+        jPanelFixedMinibusMeanReturnCar.setLayout(jPanelFixedMinibusMeanReturnCarLayout);
+        jPanelFixedMinibusMeanReturnCarLayout.setHorizontalGroup(
+            jPanelFixedMinibusMeanReturnCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 604, Short.MAX_VALUE)
+        );
+        jPanelFixedMinibusMeanReturnCarLayout.setVerticalGroup(
+            jPanelFixedMinibusMeanReturnCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 311, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelFixedMinibusMeanReturnCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addComponent(jPanelFixedMinibusMeanReturnCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane5.addTab("Vratili automobil", jPanel17);
 
         jLabel73.setText("Počet praconíkov");
 
@@ -1449,28 +1512,23 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane5)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel72, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldStatMeanMinibusesFixed, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addComponent(jLabel73)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextStatOperatorsCount, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel72)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldStatMeanMinibusesFixed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel73)
-                        .addGap(26, 26, 26)))
-                .addContainerGap(332, Short.MAX_VALUE))
+                .addGap(0, 7, Short.MAX_VALUE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel73)
+                    .addComponent(jTextStatOperatorsCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("Fixné minibusy", jPanel13);
@@ -1651,13 +1709,14 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     }//GEN-LAST:event_jButtonPuseResumeActionPerformed
 
     private void jButtonStartStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartStopActionPerformed
-        this.Min = Double.MAX_VALUE;
-        this.Max = 0;
+        initMinMax();
         if (_sim != null && _sim.isRunning()) // stop sim
         {
+            Stop = true;
             _sim.stopSimulation();
         } else // start sim
         {
+            Stop = false;
             jButtonPuseResume.setText("Pauza");
 
             if (parseSimParams()) {
@@ -1668,22 +1727,36 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                         Charts[1] = new Chart(jPanelMeanReturnCar, "Priem. čas v systéme", "Priemerný čas zákaznika v systéme vrat. auto ", "Počet replikácií", "Priemer v minútach");
                         jTabbedPane1.setEnabledAt(3, false);
                         jTabbedPane1.setEnabledAt(4, false);
+                        jTabbedPane1.setEnabledAt(5, true);
                         jTabbedPane1.setSelectedIndex(5);
                         _sim.simulateAsync((int) Config.ReplicationsCount);
                         break;
                     case 1:
+                        FW = new FileWriter("C:/Users/Bugy/Documents/NetBeansProjects/DIS_Sem03/data/fixMinibusy" + Config.MinibusesCount + jComboBoxMinibusTipy.getSelectedItem().toString() + ".csv");
+                        FW.addRow(createHeaderRow());
+                        Charts[0] = new Chart(jPanelFixedMinibusMeanRentCar, "Priem. čas v systéme", "Priemerný čas zákaznika v systéme požič. auto ", "Počet replikácií", "Priemer v minútach");
+                        Charts[1] = new Chart(jPanelFixedMinibusMeanReturnCar, "Priem. čas v systéme", "Priemerný čas zákaznika v systéme vrat. auto ", "Počet replikácií", "Priemer v minútach");
+                        jTabbedPane1.setEnabledAt(3, false);
+                        jTabbedPane1.setEnabledAt(5, false);
+                        jTabbedPane1.setEnabledAt(4, true);
+                        jTabbedPane1.setSelectedIndex(4);
+                        Thread t1 = new Thread(() -> {
+                            while (Config.OperatorsCount < 6 && !Stop) {
+                                _sim.simulate((int) Config.ReplicationsCount);
+                                Config.OperatorsCount++;
+                            }
+                        });
+                        t1.start();
                         break;
                     case 2:
                         Charts[0] = new Chart(jPanelFixedOperatorsMeanRentCar, "Priem. čas v systéme", "Priemerný čas zákaznika v systéme požič. auto ", "Počet replikácií", "Priemer v minútach");
                         Charts[1] = new Chart(jPanelFixedOperatorsMeanReturCar, "Priem. čas v systéme", "Priemerný čas zákaznika v systéme vrat. auto ", "Počet replikácií", "Priemer v minútach");
                         jTabbedPane1.setEnabledAt(4, false);
                         jTabbedPane1.setEnabledAt(5, false);
+                        jTabbedPane1.setEnabledAt(3, true);
                         jTabbedPane1.setSelectedIndex(3);
-                        //jTextFieldMinibus.setEnabled(false);
-                        //jTextFieldReplications.setEnabled(false);
-                        //jTextFieldOperators.setEnabled(true);
                         Thread t2 = new Thread(() -> {
-                            while (true) {
+                            while (!Stop) {
                                 _sim.simulate((int) Config.ReplicationsCount);
                                 Config.MinibusesCount++;
                             }
@@ -1840,15 +1913,27 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                         Charts[1].changeRange(getRangeLimit(_sim.getStatWaitingTimeForReturnCar().mean() / 60.0, -0.02), getRangeLimit(_sim.getStatWaitingTimeForReturnCar().mean() / 60.0, 0.02));
                         break;
                     case 1:
+                        if (_sim.currentReplication() + 1 == _sim.replicationCount()) {
+                            Charts[0].addValueToSeries(0, Config.OperatorsCount, _sim.getStatWaitingTimeForRentCar().mean() / 60.0);
+                            setMinMax(0, _sim.getStatWaitingTimeForRentCar().min() / 60.0, _sim.getStatWaitingTimeForRentCar().max() / 60.0);
+                            Charts[0].changeRange(MinMax[0][0], MinMax[0][1]);
 
+                            Charts[1].addValueToSeries(0, Config.OperatorsCount, _sim.getStatWaitingTimeForReturnCar().mean() / 60.0);
+                            setMinMax(1, _sim.getStatWaitingTimeForReturnCar().min() / 60.0, _sim.getStatWaitingTimeForReturnCar().max() / 60.0);
+                            Charts[1].changeRange(MinMax[1][0], MinMax[1][1]);
+                            jTextStatOperatorsCount.setText(Integer.toString(Config.OperatorsCount));
+                            FW.addRow(createRowForExport());
+                        }
                         break;
                     case 2:
-                        if (_sim.currentReplication()+1 == _sim.replicationCount()) {
-                            // to do: nastavit min max  range 
+                        if (_sim.currentReplication() + 1 == _sim.replicationCount()) {
                             Charts[0].addValueToSeries(0, Config.MinibusesCount, _sim.getStatWaitingTimeForRentCar().mean() / 60.0);
-                            Charts[0].changeRange(getRangeLimit(_sim.getStatWaitingTimeForRentCar().mean() / 60.0, -0.06), getRangeLimit(_sim.getStatWaitingTimeForRentCar().mean() / 60.0, 0.06));
+                            setMinMax(0, _sim.getStatWaitingTimeForRentCar().min() / 60.0, _sim.getStatWaitingTimeForRentCar().max() / 60.0);
+                            Charts[0].changeRange(MinMax[0][0], MinMax[0][1]);
+
                             Charts[1].addValueToSeries(0, Config.MinibusesCount, _sim.getStatWaitingTimeForReturnCar().mean() / 60.0);
-                            Charts[1].changeRange(getRangeLimit(_sim.getStatWaitingTimeForReturnCar().mean() / 60.0, -0.06), getRangeLimit(_sim.getStatWaitingTimeForReturnCar().mean() / 60.0, 0.06));
+                            setMinMax(1, _sim.getStatWaitingTimeForReturnCar().min() / 60.0, _sim.getStatWaitingTimeForReturnCar().max() / 60.0);
+                            Charts[1].changeRange(MinMax[1][0], MinMax[1][1]);
                             jTextStatMinibusesCount.setText(Integer.toString(Config.MinibusesCount));
                         }
                         break;
@@ -2041,7 +2126,6 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -2052,11 +2136,13 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JLabel jLabelWaiting;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2065,6 +2151,8 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelFixedMinibusMeanRentCar;
+    private javax.swing.JPanel jPanelFixedMinibusMeanReturnCar;
     private javax.swing.JPanel jPanelFixedOperatorsMeanRentCar;
     private javax.swing.JPanel jPanelFixedOperatorsMeanReturCar;
     private javax.swing.JPanel jPanelMeanRentCar;
@@ -2081,6 +2169,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
+    private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTable jTableMinibuses;
     private javax.swing.JTable jTableOperators;
     private javax.swing.JTextField jTextField5;
@@ -2139,7 +2228,6 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JTextField jTextFieldStatMeanLengthT1;
     private javax.swing.JTextField jTextFieldStatMeanLengthT2;
     private javax.swing.JTextField jTextFieldStatMeanLengthWaitForMinibus;
-    private javax.swing.JTextField jTextFieldStatMeanMinibusesFixed;
     private javax.swing.JTextField jTextFieldStatMeanMonthCosts;
     private javax.swing.JTextField jTextFieldStatMeanOccupacyMinibuses;
     private javax.swing.JTextField jTextFieldStatMeanOccupacyOperators;
@@ -2149,6 +2237,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private javax.swing.JTextField jTextFieldStatMeanWaitingT1;
     private javax.swing.JTextField jTextFieldStatMeanWaitingT2;
     private javax.swing.JTextField jTextStatMinibusesCount;
+    private javax.swing.JTextField jTextStatOperatorsCount;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -2308,13 +2397,13 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private String convertConfidenceIntervalToString(double[] confidenceInterval_90) {
         double min = confidenceInterval_90[0];
         double max = confidenceInterval_90[1];
-        return "<" + String.format("%.3f", min) + " ; " + String.format("%.3f", max) + ">";
+        return "<" + String.format("%.3f", min) + " : " + String.format("%.3f", max) + ">";
     }
 
     private String convertConfidenceIntervalToMinutesString(double[] confidenceInterval_90) {
         double min = confidenceInterval_90[0] / 60.0;
         double max = confidenceInterval_90[1] / 60.0;
-        return "<" + String.format("%.3f", min) + " ; " + String.format("%.3f", max) + ">";
+        return "<" + String.format("%.3f", min) + " : " + String.format("%.3f", max) + ">";
     }
 
     private String convertToPercentsString(double value) {
@@ -2330,17 +2419,47 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
         return formatter.format(value) + " €";
     }
 
-    private void setMinMax(double actualMin, double actualMax) {
-        if (actualMin < Min) {
-            Min = actualMin;
+    private void setMinMax(int index, double actualMin, double actualMax) {
+
+        if (actualMin < MinMax[index][0]) {
+            MinMax[index][0] = actualMin;
         }
-        if (actualMax > Max) {
-            Max = actualMax;
+        if (actualMax > MinMax[index][1]) {
+            MinMax[index][1] = actualMax;
         }
     }
 
     private Double getRangeLimit(double mean, double percents) {
         return mean + (mean * percents);
+    }
+
+    private void initMinMax() {
+        for (int i = 0; i < MinMax.length; i++) {
+            MinMax[i][0] = Double.MAX_VALUE;
+            MinMax[i][1] = 0;
+        }
+    }
+    
+    private List<String> createRowForExport(){
+        ArrayList<String> result = new ArrayList<>();
+        result.add(jComboBoxMinibusTipy.getSelectedItem().toString());
+        result.add(""+Config.MinibusesCount);
+        result.add(""+Config.OperatorsCount);
+        result.add(convertConfidenceIntervalToMinutesString(_sim.getStatWaitingTimeForRentCar().confidenceInterval_90()));
+        result.add(convertConfidenceIntervalToMinutesString(_sim.getStatWaitingTimeForReturnCar().confidenceInterval_90())); 
+        result.add(convertConfidenceIntervalToString(_sim.getCosts().confidenceInterval_90())); 
+        return result;
+    }
+    
+    private List<String> createHeaderRow(){
+        ArrayList<String> result = new ArrayList<>();
+        result.add("Typ minibusu");
+        result.add("Minibusy");
+        result.add("Pracovníci");
+        result.add("IS požičiali auto");
+        result.add("IS vrátili auto");
+        result.add("Mesačne náklady");
+        return result;
     }
 
 }
