@@ -33,7 +33,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
     private Chart[] Charts = new Chart[2];
     private double[][] MinMax = new double[2][2];
     private boolean Stop;
-    private FileWriter FW;
+    //private FileWriter FW;
 
     /**
      * Creates new form App
@@ -1732,8 +1732,8 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                         _sim.simulateAsync((int) Config.ReplicationsCount);
                         break;
                     case 1:
-                        FW = new FileWriter("C:/Users/Bugy/Documents/NetBeansProjects/DIS_Sem03/data/fixMinibusy" + Config.MinibusesCount + jComboBoxMinibusTipy.getSelectedItem().toString() + ".csv");
-                        FW.addRow(createHeaderRow());
+                        //FW = new FileWriter("C:/Users/Bugy/Documents/NetBeansProjects/DIS_Sem03/data/fixMinibusy" + Config.MinibusesCount + jComboBoxMinibusTipy.getSelectedItem().toString() + ".csv");
+                        //FW.addRow(createHeaderRow());
                         Charts[0] = new Chart(jPanelFixedMinibusMeanRentCar, "Priem. čas v systéme", "Priemerný čas zákaznika v systéme požič. auto ", "Počet replikácií", "Priemer v minútach");
                         Charts[1] = new Chart(jPanelFixedMinibusMeanReturnCar, "Priem. čas v systéme", "Priemerný čas zákaznika v systéme vrat. auto ", "Počet replikácií", "Priemer v minútach");
                         jTabbedPane1.setEnabledAt(3, false);
@@ -1741,7 +1741,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                         jTabbedPane1.setEnabledAt(4, true);
                         jTabbedPane1.setSelectedIndex(4);
                         Thread t1 = new Thread(() -> {
-                            while (Config.OperatorsCount < 6 && !Stop) {
+                            while (!Stop) {
                                 _sim.simulate((int) Config.ReplicationsCount);
                                 Config.OperatorsCount++;
                             }
@@ -1922,7 +1922,7 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
                             setMinMax(1, _sim.getStatWaitingTimeForReturnCar().min() / 60.0, _sim.getStatWaitingTimeForReturnCar().max() / 60.0);
                             Charts[1].changeRange(MinMax[1][0], MinMax[1][1]);
                             jTextStatOperatorsCount.setText(Integer.toString(Config.OperatorsCount));
-                            FW.addRow(createRowForExport());
+                            //FW.addRow(createRowForExport());
                         }
                         break;
                     case 2:
@@ -1945,13 +1945,6 @@ public class App extends javax.swing.JDialog implements ISimDelegate {
 
         _sim.onSimulationDidFinish((sim)
                 -> {
-
-            System.out.println(_sim.getDeparturesCustomers().mean());
-            System.out.println("T1: " + _sim.getArrivalCustomersT1().mean());
-            System.out.println("T2: " + _sim.getArrivalCustomersT2().mean());
-            System.out.println("Rental: " + _sim.getArrivalCustomersRental().mean());
-            System.out.println("Priem dlzka frontu: T1 " + _sim.getLengthMeanT1Stat().mean());
-            System.out.println("Priem dlzka frontu: T2 " + _sim.getLengthMeanT2Stat().mean());
         });
     }
 
